@@ -1,0 +1,14 @@
+{
+  "__version__": "1.3.2",
+  "splash-setting": {
+    "displayWatermark": false,
+    "url": "/Users/le/Metacraft/card-game/game/assets/resources/graphics/logo.png",
+    "displayRatio": 0.1,
+    "clearColor": {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    }
+  }
+}

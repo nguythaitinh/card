@@ -1,0 +1,13 @@
+
+card.png
+size: 304, 451
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+card/front
+  rotate: false
+  xy: 2, 2
+  size: 300, 447
+  orig: 300, 447
+  offset: 0, 0
+  index: -1

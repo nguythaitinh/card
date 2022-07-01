@@ -1,0 +1,19 @@
+# OSX
+#
+.DS_Store
+
+.idea
+.vscode
+
+wings/
+
+node_modules/
+npm-debug.log
+yarn-error.log
+
+game/library/
+game/temp/
+game/local/
+game/build/
+game/profiles/
+game/native
