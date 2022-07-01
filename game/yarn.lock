@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@cocrafts/engine-card@^0.0.10":
-  version "0.0.10"
-  resolved "https://npm.pkg.github.com/download/@cocrafts/engine-card/0.0.10/ed458fa7dec499ab1333a878676f33dcdef1d89ac336d935b65b18c996221df0#5c3b316f3210dc9392734f22202af6d1f4fc83f4"
-  integrity sha512-ol5P8gWSD3hJFNvzi3iTKK1JwKdhDoIzU7YatI37zkiTkMkmmLB0bhAnRMK4w5IkkAX74moP2CyhII+Fjc/77Q==
+"@cocrafts/engine-card@^0.0.14":
+  version "0.0.14"
+  resolved "https://npm.pkg.github.com/download/@cocrafts/engine-card/0.0.14/b971523a12d051c8c712965df2a88443dd235d8fb9b894691c8a062e1679f0f0#c63b58fcc6867f1dbf165e13d0bb23aa966ef9ec"
+  integrity sha512-xn+c75KlS/hD7Uy4wwJozpmunLwsDlZE4C3+j9Q12z0XfoitE6Yda+R13tkO1cTNqz8OahumKgOOzEx26k0X8A==
 
 lodash-es@^4.17.21:
   version "4.17.21"

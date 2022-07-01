@@ -1,12 +1,11 @@
 import { _decorator, Component, instantiate, Node, sp, tween } from 'cc';
 
-// import io from 'socket.io-client/dist/socket.io.js';
 import { allCards, Card, drawCards } from '../lib';
+import socket from '../network/connection';
 
 import { distributeCards, fillDeck } from './utils';
 
 const { ccclass, property } = _decorator;
-const wsUri = 'wss://94zbw8sdk9.execute-api.ap-northeast-1.amazonaws.com/prod/';
 
 interface CardState {
 	deck: Card[];
@@ -49,22 +48,20 @@ export class Game extends Component {
 	}
 
 	start(): void {
-		// const socket = new WebSocket('ws://localhost:3006');
-		const socket = new WebSocket(wsUri);
-
-		socket.addEventListener('open', (event) => {
-			console.log('connected to server', event);
-			socket.send(
-				JSON.stringify({
-					client: 'cardGame',
-					message: 'Hello from Game client',
-				}),
-			);
-		});
-
-		socket.addEventListener('message', (event) => {
-			console.log('Message from server', event.data);
-		});
+		console.log(socket);
+		// socket.addEventListener('open', (event) => {
+		// 	console.log('connected to server', event);
+		// 	socket.send(
+		// 		JSON.stringify({
+		// 			client: 'cardGame',
+		// 			message: 'Hello from Game client',
+		// 		}),
+		// 	);
+		// });
+		//
+		// socket.addEventListener('message', (event) => {
+		// 	console.log('Message from server', event.data);
+		// });
 
 		const playerCard = drawCards(this.playerCards.deck, 7);
 		this.playerCards.deck = playerCard.deckCards;
