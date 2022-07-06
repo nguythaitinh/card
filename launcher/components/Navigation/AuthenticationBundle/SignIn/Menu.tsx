@@ -1,11 +1,6 @@
 import { FC, Fragment, useCallback } from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
 import { modalActions } from '@cocrafts/metacraft-ui';
-import {
-	WalletAdapterProps,
-	WalletReadyState,
-} from '@solana/wallet-adapter-base';
-import { useWallet } from '@solana/wallet-adapter-react';
 import Button from 'components/Button';
 import Hyperlink from 'components/Hyperlink';
 import Text from 'components/Text';
@@ -62,36 +57,6 @@ const styles = StyleSheet.create({
 });
 
 export const Menu: FC = () => {
-	const {
-		publicKey,
-		wallet,
-		signMessage,
-		connected,
-		select,
-		disconnect,
-		wallets,
-	} = useWallet();
-
-	const selectWallet = useCallback(
-		async (adapter: WalletAdapterProps) => {
-			if (adapter.readyState === WalletReadyState.Installed) {
-				await select(adapter.name);
-			} else {
-				await Linking.openURL(adapter.url);
-			}
-		},
-		[select],
-	);
-
-	const disconnectWallet = useCallback(async () => {
-		await disconnect();
-	}, [disconnect]);
-
-	const signInWallet = useCallback(async () => {
-		await accountActions.walletSigIn({ publicKey, signMessage });
-		modalActions.hide('signInOptions');
-	}, [select, wallet, publicKey, signMessage]);
-
 	const signInGoogle = useCallback(async () => {
 		modalActions.hide('signInOptions');
 		await googleSignIn();
@@ -106,42 +71,6 @@ export const Menu: FC = () => {
 				title="Sign-In with Google"
 				onPress={signInGoogle}
 			/>
-			<View style={styles.separator} />
-			<Text style={styles.heading}>Wallet Sign-In</Text>
-			{wallet && connected ? (
-				<Fragment>
-					<Button
-						outline
-						style={styles.buttonContainer}
-						title={`Sign-In with ${wallet.adapter.name}`}
-						onPress={signInWallet}
-					/>
-					<Hyperlink
-						titleStyle={styles.hyperLink}
-						title={`Disconnect ${wallet.adapter.name}`}
-						onPress={disconnectWallet}
-					/>
-				</Fragment>
-			) : (
-				wallets.map(({ readyState, adapter }, i) => {
-					const isReady = readyState === WalletReadyState.Installed;
-					const titleStyle = [
-						styles.buttonTitle,
-						!isReady && styles.disabledTitle,
-					];
-
-					return (
-						<Button
-							key={i}
-							outline
-							style={styles.buttonContainer}
-							onPress={() => selectWallet?.(adapter)}
-						>
-							<Text style={titleStyle}>{adapter.name}</Text>
-						</Button>
-					);
-				})
-			)}
 		</View>
 	);
 };

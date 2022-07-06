@@ -3,9 +3,9 @@ import { StyleSheet, View } from 'react-native';
 import {
 	AnimateDirections,
 	BindDirections,
+	Button,
 	modalActions,
 } from '@cocrafts/metacraft-ui';
-import Button from 'components/Button';
 
 import SignInMenu from './Menu';
 
@@ -28,7 +28,7 @@ export const SignIn: FC = () => {
 
 	return (
 		<View ref={containerRef} style={styles.container}>
-			<Button outline title="Sign In" onPress={showSignInOptions} />
+			<Button title="Sign In" onPress={showSignInOptions} />
 		</View>
 	);
 };

@@ -1,3 +1,16 @@
+const { resolve } = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
+
+const copyAssets = (configs) => {
+	configs.plugins.push(
+		new CopyPlugin({
+			patterns: [{ from: resolve(process.cwd(), 'assets/'), to: './' }],
+		}),
+	);
+
+	return configs;
+};
+
 const splitBundle = (configs) => {
 	configs.entry = {
 		app: {
@@ -33,7 +46,7 @@ const setEnvironments = (configs, { webpack, wingsConfig }) => {
 };
 
 module.exports = {
-	webpackConfigs: [setEnvironments, splitBundle],
+	webpackConfigs: [setEnvironments, copyAssets, splitBundle],
 	moduleAlias: () => {
 		return {
 			global: {

@@ -36,7 +36,7 @@ export const Signed: FC<Props> = ({ profile }) => {
 
 	return (
 		<View ref={containerRef} style={styles.container}>
-			<Balance profile={profile} />
+			{/*<Balance profile={profile} />*/}
 			<Account profile={profile} onPress={onPress} onAvatarPress={onPress} />
 		</View>
 	);

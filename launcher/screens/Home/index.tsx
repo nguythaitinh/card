@@ -1,11 +1,25 @@
-import { FC } from 'react';
-import { Text, View } from 'react-native';
-
+import { FC, useEffect } from 'react';
+import Animated, {
+	useAnimatedStyle,
+	useSharedValue,
+	withTiming,
+} from 'react-native-reanimated';
+import TopNavigation from 'components/Navigation/TopNavigation';
 export const HomeScreen: FC = () => {
+	const opacity = useSharedValue(0);
+	const containerStyle = useAnimatedStyle(() => ({
+		flex: 1,
+		opacity: opacity.value,
+	}));
+
+	useEffect(() => {
+		opacity.value = withTiming(1, { duration: 1000 });
+	}, []);
+
 	return (
-		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-			<Text>Welcome</Text>
-		</View>
+		<Animated.View style={containerStyle}>
+			<TopNavigation />
+		</Animated.View>
 	);
 };
 

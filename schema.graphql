@@ -1,0 +1,70 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+	query: Query
+	mutation: Mutation
+}
+
+type Account {
+	address: String!
+	avatarUrl: String
+	email: String
+	githubUrl: String
+	id: String!
+	jwt: String
+	mineral: Float!
+	name: String
+}
+
+type BuildAccount {
+	avatarUrl: String
+	id: String
+	name: String
+}
+
+type BuildActivity {
+	account: BuildAccount
+	description: String
+	detail: BuildDetail
+	id: String!
+	reward: Float
+	timestamp: String!
+	type: String
+}
+
+type BuildDetail {
+	added: [String]
+	history: [String]
+	modified: [String]
+	removed: [String]
+	timestamp: String
+	url: String
+}
+
+type Mutation {
+	connectGitHub(code: String!): Account
+}
+
+type Profile {
+	address: String!
+	avatarUrl: String
+	email: String
+	githubUrl: String
+	id: String!
+	jwt: String
+	mineral: Float!
+	name: String
+}
+
+type Query {
+	account(address: String): Account
+	buildActivities: [BuildActivity]
+	greeting: String
+	personalBuildActivities(address: String): [BuildActivity]
+	profile(address: String): Profile
+}
+
+input LoginInput {
+	publicKey: String!
+	signature: String!
+}
