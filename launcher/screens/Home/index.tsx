@@ -25,7 +25,7 @@ export const HomeScreen: FC = () => {
 		opacity: opacity.value,
 	}));
 	const panelStyle = {
-		backgroundColor: 'rgba(0, 0, 0, 0.2)',
+		backgroundColor: 'rgba(0, 0, 0, 0.5)',
 		width: sizes.rightPaneSize,
 	};
 
@@ -36,7 +36,8 @@ export const HomeScreen: FC = () => {
 	return (
 		<AnimatedIBG style={containerStyle} source={backgroundUri}>
 			<View style={styles.contentContainer}>
-				<TopNavigation />
+				<TopNavigation style={styles.bottomBorder} />
+				<HomeDashboard />
 			</View>
 			<View style={panelStyle}>
 				<AuthenticationBundle style={styles.bottomBorder} />
