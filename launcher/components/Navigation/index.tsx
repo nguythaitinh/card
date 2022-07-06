@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { View } from 'react-native';
+import { View, ViewStyle } from 'react-native';
 import Text from 'components/Text';
 import { navigate } from 'stacks/Browser/shared';
 import { useSnapshot } from 'utils/hook';
@@ -8,7 +8,11 @@ import { ThemeState, themeState } from 'utils/state/theme';
 import NavigationItem from './NavigationItem';
 import { NavigationConfig, navigationItems, styles } from './shared';
 
-export const TopNavigation: FC = () => {
+interface Props {
+	style?: ViewStyle;
+}
+
+export const TopNavigation: FC<Props> = ({ style }) => {
 	const { sizes } = useSnapshot<ThemeState>(themeState);
 	const contentContainerStyle = [
 		styles.contentContainer,
@@ -20,7 +24,7 @@ export const TopNavigation: FC = () => {
 	};
 
 	return (
-		<View style={styles.container}>
+		<View style={[styles.container, style]}>
 			<View style={contentContainerStyle}>
 				<Text style={styles.branding}>StormGate</Text>
 				<View style={styles.navContainer}>

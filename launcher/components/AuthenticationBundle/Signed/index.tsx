@@ -8,7 +8,6 @@ import {
 import { Profile } from 'utils/types';
 
 import Account from './Account';
-import Balance from './Balance';
 import SignedMenu from './Menu';
 
 const styles = StyleSheet.create({
@@ -29,14 +28,13 @@ export const Signed: FC<Props> = ({ profile }) => {
 			id: 'signedOptions',
 			component: SignedMenu,
 			bindingRef: containerRef,
-			bindingDirection: BindDirections.BottomRight,
+			bindingDirection: BindDirections.BottomLeft,
 			animateDirection: AnimateDirections.BottomLeft,
 		});
 	};
 
 	return (
 		<View ref={containerRef} style={styles.container}>
-			{/*<Balance profile={profile} />*/}
 			<Account profile={profile} onPress={onPress} onAvatarPress={onPress} />
 		</View>
 	);

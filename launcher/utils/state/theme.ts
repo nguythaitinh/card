@@ -18,8 +18,8 @@ export const defaultTheme: ThemeState = {
 		bgLighter: '#252c48',
 	},
 	sizes: {
-		topNavigationSize: 64,
-		rightPaneSize: 70,
+		topNavigationSize: 72,
+		rightPaneSize: 240,
 	},
 };
 

@@ -21,7 +21,7 @@ export const SignIn: FC = () => {
 			id: 'signInOptions',
 			component: SignInMenu,
 			bindingRef: containerRef,
-			bindingDirection: BindDirections.BottomRight,
+			bindingDirection: BindDirections.BottomLeft,
 			animateDirection: AnimateDirections.BottomLeft,
 		});
 	};

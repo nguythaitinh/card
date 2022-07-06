@@ -17,7 +17,8 @@ export const styles = StyleSheet.create({
 	},
 	branding: {
 		color: '#FFFFFF',
-		fontSize: 20,
+		fontSize: 18,
+		fontWeight: '500',
 		paddingRight: 12,
 	},
 	navContainer: {

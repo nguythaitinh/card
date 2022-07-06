@@ -9,15 +9,6 @@ interface Props {
 	onPress?: (config: NavigationConfig) => void;
 }
 
-const styles = StyleSheet.create({
-	container: {
-		paddingHorizontal: 14,
-	},
-	title: {
-		color: '#FFFFFF',
-	},
-});
-
 export const NavigationItem: FC<Props> = ({ config, onPress }) => {
 	return (
 		<Hoverable style={styles.container}>
@@ -29,3 +20,14 @@ export const NavigationItem: FC<Props> = ({ config, onPress }) => {
 };
 
 export default NavigationItem;
+
+const styles = StyleSheet.create({
+	container: {
+		paddingHorizontal: 14,
+	},
+	title: {
+		color: '#FFFFFF',
+		fontSize: 13,
+		fontWeight: '600',
+	},
+});
