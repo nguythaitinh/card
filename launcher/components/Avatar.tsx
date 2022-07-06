@@ -31,13 +31,21 @@ export const Avatar: FC<Props> = ({
 	style,
 	imageUri,
 	characters,
-	size,
+	size = 32,
 	onPress,
 }) => {
+	const flattenStyle = StyleSheet.flatten(style);
+	const borderSize = flattenStyle?.borderWidth || 0;
+	const avatarSize = size - borderSize * 2;
 	const containerStyle = {
 		width: size,
 		height: size,
-		borderRadius: (size as number) / 2,
+		borderRadius: size / 2,
+	};
+	const avatarStyle = {
+		width: avatarSize,
+		height: avatarSize,
+		borderRadius: avatarSize / 2,
 	};
 
 	return (
@@ -46,7 +54,7 @@ export const Avatar: FC<Props> = ({
 			onPress={onPress}
 		>
 			{imageUri ? (
-				<Image style={containerStyle} source={{ uri: imageUri }} />
+				<Image style={avatarStyle} source={{ uri: imageUri }} />
 			) : (
 				<Text style={styles.character}>
 					{characters?.substring?.(0, 1) || '?'}
