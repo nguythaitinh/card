@@ -1,20 +1,18 @@
 import { StyleSheet } from 'react-native';
 
 const commandSize = 32;
+const dotSize = 8;
 
 export const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
 		marginLeft: 6,
-		backgroundColor: 'rgba(0, 0, 0, 0.1)',
-		borderRadius: 32,
 		padding: 4,
 	},
 	infoContainer: {
 		flex: 1,
 		paddingLeft: 8,
-		marginRight: 6,
-		alignItems: 'flex-end',
+		justifyContent: 'flex-end',
 	},
 	inlineContainer: {
 		flexDirection: 'row',
@@ -40,5 +38,20 @@ export const styles = StyleSheet.create({
 		backgroundColor: 'rgba(255, 255, 255, 0.1)',
 		alignItems: 'center',
 		justifyContent: 'center',
+	},
+	onlineContainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+	},
+	onlineDot: {
+		width: dotSize,
+		height: dotSize,
+		borderRadius: dotSize / 2,
+		backgroundColor: '#8eda42',
+	},
+	onlineText: {
+		fontSize: 11,
+		color: '#8eda42',
+		marginLeft: 4,
 	},
 });

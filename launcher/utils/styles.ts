@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 export const iStyles = StyleSheet.create({
 	contentContainer: {
@@ -6,4 +6,9 @@ export const iStyles = StyleSheet.create({
 		maxWidth: 1024,
 		marginHorizontal: 'auto',
 	},
+});
+
+export const noUserSelect = Platform.select({
+	web: { userSelect: 'none' },
+	default: {},
 });

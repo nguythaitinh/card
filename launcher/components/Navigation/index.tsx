@@ -22,7 +22,7 @@ export const TopNavigation: FC = () => {
 	return (
 		<View style={styles.container}>
 			<View style={contentContainerStyle}>
-				<Text style={styles.branding}>Metacraft</Text>
+				<Text style={styles.branding}>StormGate</Text>
 				<View style={styles.navContainer}>
 					{navigationItems.map((item, i) => {
 						return (

@@ -4,9 +4,11 @@ import { modalActions } from '@cocrafts/metacraft-ui';
 import Hyperlink from 'components/Hyperlink';
 import Text from 'components/Text';
 import { signOut } from 'utils/lib/auth';
+import { noUserSelect } from 'utils/styles';
 
 const styles = StyleSheet.create({
 	container: {
+		...noUserSelect,
 		minWidth: 120,
 		backgroundColor: 'rgba(255, 255, 255, 0.05)',
 		paddingVertical: 8,
