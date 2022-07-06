@@ -1,26 +1,37 @@
-import { FC } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { FC, RefObject, useRef } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import Avatar from 'components/Avatar';
+import Text from 'components/Text';
 import { shortenAddress } from 'utils/helper';
 import { Profile } from 'utils/types';
 
 export interface BuddyProps {
 	index: number;
 	item: Profile;
+	onPress?: (item: Profile, ref: RefObject<View>) => void;
 }
 
-export const BuddyItem: FC<BuddyProps> = ({ item }) => {
+export const BuddyItem: FC<BuddyProps> = ({ item, onPress }) => {
 	const { name, address } = item;
+	const containerRef = useRef<View>(null);
+
+	const handlePress = () => {
+		onPress?.(item, containerRef);
+	};
 
 	return (
-		<View style={styles.container}>
-			<Avatar size={avatarSize} imageUri={item.avatarUrl} />
+		<TouchableOpacity onPress={handlePress} style={styles.container}>
+			<Avatar
+				onPress={handlePress}
+				size={avatarSize}
+				imageUri={item.avatarUrl}
+			/>
 			<View style={styles.onlineCircle} />
-			<View style={styles.infoContainer}>
+			<View ref={containerRef} style={styles.infoContainer}>
 				<Text style={styles.name}>{name || shortenAddress(address || '')}</Text>
 				<Text style={styles.onlineText}>Online</Text>
 			</View>
-		</View>
+		</TouchableOpacity>
 	);
 };
 
@@ -50,9 +61,10 @@ const styles = StyleSheet.create({
 		paddingLeft: 8,
 	},
 	name: {
+		marginTop: 4,
 		fontSize: 13,
+		lineHeight: 13,
 		color: 'rgba(255, 255, 255, 0.4)',
-		marginTop: 3,
 	},
 	onlineText: {
 		color: 'rgba(255, 255, 255, 0.2)',
