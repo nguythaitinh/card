@@ -5,7 +5,7 @@ import {
 	BindDirections,
 	modalActions,
 } from '@cocrafts/metacraft-ui';
-import { Profile } from 'utils/state/account';
+import { Profile } from 'utils/types';
 
 import Account from './Account';
 import Balance from './Balance';

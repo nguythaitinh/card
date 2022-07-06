@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { appState } from './instance';
+import { appState } from './internal';
 
 export const setPrivacy = async (flag: boolean): Promise<void> => {
 	appState.privacy = flag;

@@ -3,7 +3,7 @@ import { proxy } from 'valtio';
 
 export interface ThemeSizes {
 	topNavigationSize: number;
-	leftNavigationSize: number;
+	rightPaneSize: number;
 }
 
 export type ThemeState = LibThemeState & {
@@ -18,8 +18,8 @@ export const defaultTheme: ThemeState = {
 		bgLighter: '#252c48',
 	},
 	sizes: {
-		topNavigationSize: 48,
-		leftNavigationSize: 70,
+		topNavigationSize: 64,
+		rightPaneSize: 70,
 	},
 };
 

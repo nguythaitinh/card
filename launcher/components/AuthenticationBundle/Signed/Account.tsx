@@ -3,7 +3,7 @@ import { TouchableOpacity, View } from 'react-native';
 import Avatar from 'components/Avatar';
 import Text from 'components/Text';
 import { shortenAddress } from 'utils/helper';
-import { Profile } from 'utils/state/account';
+import { Profile } from 'utils/types';
 
 import { styles } from './internal';
 

@@ -4,4 +4,4 @@ export const appActions = {
 	setPrivacy,
 };
 
-export * from './instance';
+export * from './internal';

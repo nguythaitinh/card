@@ -1,15 +1,7 @@
+import { Profile } from 'utils/types';
 import { proxy } from 'valtio';
 
-export interface Profile {
-	id?: string;
-	address?: string;
-	name?: string;
-	avatarUrl?: string;
-	githubUrl?: string;
-	mineral?: number;
-}
-
-interface AccountState {
+export interface AccountState {
 	profile: Profile;
 	loading: boolean;
 }

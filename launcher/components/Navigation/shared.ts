@@ -1,18 +1,14 @@
 import { FC } from 'react';
 import { StyleSheet } from 'react-native';
-import DiamondIcon from 'components/icons/Diamond';
-import ShapesIcon from 'components/icons/Shapes';
-import { RootParamList } from 'stacks/Browser/shared';
+
+import { RootParamList } from '../../stacks/Browser/shared';
+import DiamondIcon from '../icons/Diamond';
+import ShapesIcon from '../icons/Shapes';
 
 export const navigationHeight = 64;
 
 export const styles = StyleSheet.create({
-	container: {
-		position: 'absolute',
-		top: 0,
-		left: 0,
-		right: 0,
-	},
+	container: {},
 	contentContainer: {
 		paddingHorizontal: 12,
 		height: navigationHeight,
@@ -27,6 +23,7 @@ export const styles = StyleSheet.create({
 	navContainer: {
 		flex: 1,
 		flexDirection: 'row',
+		paddingLeft: 24,
 	},
 });
 
@@ -46,14 +43,21 @@ export interface NavigationConfig {
 export const navigationItems: NavigationConfig[] = [
 	{
 		Icon: ShapesIcon,
-		title: 'build',
+		title: 'HOME',
 		route: {
 			name: 'Home',
 		},
 	},
 	{
 		Icon: DiamondIcon,
-		title: 'marketplace',
+		title: 'PROFILE',
+		route: {
+			name: 'AuthResponse',
+		},
+	},
+	{
+		Icon: DiamondIcon,
+		title: 'COLLECTION',
 		route: {
 			name: 'AuthResponse',
 		},

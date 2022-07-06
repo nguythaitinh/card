@@ -6,8 +6,8 @@ import EyeClosedIcon from 'components/icons/EyeClosed';
 import Text from 'components/Text';
 import { formatNumber, memiToUSD } from 'utils/helper';
 import { useSnapshot } from 'utils/hook';
-import { Profile } from 'utils/state/account';
 import { appActions, appState } from 'utils/state/app';
+import { Profile } from 'utils/types';
 
 import { styles } from './internal';
 

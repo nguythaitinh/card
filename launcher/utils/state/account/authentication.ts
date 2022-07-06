@@ -1,8 +1,9 @@
 import { graphQlClient } from 'utils/graphql';
 import * as queries from 'utils/graphql/query';
 import { extractJwt } from 'utils/lib/auth';
+import { Profile } from 'utils/types';
 
-import { accountState, Profile } from './internal';
+import { accountState } from './internal';
 
 export const syncProfile = async (): Promise<Profile | null> => {
 	const jwt = await extractJwt();

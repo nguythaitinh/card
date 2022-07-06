@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { useSnapshot } from 'utils/hook';
-import { accountState } from 'utils/state/account';
+import { AccountState, accountState } from 'utils/state/account';
+import { ThemeState, themeState } from 'utils/state/theme';
 
 import Signed from './Signed';
 import SignIn from './SignIn';
@@ -9,7 +10,9 @@ import SignIn from './SignIn';
 const commandSize = 32;
 const styles = StyleSheet.create({
 	container: {
-		marginRight: 18,
+		alignItems: 'flex-end',
+		justifyContent: 'center',
+		marginRight: 12,
 	},
 	loadingContainer: {
 		width: commandSize,
@@ -23,10 +26,15 @@ const styles = StyleSheet.create({
 });
 
 export const AuthenticationBundle: FC = () => {
-	const { profile, loading } = useSnapshot(accountState);
+	const { profile, loading } = useSnapshot<AccountState>(accountState);
+	const { sizes } = useSnapshot<ThemeState>(themeState);
+	const containerStyle = [
+		styles.container,
+		{ height: sizes.topNavigationSize },
+	];
 
 	return (
-		<View style={styles.container}>
+		<View style={containerStyle}>
 			{loading ? (
 				<View style={styles.loadingContainer}>
 					<ActivityIndicator size={commandSize - 6} />
