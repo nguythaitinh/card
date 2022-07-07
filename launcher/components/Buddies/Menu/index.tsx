@@ -1,12 +1,26 @@
 import { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { modalActions, ModalConfigs } from '@cocrafts/metacraft-ui';
+import { liveActions } from 'utils/state/live';
+import { Profile } from 'utils/types/graphql';
 
 import MenuItem from './Item';
 
-export const BuddyMenu: FC = () => {
+interface Props {
+	config: ModalConfigs;
+}
+
+export const BuddyMenu: FC<Props> = ({ config }) => {
+	const profile = config.context as Profile;
+
+	const onInvite = () => {
+		modalActions.hide(config.id as string);
+		liveActions.sendGameInvitation(profile.address);
+	};
+
 	return (
 		<View style={styles.container}>
-			<MenuItem title="Send Invite" />
+			<MenuItem title="Send Invite" onPress={onInvite} />
 			<MenuItem style={styles.lastMenuItem} title="Send Message" />
 		</View>
 	);

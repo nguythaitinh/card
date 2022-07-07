@@ -2,6 +2,8 @@ import { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Button from 'components/Button';
 
+import GameInvitations from './GameInvitations';
+
 export const HomeDashboard: FC = () => {
 	return (
 		<View style={styles.container}>
@@ -11,6 +13,7 @@ export const HomeDashboard: FC = () => {
 				style={styles.playButton}
 				titleStyle={styles.playTitle}
 			/>
+			<GameInvitations />
 		</View>
 	);
 };

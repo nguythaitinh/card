@@ -9,10 +9,12 @@ export const counterIncreased = gql`
 export const gameInvitation = gql`
 	subscription GameInvitation($opponent: String!) {
 		gameInvitation(opponent: $opponent) {
-			opponent
 			game
-			owner
-			timestamp
+			owner {
+				address
+				avatarUrl
+				name
+			}
 		}
 	}
 `;

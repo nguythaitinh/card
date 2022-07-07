@@ -111,10 +111,8 @@ export type CardDuelSetup = {
 export type GameInvitation = {
   __typename?: 'GameInvitation';
   game: Scalars['String'];
-  opponent: Scalars['String'];
-  opponentProfile?: Maybe<Profile>;
-  owner: Scalars['String'];
-  ownerProfile?: Maybe<Profile>;
+  opponent: Profile;
+  owner: Profile;
   timestamp: Scalars['String'];
 };
 
@@ -420,10 +418,8 @@ export type CardDuelSetupResolvers<ContextType = any, ParentType extends Resolve
 
 export type GameInvitationResolvers<ContextType = any, ParentType extends ResolversParentTypes['GameInvitation'] = ResolversParentTypes['GameInvitation']> = {
   game?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  opponent?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  opponentProfile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
-  owner?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  ownerProfile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
+  opponent?: Resolver<ResolversTypes['Profile'], ParentType, ContextType>;
+  owner?: Resolver<ResolversTypes['Profile'], ParentType, ContextType>;
   timestamp?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };

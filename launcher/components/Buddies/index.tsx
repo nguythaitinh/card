@@ -22,6 +22,7 @@ export const Buddies: FC = () => {
 			bindingDirection: BindDirections.Left,
 			animateDirection: AnimateDirections.TopLeft,
 			positionOffset: { x: -50, y: 0 },
+			context: profile,
 		});
 	};
 
