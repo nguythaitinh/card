@@ -14,6 +14,11 @@ export type Scalars = {
   Float: number;
 };
 
+export type AcceptGameInput = {
+  pk?: InputMaybe<Scalars['String']>;
+  sk?: InputMaybe<Scalars['String']>;
+};
+
 export type Account = {
   __typename?: 'Account';
   address: Scalars['String'];
@@ -111,6 +116,7 @@ export type CardDuelSetup = {
 export type GameInvitation = {
   __typename?: 'GameInvitation';
   game: Scalars['String'];
+  id: Scalars['String'];
   opponent: Profile;
   owner: Profile;
   timestamp: Scalars['String'];
@@ -132,9 +138,15 @@ export enum MetacraftGames {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  acceptGame?: Maybe<Scalars['Boolean']>;
   connectGitHub?: Maybe<Account>;
   increaseCounter?: Maybe<Scalars['Float']>;
   inviteGame?: Maybe<GameInvitation>;
+};
+
+
+export type MutationAcceptGameArgs = {
+  input: AcceptGameInput;
 };
 
 
@@ -273,6 +285,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  AcceptGameInput: AcceptGameInput;
   Account: ResolverTypeWrapper<Account>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   BuildAccount: ResolverTypeWrapper<BuildAccount>;
@@ -299,6 +312,7 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  AcceptGameInput: AcceptGameInput;
   Account: Account;
   Boolean: Scalars['Boolean'];
   BuildAccount: BuildAccount;
@@ -418,6 +432,7 @@ export type CardDuelSetupResolvers<ContextType = any, ParentType extends Resolve
 
 export type GameInvitationResolvers<ContextType = any, ParentType extends ResolversParentTypes['GameInvitation'] = ResolversParentTypes['GameInvitation']> = {
   game?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   opponent?: Resolver<ResolversTypes['Profile'], ParentType, ContextType>;
   owner?: Resolver<ResolversTypes['Profile'], ParentType, ContextType>;
   timestamp?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -425,6 +440,7 @@ export type GameInvitationResolvers<ContextType = any, ParentType extends Resolv
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  acceptGame?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationAcceptGameArgs, 'input'>>;
   connectGitHub?: Resolver<Maybe<ResolversTypes['Account']>, ParentType, ContextType, RequireFields<MutationConnectGitHubArgs, 'code'>>;
   increaseCounter?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType, Partial<MutationIncreaseCounterArgs>>;
   inviteGame?: Resolver<Maybe<ResolversTypes['GameInvitation']>, ParentType, ContextType, RequireFields<MutationInviteGameArgs, 'input'>>;

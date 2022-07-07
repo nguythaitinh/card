@@ -9,6 +9,7 @@ export const counterIncreased = gql`
 export const gameInvitation = gql`
 	subscription GameInvitation($opponent: String!) {
 		gameInvitation(opponent: $opponent) {
+			id
 			game
 			owner {
 				address
