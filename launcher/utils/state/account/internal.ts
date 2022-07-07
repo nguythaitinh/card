@@ -1,4 +1,4 @@
-import { Profile } from 'utils/types';
+import { Profile } from 'utils/types/graphql';
 import { proxy } from 'valtio';
 
 export interface AccountState {
@@ -7,6 +7,6 @@ export interface AccountState {
 }
 
 export const accountState = proxy<AccountState>({
-	profile: {},
+	profile: {} as never,
 	loading: true,
 });

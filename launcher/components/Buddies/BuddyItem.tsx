@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import Avatar from 'components/Avatar';
 import Text from 'components/Text';
 import { shortenAddress } from 'utils/helper';
-import { Profile } from 'utils/types';
+import { Profile } from 'utils/types/graphql';
 
 export interface BuddyProps {
 	index: number;
@@ -24,7 +24,7 @@ export const BuddyItem: FC<BuddyProps> = ({ item, onPress }) => {
 			<Avatar
 				onPress={handlePress}
 				size={avatarSize}
-				imageUri={item.avatarUrl}
+				imageUri={item.avatarUrl as string}
 			/>
 			<View style={styles.onlineCircle} />
 			<View ref={containerRef} style={styles.infoContainer}>

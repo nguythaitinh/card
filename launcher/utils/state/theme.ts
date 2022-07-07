@@ -19,7 +19,7 @@ export const defaultTheme: ThemeState = {
 	},
 	sizes: {
 		topNavigationSize: 72,
-		rightPaneSize: 240,
+		rightPaneSize: 260,
 	},
 };
 

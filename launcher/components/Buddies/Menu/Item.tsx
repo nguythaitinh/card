@@ -20,7 +20,7 @@ export default BuddyMenuItem;
 
 const styles = StyleSheet.create({
 	container: {
-		paddingHorizontal: 24,
+		paddingHorizontal: 20,
 		paddingVertical: 8,
 		borderBottomWidth: 1,
 		borderColor: 'rgba(255, 255, 255, 0.05)',

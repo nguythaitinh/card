@@ -5,7 +5,7 @@ import {
 	BindDirections,
 	modalActions,
 } from '@cocrafts/metacraft-ui';
-import { Profile } from 'utils/types';
+import { Profile } from 'utils/types/graphql';
 
 import Account from './Account';
 import SignedMenu from './Menu';

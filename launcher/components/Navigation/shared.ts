@@ -5,13 +5,10 @@ import { RootParamList } from '../../stacks/Browser/shared';
 import DiamondIcon from '../icons/Diamond';
 import ShapesIcon from '../icons/Shapes';
 
-export const navigationHeight = 64;
-
 export const styles = StyleSheet.create({
 	container: {},
 	contentContainer: {
 		paddingHorizontal: 12,
-		height: navigationHeight,
 		alignItems: 'center',
 		flexDirection: 'row',
 	},

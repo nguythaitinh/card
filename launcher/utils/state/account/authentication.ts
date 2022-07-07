@@ -1,7 +1,7 @@
 import { graphQlClient } from 'utils/graphql';
 import * as queries from 'utils/graphql/query';
 import { extractJwt } from 'utils/lib/auth';
-import { Profile } from 'utils/types';
+import { Profile } from 'utils/types/graphql';
 
 import { accountState } from './internal';
 
@@ -12,8 +12,8 @@ export const syncProfile = async (): Promise<Profile | null> => {
 	if (!jwt) return null;
 
 	try {
-		const { data } = await graphQlClient.query({ query: queries.account });
-		const profile = data?.account || {};
+		const { data } = await graphQlClient.query({ query: queries.profile });
+		const profile = data?.profile || {};
 		accountState.profile = profile;
 
 		return profile;
@@ -27,5 +27,5 @@ export const syncProfile = async (): Promise<Profile | null> => {
 };
 
 export const clearProfile = (): void => {
-	accountState.profile = {};
+	accountState.profile = {} as never;
 };

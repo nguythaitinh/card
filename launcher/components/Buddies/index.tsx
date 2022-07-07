@@ -6,7 +6,7 @@ import {
 	modalActions,
 } from '@cocrafts/metacraft-ui';
 import { useBuddies } from 'utils/hook';
-import { Profile } from 'utils/types';
+import { Profile } from 'utils/types/graphql';
 
 import BuddyItem, { BuddyProps } from './BuddyItem';
 import BuddyMenu from './Menu';
@@ -31,7 +31,11 @@ export const Buddies: FC = () => {
 
 	return (
 		<View style={styles.container}>
-			<FlatList data={list} renderItem={renderBuddy} />
+			<FlatList
+				showsVerticalScrollIndicator={false}
+				data={list}
+				renderItem={renderBuddy}
+			/>
 		</View>
 	);
 };
@@ -40,6 +44,7 @@ export default Buddies;
 
 const styles = StyleSheet.create({
 	container: {
+		flex: 1,
 		paddingVertical: 12,
 		paddingLeft: 16,
 	},

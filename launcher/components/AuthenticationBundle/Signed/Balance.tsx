@@ -7,7 +7,7 @@ import Text from 'components/Text';
 import { formatNumber, memiToUSD } from 'utils/helper';
 import { useSnapshot } from 'utils/hook';
 import { appActions, appState } from 'utils/state/app';
-import { Profile } from 'utils/types';
+import { Profile } from 'utils/types/graphql';
 
 import { styles } from './internal';
 

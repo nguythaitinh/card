@@ -18,7 +18,7 @@ export const AuthenticationBundle: FC<Props> = ({ style }) => {
 		styles.container,
 		{
 			width: sizes.rightPaneSize,
-			height: sizes.topNavigationSize,
+			height: sizes.topNavigationSize + 1,
 		},
 		style,
 	];

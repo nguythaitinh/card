@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Avatar from 'components/Avatar';
 import Text from 'components/Text';
-import { Profile } from 'utils/types';
+import { Profile } from 'utils/types/graphql';
 
 import { styles } from './internal';
 
@@ -19,7 +19,7 @@ export const Account: FC<Props> = ({ profile, onPress, onAvatarPress }) => {
 		<TouchableOpacity onPress={onPress} style={styles.container}>
 			<Avatar
 				size={38}
-				imageUri={avatarUrl}
+				imageUri={avatarUrl as string}
 				characters={address}
 				onPress={onAvatarPress}
 			/>
