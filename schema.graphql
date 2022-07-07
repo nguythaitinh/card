@@ -3,6 +3,7 @@
 schema {
 	query: Query
 	mutation: Mutation
+	subscription: Subscription
 }
 
 type Account {
@@ -42,8 +43,65 @@ type BuildDetail {
 	url: String
 }
 
+type CardDuel {
+	history: [[CardDuelCommand]]
+	id: String
+	setup: CardDuelSetup
+}
+
+type CardDuelAttributes {
+	attack: Int
+	cooldown: Int
+	defense: Int
+	health: Int
+	perTurnHero: Int
+	perTurnTroop: Int
+	turn: Int
+}
+
+type CardDuelCommand {
+	from: CardDuelIdentifier
+	owner: String
+	payload: CardDuelAttributes
+	side: Int
+	target: CardDuelIdentifier
+	type: Int
+}
+
+type CardDuelIdentifier {
+	id: String
+	owner: String
+	place: Int
+	position: String
+}
+
+type CardDuelSetting {
+	groundSize: Int
+	handSize: Int
+	maxAttachment: Int
+	perTurnHero: Int
+	perTurnTroop: Int
+}
+
+type CardDuelSetup {
+	deck: [[String]]
+	firstMover: String!
+	player: [String]
+	setting: CardDuelSetting!
+	version: String!
+}
+
+type GameInvitation {
+	game: String!
+	opponent: String!
+	owner: String!
+	timestamp: String!
+}
+
 type Mutation {
 	connectGitHub(code: String!): Account
+	increaseCounter(amount: Float): Float
+	inviteGame(input: InviteGameInput!): GameInvitation
 }
 
 type Profile {
@@ -61,9 +119,24 @@ type Query {
 	account(address: String): Account
 	buddies: [Account]
 	buildActivities: [BuildActivity]
+	counter: Float
 	greeting: String
 	personalBuildActivities(address: String): [BuildActivity]
 	profile(address: String): Profile
+}
+
+type Subscription {
+	counterIncreased: Float
+	gameInvitation(opponent: String!): GameInvitation
+}
+
+enum MetacraftGames {
+	CARD
+}
+
+input InviteGameInput {
+	game: MetacraftGames!
+	opponent: String!
 }
 
 input LoginInput {

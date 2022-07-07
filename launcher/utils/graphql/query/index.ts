@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export * from './account';
+export * from './profile';
 
 export const greeting = gql`
 	query Greeting {
