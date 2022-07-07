@@ -55,6 +55,7 @@ module.exports = {
 	settings: {
 		react: { version: 'detect' },
 	},
+	ignorePatterns: ['launcher/utils/types/graphql.ts'],
 	globals: {
 		module: true,
 		require: true,
