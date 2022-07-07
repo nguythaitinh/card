@@ -12,7 +12,6 @@ type Account {
 	email: String
 	githubUrl: String
 	id: String!
-	isOnline: Boolean
 	jwt: String
 	mineral: Float!
 	name: String
@@ -93,8 +92,9 @@ type CardDuelSetup {
 
 type GameInvitation {
 	game: String!
-	opponent: String!
-	owner: String!
+	opponent: Profile!
+	owner: Profile!
+	timeout: Int
 	timestamp: String!
 }
 
@@ -110,16 +110,19 @@ type Profile {
 	email: String
 	githubUrl: String
 	id: String!
+	isOnline: Boolean
 	jwt: String
+	linkedId: String
 	mineral: Float!
 	name: String
 }
 
 type Query {
 	account(address: String): Account
-	buddies: [Account]
+	buddies: [Profile]
 	buildActivities: [BuildActivity]
 	counter: Float
+	gameInvitations: [GameInvitation]
 	greeting: String
 	personalBuildActivities(address: String): [BuildActivity]
 	profile(address: String): Profile

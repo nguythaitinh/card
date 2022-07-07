@@ -1292,10 +1292,10 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@cocrafts/metacraft-ui@^0.0.35":
-  version "0.0.35"
-  resolved "https://npm.pkg.github.com/download/@cocrafts/metacraft-ui/0.0.35/47c9b26feafafb2e2b971a1e4e2c17357673825ed5a5189028231f41fe86f63b#2504d30b5617bd540d91ef9cfafa3001d006dd0f"
-  integrity sha512-R+3eDXVJbd2dUHThRNlHdSTP2f3mGg+Q3DDJ3FH9+38Wun96gOu2sR0uSRIMKvBvPXMJ5LWhWv+MlAZGlYfMMg==
+"@cocrafts/metacraft-ui@^0.0.37":
+  version "0.0.37"
+  resolved "https://npm.pkg.github.com/download/@cocrafts/metacraft-ui/0.0.37/00f3424ab6c37eb930a51bb8fe762de23b9c37c10c3476b3f0bc0058dda2e37e#a572833c74e949c3ea33c691aace0f28620a988d"
+  integrity sha512-vBIz6Hk5tljHWquKEVPH0nF+Ylp+aDxp630oSuSapfleBkVVbqSNn7Ty05uj3P6t3+2C7ntdR8wtCPTYPR+8Cw==
 
 "@eslint/eslintrc@^0.4.3":
   version "0.4.3"
