@@ -14,11 +14,6 @@ export type Scalars = {
   Float: number;
 };
 
-export type AcceptGameInput = {
-  pk?: InputMaybe<Scalars['String']>;
-  sk?: InputMaybe<Scalars['String']>;
-};
-
 export type Account = {
   __typename?: 'Account';
   address: Scalars['String'];
@@ -87,6 +82,14 @@ export type CardDuelCommand = {
   type?: Maybe<Scalars['Int']>;
 };
 
+export type CardDuelHistory = {
+  __typename?: 'CardDuelHistory';
+  duel: CardDuel;
+  opponent?: Maybe<Profile>;
+  timestamp: Scalars['String'];
+  victory?: Maybe<Scalars['Boolean']>;
+};
+
 export type CardDuelIdentifier = {
   __typename?: 'CardDuelIdentifier';
   id?: Maybe<Scalars['String']>;
@@ -146,7 +149,7 @@ export type Mutation = {
 
 
 export type MutationAcceptGameArgs = {
-  input: AcceptGameInput;
+  invitationId: Scalars['String'];
 };
 
 
@@ -183,6 +186,8 @@ export type Query = {
   account?: Maybe<Account>;
   buddies?: Maybe<Array<Maybe<Profile>>>;
   buildActivities?: Maybe<Array<Maybe<BuildActivity>>>;
+  cardDuelHistory?: Maybe<Array<Maybe<CardDuelHistory>>>;
+  cardDuelPlaying?: Maybe<CardDuelHistory>;
   counter?: Maybe<Scalars['Float']>;
   gameInvitations?: Maybe<Array<Maybe<GameInvitation>>>;
   greeting?: Maybe<Scalars['String']>;
@@ -193,6 +198,11 @@ export type Query = {
 
 export type QueryAccountArgs = {
   address?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryCardDuelHistoryArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -285,7 +295,6 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  AcceptGameInput: AcceptGameInput;
   Account: ResolverTypeWrapper<Account>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   BuildAccount: ResolverTypeWrapper<BuildAccount>;
@@ -294,6 +303,7 @@ export type ResolversTypes = {
   CardDuel: ResolverTypeWrapper<CardDuel>;
   CardDuelAttributes: ResolverTypeWrapper<CardDuelAttributes>;
   CardDuelCommand: ResolverTypeWrapper<CardDuelCommand>;
+  CardDuelHistory: ResolverTypeWrapper<CardDuelHistory>;
   CardDuelIdentifier: ResolverTypeWrapper<CardDuelIdentifier>;
   CardDuelSetting: ResolverTypeWrapper<CardDuelSetting>;
   CardDuelSetup: ResolverTypeWrapper<CardDuelSetup>;
@@ -312,7 +322,6 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  AcceptGameInput: AcceptGameInput;
   Account: Account;
   Boolean: Scalars['Boolean'];
   BuildAccount: BuildAccount;
@@ -321,6 +330,7 @@ export type ResolversParentTypes = {
   CardDuel: CardDuel;
   CardDuelAttributes: CardDuelAttributes;
   CardDuelCommand: CardDuelCommand;
+  CardDuelHistory: CardDuelHistory;
   CardDuelIdentifier: CardDuelIdentifier;
   CardDuelSetting: CardDuelSetting;
   CardDuelSetup: CardDuelSetup;
@@ -404,6 +414,14 @@ export type CardDuelCommandResolvers<ContextType = any, ParentType extends Resol
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type CardDuelHistoryResolvers<ContextType = any, ParentType extends ResolversParentTypes['CardDuelHistory'] = ResolversParentTypes['CardDuelHistory']> = {
+  duel?: Resolver<ResolversTypes['CardDuel'], ParentType, ContextType>;
+  opponent?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
+  timestamp?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  victory?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type CardDuelIdentifierResolvers<ContextType = any, ParentType extends ResolversParentTypes['CardDuelIdentifier'] = ResolversParentTypes['CardDuelIdentifier']> = {
   id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   owner?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -440,7 +458,7 @@ export type GameInvitationResolvers<ContextType = any, ParentType extends Resolv
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  acceptGame?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationAcceptGameArgs, 'input'>>;
+  acceptGame?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationAcceptGameArgs, 'invitationId'>>;
   connectGitHub?: Resolver<Maybe<ResolversTypes['Account']>, ParentType, ContextType, RequireFields<MutationConnectGitHubArgs, 'code'>>;
   increaseCounter?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType, Partial<MutationIncreaseCounterArgs>>;
   inviteGame?: Resolver<Maybe<ResolversTypes['GameInvitation']>, ParentType, ContextType, RequireFields<MutationInviteGameArgs, 'input'>>;
@@ -464,6 +482,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   account?: Resolver<Maybe<ResolversTypes['Account']>, ParentType, ContextType, Partial<QueryAccountArgs>>;
   buddies?: Resolver<Maybe<Array<Maybe<ResolversTypes['Profile']>>>, ParentType, ContextType>;
   buildActivities?: Resolver<Maybe<Array<Maybe<ResolversTypes['BuildActivity']>>>, ParentType, ContextType>;
+  cardDuelHistory?: Resolver<Maybe<Array<Maybe<ResolversTypes['CardDuelHistory']>>>, ParentType, ContextType, Partial<QueryCardDuelHistoryArgs>>;
+  cardDuelPlaying?: Resolver<Maybe<ResolversTypes['CardDuelHistory']>, ParentType, ContextType>;
   counter?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   gameInvitations?: Resolver<Maybe<Array<Maybe<ResolversTypes['GameInvitation']>>>, ParentType, ContextType>;
   greeting?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -484,6 +504,7 @@ export type Resolvers<ContextType = any> = {
   CardDuel?: CardDuelResolvers<ContextType>;
   CardDuelAttributes?: CardDuelAttributesResolvers<ContextType>;
   CardDuelCommand?: CardDuelCommandResolvers<ContextType>;
+  CardDuelHistory?: CardDuelHistoryResolvers<ContextType>;
   CardDuelIdentifier?: CardDuelIdentifierResolvers<ContextType>;
   CardDuelSetting?: CardDuelSettingResolvers<ContextType>;
   CardDuelSetup?: CardDuelSetupResolvers<ContextType>;

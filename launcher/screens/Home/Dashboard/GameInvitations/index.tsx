@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSnapshot } from 'utils/hook';
 import { LiveState, liveState } from 'utils/state/live';
+import { liveActions } from 'utils/state/live';
 import { GameInvitation } from 'utils/types/graphql';
 
 import GameInvitationItem from './Item';
@@ -9,8 +10,8 @@ import GameInvitationItem from './Item';
 export const GameInvitations: FC = () => {
 	const { gameInvites } = useSnapshot<LiveState>(liveState);
 
-	const onAccept = ({ game }: GameInvitation) => {
-		console.log('accepting', game);
+	const onAccept = ({ id }: GameInvitation) => {
+		liveActions.acceptGameInvitation(id);
 	};
 
 	return (

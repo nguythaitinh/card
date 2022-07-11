@@ -7,3 +7,9 @@ export const inviteGame = gql`
 		}
 	}
 `;
+
+export const acceptGame = gql`
+	mutation AcceptGame($invitationId: String!) {
+		acceptGame(invitationId: $invitationId)
+	}
+`;

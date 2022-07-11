@@ -4,14 +4,16 @@ import { graphQlClient } from 'utils/graphql';
 import * as queries from 'utils/graphql/query';
 import * as subscriptions from 'utils/graphql/subscription';
 import { accountState } from 'utils/state/account';
-import { GameInvitation } from 'utils/types/graphql';
+import { CardDuelHistory, GameInvitation } from 'utils/types/graphql';
 
 export interface LiveState {
 	gameInvites: GameInvitation[];
+	gamePlaying?: CardDuelHistory;
 }
 
 export const liveState = proxy<LiveState>({
 	gameInvites: [],
+	gamePlaying: undefined,
 });
 
 let invitationSub: ObservableSubscription;
@@ -31,11 +33,14 @@ subscribe(accountState, () => {
 				liveState.gameInvites.push(data.gameInvitation);
 			});
 
+		graphQlClient.query({ query: queries.gameInvitations }).then((response) => {
+			liveState.gameInvites = response?.data?.gameInvitations || [];
+		});
+
+		graphQlClient.query({ query: queries.cardDuelPlaying }).then((response) => {
+			console.log(response?.data.cardDuelPlaying);
+		});
+
 		lastAddress = nextAddress;
 	}
-});
-
-graphQlClient.query({ query: queries.gameInvitations }).then((response) => {
-	liveState.gameInvites = response?.data?.gameInvitations || [];
-	console.log(response?.data?.gameInvitations);
 });
