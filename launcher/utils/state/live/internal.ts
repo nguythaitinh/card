@@ -1,5 +1,7 @@
 import { proxy, subscribe } from 'valtio';
 import { ObservableSubscription } from '@apollo/client';
+import { BindDirections, modalActions } from '@cocrafts/metacraft-ui';
+import GamePlayingModal from 'screens/Home/Dashboard/GamePlaying';
 import { graphQlClient } from 'utils/graphql';
 import * as queries from 'utils/graphql/query';
 import * as subscriptions from 'utils/graphql/subscription';
@@ -38,7 +40,16 @@ subscribe(accountState, () => {
 		});
 
 		graphQlClient.query({ query: queries.cardDuelPlaying }).then((response) => {
-			console.log(response?.data.cardDuelPlaying);
+			const instance = response?.data?.cardDuelPlaying;
+
+			if (instance) {
+				modalActions.show({
+					id: 'gamePlayingNotice',
+					component: GamePlayingModal,
+					context: instance,
+					bindingDirection: BindDirections.BottomLeft,
+				});
+			}
 		});
 
 		lastAddress = nextAddress;

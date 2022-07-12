@@ -67,6 +67,13 @@ type CardDuelCommand {
 	type: Int
 }
 
+type CardDuelHistory {
+	duel: CardDuel!
+	opponent: Profile
+	timestamp: String!
+	victory: Boolean
+}
+
 type CardDuelIdentifier {
 	id: String
 	owner: String
@@ -99,7 +106,7 @@ type GameInvitation {
 }
 
 type Mutation {
-	acceptGame(input: AcceptGameInput!): Boolean
+	acceptGame(invitationId: String!): Boolean
 	connectGitHub(code: String!): Account
 	increaseCounter(amount: Float): Float
 	inviteGame(input: InviteGameInput!): GameInvitation
@@ -122,6 +129,8 @@ type Query {
 	account(address: String): Account
 	buddies: [Profile]
 	buildActivities: [BuildActivity]
+	cardDuelHistory(limit: Int): [CardDuelHistory]
+	cardDuelPlaying: CardDuelHistory
 	counter: Float
 	gameInvitations: [GameInvitation]
 	greeting: String
@@ -136,11 +145,6 @@ type Subscription {
 
 enum MetacraftGames {
 	CARD
-}
-
-input AcceptGameInput {
-	pk: String
-	sk: String
 }
 
 input InviteGameInput {
