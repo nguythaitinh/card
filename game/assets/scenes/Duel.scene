@@ -142,7 +142,7 @@
     "_priority": 1073741824,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 424.66425992779784,
+    "_orthoHeight": 451.04294478527606,
     "_near": 0,
     "_far": 2000,
     "_color": {
@@ -366,7 +366,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -367.689,
+      "y": -364.689,
       "z": 0
     },
     "_lrot": {
@@ -411,7 +411,7 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 100,
+      "x": -100,
       "y": 0,
       "z": 0
     },
@@ -419,8 +419,8 @@
       "__type__": "cc.Quat",
       "x": 0,
       "y": 0,
-      "z": -0.02908181109150403,
-      "w": 0.9995770346819889
+      "z": 0.035134971647589906,
+      "w": 0.999382576277635
     },
     "_lscale": {
       "__type__": "cc.Vec3",
@@ -433,7 +433,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": -3.333
+      "z": 4.027
     },
     "_id": "25mQiqV0hIEJKTZmT4GOcu"
   },
@@ -623,7 +623,7 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -100,
+      "x": 100,
       "y": 0,
       "z": 0
     },
@@ -631,8 +631,8 @@
       "__type__": "cc.Quat",
       "x": 0,
       "y": 0,
-      "z": 0.037803548221761046,
-      "w": 0.9992851903945364
+      "z": -0.03248358862031481,
+      "w": 0.9994722689851611
     },
     "_lscale": {
       "__type__": "cc.Vec3",
@@ -645,7 +645,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 4.333
+      "z": -3.723
     },
     "_id": "10ncgHfWJFfaqI2R1sT94b"
   },
@@ -744,7 +744,7 @@
     "_left": 412.449,
     "_right": 367.551,
     "_top": 0,
-    "_bottom": -142.68900000000002,
+    "_bottom": -139.68900000000002,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
     "_isAbsLeft": true,
@@ -783,7 +783,7 @@
     "_spacingX": -200,
     "_spacingY": 0,
     "_verticalDirection": 1,
-    "_horizontalDirection": 1,
+    "_horizontalDirection": 0,
     "_constraint": 0,
     "_constraintNum": 2,
     "_affectedByScale": false,
@@ -821,7 +821,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 375.956,
+      "y": 389.1329999999999,
       "z": 0
     },
     "_lrot": {
@@ -874,8 +874,8 @@
       "__type__": "cc.Quat",
       "x": 0,
       "y": 0,
-      "z": 0.01745240643728351,
-      "w": 0.9998476951563913
+      "z": 0.01743495580032729,
+      "w": 0.9998479996060604
     },
     "_lscale": {
       "__type__": "cc.Vec3",
@@ -888,7 +888,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 2
+      "z": 1.998
     },
     "_id": "4902pezzpE/Ilia0JNixSu"
   },
@@ -980,8 +980,8 @@
       "__type__": "cc.Quat",
       "x": 0,
       "y": 0,
-      "z": -0.01164980922605895,
-      "w": 0.9999321386699181
+      "z": -0.01815915270750059,
+      "w": 0.9998351089919506
     },
     "_lscale": {
       "__type__": "cc.Vec3",
@@ -994,7 +994,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": -1.335
+      "z": -2.081
     },
     "_id": "f1r9a0yyhG3LY5WyR7NJdo"
   },
@@ -1092,7 +1092,7 @@
     "_target": null,
     "_left": 450.00000000000006,
     "_right": 449.9999999999999,
-    "_top": -115.95599999999999,
+    "_top": -129.13299999999995,
     "_bottom": 627.396,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
@@ -1269,8 +1269,12 @@
     },
     "playerDeck": null,
     "opponentDeck": null,
-    "playerHand": null,
-    "opponentHand": null,
+    "playerHand": {
+      "__id__": 9
+    },
+    "opponentHand": {
+      "__id__": 22
+    },
     "_id": "15iw3Qe9tJppqch3PJHJuY"
   },
   {
