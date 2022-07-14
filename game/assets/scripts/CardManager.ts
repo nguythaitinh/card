@@ -7,8 +7,8 @@ import {
 	RichText,
 	Sprite,
 	SpriteFrame,
+	UITransform,
 } from 'cc';
-import { ClassMap } from 'db://assets/scripts/lib';
 
 const { ccclass } = _decorator;
 
@@ -52,7 +52,7 @@ export class CardManager extends Component {
 
 		cardDesc.string = `<color=888888>${card.base.skill.desc}</color>`;
 		cardName.string = `<color=DEDEDE><bold>${card.base.name || card.base.id} [${
-			ClassMap[card.base.class] || 'Spell'
+			card.base.class || 'Spell'
 		}]</bold></color>`;
 		this.loadVisual(`graphics/characters/${visualUri}/spriteFrame`);
 	}

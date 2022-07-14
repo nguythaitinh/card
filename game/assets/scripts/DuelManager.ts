@@ -23,6 +23,8 @@ export class DuelManager extends Component {
 	@property(Node)
 	opponentHand: Node = null;
 
+	historyLevel = 0;
+
 	props: DuelProps = {
 		prefabs: {},
 		nodes: {
@@ -50,18 +52,17 @@ export class DuelManager extends Component {
 			},
 		};
 
-		subscribeBridge(this.onGameStateUpdate);
 		cleanUpDesignerElements(this.props);
 	}
 
 	onGameStateUpdate(state: GameState): void {
-		console.log(state, '<-- subscribe');
+		this.progressHistory(state);
 	}
 
 	start(): void {
 		const { duel } = this.props;
 		const meta = fetchGameMeta(duel.setup.version);
-		const batches = duel.history.slice(0, 1);
+		const batches = duel.history.slice(0, 0);
 		let snapshot = getInitialSnapshot(meta, duel.setup as DuelSetup);
 
 		batches.forEach((commands) => {
@@ -77,5 +78,14 @@ export class DuelManager extends Component {
 		});
 
 		replicateDuel(this.props, snapshot);
+		subscribeBridge(this.onGameStateUpdate.bind(this), true);
+	}
+
+	progressHistory({ duel }: GameState): void {
+		const diff = duel.history.length - this.historyLevel;
+		const aheadHistory = duel.history.slice(this.historyLevel);
+		console.log(aheadHistory);
+
+		console.log(diff);
 	}
 }
