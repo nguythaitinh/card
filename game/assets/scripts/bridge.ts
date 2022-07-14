@@ -12,9 +12,15 @@ type BridgeSubscriber = (state: GameState) => void;
 const listeners: BridgeSubscriber[] = [];
 export const gameState: GameState = {};
 
-export const subscribeBridge = (subscriber: BridgeSubscriber): void => {
+export const subscribeBridge = (
+	subscriber: BridgeSubscriber,
+	withEmit = false,
+): void => {
 	listeners.push(subscriber);
-	subscriber(gameState);
+
+	if (withEmit) {
+		subscriber(gameState);
+	}
 };
 
 export const send = (type: string, payload: Record<string, unknown>): void => {
