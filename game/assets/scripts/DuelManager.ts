@@ -4,6 +4,7 @@ import { _decorator, Component, Node, Prefab } from 'cc';
 import { cleanUpDesignerElements, replicateDuel } from './lib/duel';
 import { DuelProps } from './lib/types';
 import { GameState, gameState, subscribeBridge } from './bridge';
+import { playCommands } from './replayer';
 
 const { ccclass, property } = _decorator;
 const { runCommand, getInitialSnapshot, fetchGameMeta } = Engine;
@@ -23,10 +24,12 @@ export class DuelManager extends Component {
 	@property(Node)
 	opponentHand: Node = null;
 
-	historyLevel = 0;
-
 	props: DuelProps = {
 		prefabs: {},
+		history: {
+			remote: [],
+			inner: [],
+		},
 		nodes: {
 			player: {},
 			opponent: {},
@@ -37,6 +40,10 @@ export class DuelManager extends Component {
 		this.props = {
 			user: gameState.user,
 			duel: gameState.duel,
+			history: {
+				remote: gameState.duel.history as never,
+				inner: [],
+			},
 			prefabs: {
 				card: this.cardPrefab,
 			},
@@ -55,17 +62,24 @@ export class DuelManager extends Component {
 		cleanUpDesignerElements(this.props);
 	}
 
-	onGameStateUpdate(state: GameState): void {
-		this.progressHistory(state);
+	onGameStateUpdate(remote: GameState): void {
+		const { history } = this.props;
+
+		history.remote = remote.duel.history as never;
+		const diffs = history.remote.slice(history.inner.length);
+
+		playCommands(this.props, diffs);
 	}
 
 	start(): void {
-		const { duel } = this.props;
+		const { duel, history } = this.props;
 		const meta = fetchGameMeta(duel.setup.version);
 		const batches = duel.history.slice(0, 0);
 		let snapshot = getInitialSnapshot(meta, duel.setup as DuelSetup);
 
 		batches.forEach((commands) => {
+			history.inner.push(commands as never);
+
 			commands.forEach((command) => {
 				snapshot = {
 					...snapshot,
@@ -78,14 +92,8 @@ export class DuelManager extends Component {
 		});
 
 		replicateDuel(this.props, snapshot);
+		this.props.snapshot = snapshot;
+
 		subscribeBridge(this.onGameStateUpdate.bind(this), true);
-	}
-
-	progressHistory({ duel }: GameState): void {
-		const diff = duel.history.length - this.historyLevel;
-		const aheadHistory = duel.history.slice(this.historyLevel);
-		console.log(aheadHistory);
-
-		console.log(diff);
 	}
 }

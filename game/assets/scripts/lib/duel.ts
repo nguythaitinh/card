@@ -1,8 +1,7 @@
 import { CardState, DuelState } from '@cocrafts/engine-card';
 
 import { DuelProps } from '../lib/types';
-
-import { getCardCurve, instantiateCard } from './util';
+import { getCardCurve, instantiateCard } from '../utils';
 
 export const cleanUpDesignerElements = ({ nodes }: DuelProps): void => {
 	nodes.player.hand?.children.map((i) => i.destroy());
