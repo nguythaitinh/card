@@ -24,22 +24,19 @@ export const replicateDuel = (
 	playerCardCurve.forEach(({ height, angle }, i) => {
 		const scale = 0.5;
 		const card = playerHand[i] as CardState;
-		const { node, manager } = instantiateCard(prefabs.card);
+		const { node } = instantiateCard(prefabs.card, card, true);
 
-		manager.setCard(card, true);
 		node.setScale(scale, scale);
 		node.parent = nodes.player.hand;
 		node.setPosition(0, height, 0);
 		node.setRotationFromEuler(0, 0, angle);
-		node.setSiblingIndex(i);
 	});
 
 	opponentCardCurve.forEach(({ height, angle }, i) => {
 		const scale = 0.3;
 		const card = playerHand[i] as CardState;
-		const { node, manager } = instantiateCard(prefabs.card);
+		const { node } = instantiateCard(prefabs.card, card, false);
 
-		manager.setCard(card, false);
 		node.setScale(scale, scale);
 		node.parent = nodes.opponent.hand;
 		node.setPosition(0, height, 0);

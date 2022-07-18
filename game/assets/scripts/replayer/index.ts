@@ -1,8 +1,10 @@
-import { DuelCommand } from '@cocrafts/engine-card';
+import Engine, { DuelCommand } from '@cocrafts/engine-card';
 
 import { DuelProps } from '../lib/types';
 
-import draw from './draw';
+import move from './move';
+
+const { CommandType } = Engine;
 
 export const playCommands = async (
 	props: DuelProps,
@@ -12,7 +14,11 @@ export const playCommands = async (
 		const commands = batches[i];
 
 		for (let z = 0; z < commands.length; z += 1) {
-			await draw(props, commands[i]);
+			const command = commands[z];
+
+			if (command.type === CommandType.CardMove) {
+				await move(props, commands[z]);
+			}
 		}
 	}
 };

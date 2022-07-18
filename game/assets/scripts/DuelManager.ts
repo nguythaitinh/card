@@ -5,6 +5,7 @@ import { cleanUpDesignerElements, replicateDuel } from './lib/duel';
 import { DuelProps } from './lib/types';
 import { GameState, gameState, subscribeBridge } from './bridge';
 import { playCommands } from './replayer';
+import { getOrderPair } from './utils';
 
 const { ccclass, property } = _decorator;
 const { runCommand, getInitialSnapshot, fetchGameMeta } = Engine;
@@ -15,14 +16,23 @@ export class DuelManager extends Component {
 	cardPrefab: Prefab;
 
 	@property(Node)
-	playerDeck: Node = null;
+	screenGuide: Node;
 	@property(Node)
-	opponentDeck: Node = null;
+	centralGuide: Node;
+	@property(Node)
+	leftGuide: Node;
+	@property(Node)
+	rightGuide: Node;
 
 	@property(Node)
-	playerHand: Node = null;
+	playerDeck: Node;
 	@property(Node)
-	opponentHand: Node = null;
+	opponentDeck: Node;
+
+	@property(Node)
+	playerHand: Node;
+	@property(Node)
+	opponentHand: Node;
 
 	props: DuelProps = {
 		prefabs: {},
@@ -31,6 +41,7 @@ export class DuelManager extends Component {
 			inner: [],
 		},
 		nodes: {
+			guide: {},
 			player: {},
 			opponent: {},
 		},
@@ -48,6 +59,12 @@ export class DuelManager extends Component {
 				card: this.cardPrefab,
 			},
 			nodes: {
+				guide: {
+					screen: this.screenGuide,
+					central: this.centralGuide,
+					left: this.leftGuide,
+					right: this.rightGuide,
+				},
 				player: {
 					deck: this.playerDeck,
 					hand: this.playerHand,
@@ -72,10 +89,14 @@ export class DuelManager extends Component {
 	}
 
 	start(): void {
-		const { duel, history } = this.props;
+		const { user, duel, history } = this.props;
 		const meta = fetchGameMeta(duel.setup.version);
 		const batches = duel.history.slice(0, 0);
 		let snapshot = getInitialSnapshot(meta, duel.setup as DuelSetup);
+
+		this.props.snapshot = snapshot;
+		this.props.meta = meta;
+		this.props.orderPair = getOrderPair(user.address, snapshot.player);
 
 		batches.forEach((commands) => {
 			history.inner.push(commands as never);
@@ -92,7 +113,6 @@ export class DuelManager extends Component {
 		});
 
 		replicateDuel(this.props, snapshot);
-		this.props.snapshot = snapshot;
 
 		subscribeBridge(this.onGameStateUpdate.bind(this), true);
 	}

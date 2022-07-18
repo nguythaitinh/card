@@ -1,3 +1,7 @@
+import { Vec3 } from 'cc';
+
+import { AngledPosition } from '../lib/types';
+
 export interface CardCurve {
 	angle: number;
 	height: number;
@@ -5,8 +9,8 @@ export interface CardCurve {
 
 export const getCardCurve = (
 	length: number,
-	heightRange = -20,
-	angleRange = -12,
+	heightRange = 20,
+	angleRange = 12,
 	maxLength = 9,
 ): CardCurve[] => {
 	const result: CardCurve[] = [];
@@ -34,4 +38,45 @@ const distanceFromCentral = (radius: number, currentIndex: number): number => {
 	} else {
 		return (currentIndex % radius) - radius;
 	}
+};
+
+export const linearDistribute = (
+	central: Vec3,
+	amount: number,
+	spacing: number,
+): Vec3[] => {
+	const result: Vec3[] = [];
+	const size = amount * spacing;
+	const radius = size / 2;
+	const leftMost = central.x - radius + spacing / 2;
+
+	for (let i = 0; i < amount; i += 1) {
+		result.push(new Vec3(leftMost + i * spacing, central.y, central.z));
+	}
+
+	return result;
+};
+
+export const linearPositionAt = (
+	central: Vec3,
+	spacing: number,
+	totalAmount: number,
+	currentIndex: number,
+	heightRange = 0,
+	angleRange = 0,
+): AngledPosition => {
+	const size = totalAmount * spacing;
+	const radius = totalAmount / 2;
+	const halfSize = size / 2;
+	const leftMost = central.x - halfSize + spacing / 2;
+	const distance = distanceFromCentral(radius, currentIndex);
+
+	return {
+		position: new Vec3(
+			leftMost + currentIndex * spacing,
+			central.y + heightRange * (Math.abs(distance) / radius),
+			central.z,
+		),
+		angle: angleRange * (distance / radius),
+	};
 };
