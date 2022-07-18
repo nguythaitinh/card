@@ -34,18 +34,7 @@ export class DuelManager extends Component {
 	@property(Node)
 	opponentHand: Node;
 
-	props: DuelProps = {
-		prefabs: {},
-		history: {
-			remote: [],
-			inner: [],
-		},
-		nodes: {
-			guide: {},
-			player: {},
-			opponent: {},
-		},
-	};
+	props: DuelProps;
 
 	onLoad(): void {
 		this.props = {

@@ -1,4 +1,4 @@
-import { Vec3 } from 'cc';
+import { Node, Vec3 } from 'cc';
 
 import { AngledPosition } from '../lib/types';
 
@@ -26,6 +26,17 @@ export const getCardCurve = (
 	}
 
 	return result;
+};
+
+export const relativePosition = (first: Node, second: Node): Vec3 => {
+	const firstPos = first.getWorldPosition();
+	const secondPos = second.getWorldPosition();
+
+	return new Vec3(
+		firstPos.x - secondPos.x,
+		firstPos.y - secondPos.y,
+		firstPos.z - secondPos.z,
+	);
 };
 
 const distanceFromCentral = (radius: number, currentIndex: number): number => {
@@ -57,23 +68,32 @@ export const linearDistribute = (
 	return result;
 };
 
-export const linearPositionAt = (
-	central: Vec3,
-	spacing: number,
-	totalAmount: number,
-	currentIndex: number,
+interface LinearSeatProps {
+	central?: Vec3;
+	spacing?: number;
+	heightRange?: number;
+	angleRange?: number;
+	length: number;
+	at: number;
+}
+
+export const linearSeat = ({
+	central = new Vec3(0, 0, 0),
+	spacing = 100,
 	heightRange = 0,
 	angleRange = 0,
-): AngledPosition => {
-	const size = totalAmount * spacing;
-	const radius = totalAmount / 2;
+	length,
+	at,
+}: LinearSeatProps): AngledPosition => {
+	const size = length * spacing;
+	const radius = length / 2;
 	const halfSize = size / 2;
 	const leftMost = central.x - halfSize + spacing / 2;
-	const distance = distanceFromCentral(radius, currentIndex);
+	const distance = distanceFromCentral(radius, at);
 
 	return {
 		position: new Vec3(
-			leftMost + currentIndex * spacing,
+			leftMost + at * spacing,
 			central.y + heightRange * (Math.abs(distance) / radius),
 			central.z,
 		),

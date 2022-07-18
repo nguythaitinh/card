@@ -2,7 +2,12 @@ import Engine, { DuelCommand } from '@cocrafts/engine-card';
 import { Animation, tween, Vec3 } from 'cc';
 
 import { DuelProps } from '../lib/types';
-import { getOrder, instantiateCard, linearPositionAt } from '../utils';
+import {
+	getOrder,
+	instantiateCard,
+	linearSeat,
+	relativePosition,
+} from '../utils';
 
 const { runCommand } = Engine;
 
@@ -20,22 +25,34 @@ export const run = async (
 	const currentNodes = isPlayerCommand ? nodes.player : nodes.opponent;
 
 	return new Promise((resolve) => {
-		const deckPos = currentNodes.deck.getWorldPosition();
-		const handPos = currentNodes.hand.getWorldPosition();
-		const centralPos = nodes.guide.central.getWorldPosition();
-
+		const deckPos = relativePosition(currentNodes.deck, currentNodes.hand);
+		const centralPos = relativePosition(nodes.guide.central, currentNodes.hand);
 		const { node } = instantiateCard(prefabs.card, card, isPlayerCommand);
-		const root = node.getChildByPath('root');
-		const animation = root.getComponent('cc.Animation') as Animation;
 
 		node.setPosition(deckPos);
-		node.parent = nodes.guide.screen;
-		animation.getState('card-flip').speed = 1.5;
-		animation.play('card-flip');
+		node.parent = currentNodes.hand;
 
 		if (isPlayerCommand) {
-			const centralDest = linearPositionAt(centralPos, 200, 5, cardIndex, 0, 0);
-			const handDest = linearPositionAt(handPos, 100, 5, cardIndex, -20, -12);
+			const root = node.getChildByPath('root');
+			const animation = root.getComponent('cc.Animation') as Animation;
+
+			animation.getState('card-flip').speed = 1.5;
+			animation.play('card-flip');
+
+			const centralDest = linearSeat({
+				central: centralPos,
+				spacing: 200,
+				length: 5,
+				at: cardIndex,
+			});
+
+			const handDest = linearSeat({
+				spacing: 100,
+				length: 5,
+				at: cardIndex,
+				heightRange: -20,
+				angleRange: -20,
+			});
 
 			tween(node)
 				.to(
@@ -60,7 +77,13 @@ export const run = async (
 				)
 				.start();
 		} else {
-			const handDest = linearPositionAt(handPos, 80, 5, cardIndex, 16, 12);
+			const handDest = linearSeat({
+				spacing: 80,
+				length: 5,
+				at: cardIndex,
+				heightRange: 16,
+				angleRange: 12,
+			});
 
 			tween(node)
 				.to(0, { scale: new Vec3(0.3, 0.25) })
@@ -72,9 +95,8 @@ export const run = async (
 				.start();
 		}
 
-		setTimeout(() => resolve(), 250);
-
 		props.snapshot = { ...props.snapshot, ...updates };
+		setTimeout(() => resolve(), 250);
 	});
 };
 
