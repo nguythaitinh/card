@@ -7,12 +7,8 @@ import {
 	RichText,
 	Sprite,
 	SpriteFrame,
-	tween,
 	UITransform,
-	Vec3,
 } from 'cc';
-
-import { AngledPosition } from './lib/types';
 
 const { ccclass } = _decorator;
 
@@ -31,67 +27,6 @@ export class CardManager extends Component {
 
 		this.node.getChildByPath('root/back').active = true;
 		this.props.animation = root.getComponent('cc.Animation') as Animation;
-	}
-
-	start(): void {
-		if (this.props.isPlayerCard) {
-			// this.props.animation.play('card-flip');
-		}
-	}
-
-	flipTo(firstDest: AngledPosition, secondDest?: AngledPosition): void {
-		const root = this.node.getChildByPath('root');
-		const animation = root.getComponent('cc.Animation') as Animation;
-
-		this.node.active = false;
-		animation.getState('card-flip').speed = 1.5;
-		animation.play('card-flip');
-
-		const animator = tween(this.node)
-			.to(
-				0,
-				{ scale: new Vec3(0.42, 0.32) },
-				{
-					onComplete: () => {
-						this.node.active = true;
-					},
-				},
-			)
-			.to(
-				1,
-				{
-					position: firstDest.position,
-					scale: new Vec3(0.6, 0.6),
-				},
-				{ easing: 'cubicInOut' },
-			);
-
-		if (secondDest) {
-			animator.delay(3).to(
-				0.5,
-				{
-					position: secondDest.position,
-					scale: new Vec3(0.5, 0.5),
-					angle: secondDest.angle,
-				},
-				{ easing: 'cubicInOut' },
-			);
-		}
-
-		animator.start();
-	}
-
-	moveTo(destination: AngledPosition): void {
-		tween(this.node)
-			.to(0, {
-				scale: new Vec3(0.3, 0.25),
-			})
-			.to(1, {
-				position: destination.position,
-				scale: new Vec3(0.35, 0.35),
-				angle: destination.angle,
-			})
-			.start();
 	}
 
 	setCard(card: CardState, isPlayerCard: boolean): void {
