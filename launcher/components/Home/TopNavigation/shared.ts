@@ -36,13 +36,13 @@ export interface NavigationConfig {
 
 export const navigationItems: NavigationConfig[] = [
 	{
-		title: 'HOME',
+		title: 'DASHBOARD',
 		route: {
 			name: 'Home',
 		},
 	},
 	{
-		title: 'PROFILE',
+		title: 'MARKETPLACE',
 		route: {
 			name: 'AuthResponse',
 		},
