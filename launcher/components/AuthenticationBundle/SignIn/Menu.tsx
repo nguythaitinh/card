@@ -1,6 +1,6 @@
 import { FC, useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { modalActions } from '@cocrafts/metacraft-ui';
+import { modalActions } from '@metacraft/ui';
 import { googleSignIn } from 'utils/lib/auth';
 
 import Button from '../../Button';

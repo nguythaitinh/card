@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { modalActions } from '@cocrafts/metacraft-ui';
+import { modalActions } from '@metacraft/ui';
 import Hyperlink from 'components/Hyperlink';
 import Text from 'components/Text';
 import { signOut } from 'utils/lib/auth';

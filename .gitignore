@@ -6,6 +6,7 @@
 .vscode
 
 wings/
+assets/cg
 
 node_modules/
 npm-debug.log

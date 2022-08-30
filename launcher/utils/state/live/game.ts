@@ -1,6 +1,7 @@
+import { navigate } from 'stacks/Browser/shared';
 import { graphQlClient } from 'utils/graphql';
 import * as mutations from 'utils/graphql/mutation';
-import { MetacraftGames } from 'utils/types/graphql';
+import { CardDuelHistory, MetacraftGames } from 'utils/types/graphql';
 
 import { liveState } from './internal';
 
@@ -27,4 +28,10 @@ export const acceptGameInvitation = async (
 	liveState.gameInvites = liveState.gameInvites.filter(
 		(i) => i.id !== invitationId,
 	);
+};
+
+export const resumePlayingGame = async (
+	history: CardDuelHistory,
+): Promise<void> => {
+	navigate('CardGame', { id: history.id } as never);
 };

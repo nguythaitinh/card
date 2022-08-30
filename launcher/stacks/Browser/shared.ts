@@ -14,7 +14,12 @@ export type HomeParamList = {
 	Dashboard: undefined;
 };
 
+export type CardParamList = {
+	id: string;
+};
+
 export type RootParamList = {
+	CardGame: NavigatorScreenParams<CardParamList>;
 	Home: NavigatorScreenParams<HomeParamList>;
 	AuthResponse: undefined;
 };
@@ -23,6 +28,7 @@ export const linking: LinkingOptions<RootParamList> = {
 	prefixes: ['https://stormgate.io'],
 	config: {
 		screens: {
+			CardGame: '/card/:id',
 			Home: {
 				path: '/',
 				screens: {

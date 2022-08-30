@@ -69,6 +69,7 @@ type CardDuelCommand {
 
 type CardDuelHistory {
 	duel: CardDuel!
+	id: String
 	opponent: Profile
 	timestamp: String!
 	victory: Boolean
@@ -105,17 +106,29 @@ type GameInvitation {
 	timestamp: String!
 }
 
+type GameSubscription {
+	email: String!
+	game: MetacraftGames
+	timestamp: String!
+}
+
 type Mutation {
 	acceptGame(invitationId: String!): Boolean
+	claimTokenFromOrder(orderId: String!, signature: String!): TokenOrder
+	confirmTokenOrder(input: ConfirmTokenOrderInput): TokenOrder
 	connectGitHub(code: String!): Account
+	createTokenOrder(input: CreateTokenOrderInput): TokenOrder
 	increaseCounter(amount: Float): Float
 	inviteGame(input: InviteGameInput!): GameInvitation
+	registerTokenOrderNonce(orderId: String!): String
+	subscribeGame(input: SubscribeGameInput): GameSubscription
 }
 
 type Profile {
 	address: String!
 	avatarUrl: String
 	email: String
+	githubId: String
 	githubUrl: String
 	id: String!
 	isOnline: Boolean
@@ -129,6 +142,7 @@ type Query {
 	account(address: String): Account
 	buddies: [Profile]
 	buildActivities: [BuildActivity]
+	cardDuel(id: String!): CardDuel
 	cardDuelHistory(limit: Int): [CardDuelHistory]
 	cardDuelPlaying: CardDuelHistory
 	counter: Float
@@ -136,6 +150,7 @@ type Query {
 	greeting: String
 	personalBuildActivities(address: String): [BuildActivity]
 	profile(address: String): Profile
+	tokenOrders: [TokenOrder]
 }
 
 type Subscription {
@@ -143,8 +158,58 @@ type Subscription {
 	gameInvitation(opponent: String!): GameInvitation
 }
 
+type TokenOrder {
+	id: String
+	investAmount: Float!
+	investCurrency: SupportedCurrencies!
+	investUsdRatio: Float!
+	mineralAmount: Float!
+	mineralUnitPrice: Float!
+	nonce: String
+	nonceTime: String
+	owner: Profile
+	pendingUnlocks: [TokenUnlock]
+	round: String
+	status: OrderStatuses!
+	timestamp: String!
+	unlockAmount: Float
+	unlockCount: Int
+}
+
+type TokenUnlock {
+	amount: Float!
+	id: String
+	percentage: Float!
+	round: String
+	total: Float!
+	unlockOrder: Int
+}
+
 enum MetacraftGames {
 	CARD
+}
+
+enum OrderStatuses {
+	CANCELLED
+	INITIATED
+	PAID
+}
+
+enum SupportedCurrencies {
+	BUSD
+	SOL
+	USDC
+	USDT
+}
+
+input ConfirmTokenOrderInput {
+	orderId: String!
+	signature: String!
+}
+
+input CreateTokenOrderInput {
+	investAmount: Float
+	investCurrency: SupportedCurrencies
 }
 
 input InviteGameInput {
@@ -155,4 +220,9 @@ input InviteGameInput {
 input LoginInput {
 	publicKey: String!
 	signature: String!
+}
+
+input SubscribeGameInput {
+	email: String!
+	game: MetacraftGames
 }

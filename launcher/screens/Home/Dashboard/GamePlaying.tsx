@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { ModalConfigs } from '@cocrafts/metacraft-ui';
+import { modalActions, ModalConfigs } from '@metacraft/ui';
 import Avatar from 'components/Avatar';
 import Button from 'components/Button';
+import { liveActions } from 'utils/state/live';
 import { CardDuelHistory } from 'utils/types/graphql';
 
 interface Props {
@@ -10,23 +11,34 @@ interface Props {
 }
 
 export const GamePlaying: FC<Props> = ({ config }) => {
-	const history = config.context as CardDuelHistory;
+	const { id } = config;
+	const duel = config.context as CardDuelHistory;
+
+	const onResume = () => {
+		modalActions.hide(id as string);
+		liveActions.resumePlayingGame(duel);
+	};
 
 	return (
 		<View style={styles.container}>
 			<Avatar
 				style={styles.avatar}
 				size={42}
-				imageUri={history.opponent?.avatarUrl as string}
+				imageUri={duel.opponent?.avatarUrl as string}
 			/>
 			<View style={styles.innerContainer}>
 				<Text style={styles.message}>
-					You are on a match with {history.opponent?.name}, would you like to
+					You are on a match with {duel.opponent?.name}, would you like to
 					continue it?
 				</Text>
 				<View style={styles.commandContainer}>
 					<Button outline title="Cancel" style={styles.buttonContainer} />
-					<Button outline title="Resume" style={styles.buttonContainer} />
+					<Button
+						outline
+						title="Resume"
+						style={styles.buttonContainer}
+						onPress={onResume}
+					/>
 				</View>
 			</View>
 		</View>

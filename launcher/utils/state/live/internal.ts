@@ -1,6 +1,6 @@
 import { proxy, subscribe } from 'valtio';
 import { ObservableSubscription } from '@apollo/client';
-import { BindDirections, modalActions } from '@cocrafts/metacraft-ui';
+import { BindDirections, modalActions } from '@metacraft/ui';
 import GamePlayingModal from 'screens/Home/Dashboard/GamePlaying';
 import { graphQlClient } from 'utils/graphql';
 import * as queries from 'utils/graphql/query';

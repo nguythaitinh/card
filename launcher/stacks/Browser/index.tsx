@@ -1,36 +1,23 @@
 import { FC } from 'react';
-import {
-	DefaultTheme,
-	NavigationContainer,
-	Theme,
-} from '@react-navigation/native';
+import { themeState } from '@metacraft/ui';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import CardGame from 'screens/CardGame';
 import Home from 'screens/Home';
 import { useSnapshot } from 'utils/hook';
-import { themeState } from 'utils/state/theme';
 
 import { linking, navigationRef, RootParamList, screenOptions } from './shared';
 
 const Stack = createStackNavigator<RootParamList>();
 
 export const BrowserStack: FC = () => {
-	const { colors } = useSnapshot(themeState);
-	const navigationTheme: Theme = {
-		...DefaultTheme,
-		colors: {
-			...DefaultTheme.colors,
-			background: colors.bg,
-		},
-	};
+	const theme = useSnapshot(themeState);
 
 	return (
-		<NavigationContainer
-			ref={navigationRef}
-			linking={linking}
-			theme={navigationTheme}
-		>
+		<NavigationContainer ref={navigationRef} linking={linking} theme={theme}>
 			<Stack.Navigator screenOptions={screenOptions}>
 				<Stack.Screen name="Home" component={Home} />
+				<Stack.Screen name="CardGame" component={CardGame} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

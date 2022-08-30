@@ -23,6 +23,7 @@ module.exports = {
 	rules: {
 		'@typescript-eslint/no-var-requires': 'off',
 
+		'react/jsx-uses-react': 1,
 		'simple-import-sort/exports': 'error',
 		'simple-import-sort/imports': [
 			'error',
@@ -55,7 +56,10 @@ module.exports = {
 	settings: {
 		react: { version: 'detect' },
 	},
-	ignorePatterns: ['launcher/utils/types/graphql.ts'],
+	ignorePatterns: [
+		'launcher/utils/types/graphql.ts',
+		'game/assets/scripts/lib/graphql.ts',
+	],
 	globals: {
 		module: true,
 		require: true,

@@ -1,10 +1,6 @@
 import { FC, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
-import {
-	AnimateDirections,
-	BindDirections,
-	modalActions,
-} from '@cocrafts/metacraft-ui';
+import { AnimateDirections, BindDirections, modalActions } from '@metacraft/ui';
 import Button from 'components/Button';
 
 import SignInMenu from './Menu';

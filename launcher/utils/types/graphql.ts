@@ -85,6 +85,7 @@ export type CardDuelCommand = {
 export type CardDuelHistory = {
   __typename?: 'CardDuelHistory';
   duel: CardDuel;
+  id?: Maybe<Scalars['String']>;
   opponent?: Maybe<Profile>;
   timestamp: Scalars['String'];
   victory?: Maybe<Scalars['Boolean']>;
@@ -416,6 +417,7 @@ export type CardDuelCommandResolvers<ContextType = any, ParentType extends Resol
 
 export type CardDuelHistoryResolvers<ContextType = any, ParentType extends ResolversParentTypes['CardDuelHistory'] = ResolversParentTypes['CardDuelHistory']> = {
   duel?: Resolver<ResolversTypes['CardDuel'], ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   opponent?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
   timestamp?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   victory?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;

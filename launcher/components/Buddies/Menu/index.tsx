@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { modalActions, ModalConfigs } from '@cocrafts/metacraft-ui';
+import { modalActions, ModalConfigs } from '@metacraft/ui';
 import { liveActions } from 'utils/state/live';
 import { Profile } from 'utils/types/graphql';
 

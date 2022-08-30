@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { buddyActions, BuddyState, buddyState } from 'utils/state/buddies';
 import { useSnapshot } from 'valtio';
+import { buddyActions, BuddyState, buddyState } from 'utils/state/buddies';
 
 export const useBuddies = (deps = []): BuddyState => {
 	const snapshot = useSnapshot<BuddyState>(buddyState);

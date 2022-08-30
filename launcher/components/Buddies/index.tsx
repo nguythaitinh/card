@@ -1,10 +1,6 @@
 import { FC, RefObject } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
-import {
-	AnimateDirections,
-	BindDirections,
-	modalActions,
-} from '@cocrafts/metacraft-ui';
+import { AnimateDirections, BindDirections, modalActions } from '@metacraft/ui';
 import { useBuddies } from 'utils/hook';
 import { Profile } from 'utils/types/graphql';
 
