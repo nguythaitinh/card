@@ -9,5 +9,5 @@
 			"utils/*": ["./launcher/utils/*"]
 		}
 	},
-	"include": ["index.web.js", "src", "src/utils/global.d.ts"]
+	"include": ["index.web.js", "launcher"]
 }

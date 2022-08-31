@@ -4,7 +4,15 @@ const CopyPlugin = require('copy-webpack-plugin');
 const copyAssets = (configs) => {
 	configs.plugins.push(
 		new CopyPlugin({
-			patterns: [{ from: resolve(process.cwd(), 'assets/'), to: './' }],
+			patterns: [
+				{
+					from: resolve(process.cwd(), 'assets/'),
+					to: './',
+					filter: (uri) => {
+						return !(uri.endsWith('.ejs') || uri.endsWith('.sass'));
+					},
+				},
+			],
 		}),
 	);
 
@@ -23,7 +31,7 @@ const splitBundle = (configs) => {
 				'react-dom',
 				'react-native',
 				'react-art',
-				'@react-native-community/async-storage',
+				'@react-native-async-storage/async-storage',
 			],
 		},
 	};
@@ -46,6 +54,7 @@ const setEnvironments = (configs, { webpack, wingsConfig }) => {
 };
 
 module.exports = {
+	buildId: () => 'app',
 	webpackConfigs: [setEnvironments, copyAssets, splitBundle],
 	moduleAlias: () => {
 		return {

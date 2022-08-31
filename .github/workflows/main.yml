@@ -33,7 +33,7 @@ jobs:
         run: echo "::set-output name=BRANCH_NAME::${GITHUB_REF##*/}"
 
       - name: Install metacraft-cli
-        run: npm i --location=global @metacraft/cli
+        run: npm i --location=global wings-cli
 
       - name: Install dependencies
         run: yarn
@@ -57,7 +57,7 @@ jobs:
         run: echo $(terraform output -json) > tf-output.json
 
       - name: Build
-        run: metacraft bundle
+        run: wings bundle
 
       - uses: shallwefootball/s3-upload-action@master
         with:
