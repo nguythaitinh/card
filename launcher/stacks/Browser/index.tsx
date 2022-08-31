@@ -7,6 +7,7 @@ import Buddies from 'components/Buddies';
 import TopNavigation from 'components/Home/TopNavigation';
 import CardGame from 'screens/CardGame';
 import Home from 'screens/Home';
+import Marketplace from 'screens/Marketplace';
 import { useSnapshot } from 'utils/hook';
 
 import { linking, navigationRef, RootParamList, screenOptions } from './shared';
