@@ -33,7 +33,7 @@ jobs:
         run: echo "::set-output name=BRANCH_NAME::${GITHUB_REF##*/}"
 
       - name: Install metacraft-cli
-        run: npm i --location=global wings-cli
+        run: npm i --location=global @metacraft/cli
 
       - name: Install dependencies
         run: yarn
@@ -57,14 +57,14 @@ jobs:
         run: echo $(terraform output -json) > tf-output.json
 
       - name: Build
-        run: wings bundle
+        run: metacraft bundle
 
       - uses: shallwefootball/s3-upload-action@master
         with:
           aws_bucket: "under-realm-${{ steps.branch.outputs.BRANCH_NAME }}"
           aws_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          source_dir: wings
+          source_dir: metacraft
           destination_dir: ''
 
       - name: Invalidate CloudFront cache
