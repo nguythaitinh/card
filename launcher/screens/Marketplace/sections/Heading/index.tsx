@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Text } from '@metacraft/ui';
-import { UnderRealmIcon } from 'components/Marketplace/visuals/UnderRealmIcon';
+import { UnderRealmIcon } from 'components/icons/underRealm/MarkLogo';
 import resources from 'utils/resources';
 
 import { marketplaceSizes } from '../../shared';
