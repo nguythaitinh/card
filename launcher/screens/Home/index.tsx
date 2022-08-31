@@ -1,17 +1,28 @@
 import React, { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from '@metacraft/ui';
+import Buddies from 'components/Buddies';
+import CompactLayout from 'components/layouts/Compact';
 
 export const LauncherHome: FC = () => {
 	return (
-		<View style={styles.container}>
-			<Text>Dashboard</Text>
-		</View>
+		<CompactLayout contentContainerStyle={styles.contentContainer}>
+			<View style={styles.innerContainer}>
+				<Text>Home</Text>
+			</View>
+			<Buddies width={280} />
+		</CompactLayout>
 	);
 };
 
 export default LauncherHome;
 
 const styles = StyleSheet.create({
-	container: {},
+	contentContainer: {
+		flexDirection: 'row',
+	},
+	innerContainer: {
+		flex: 1,
+		paddingTop: 60,
+	},
 });
