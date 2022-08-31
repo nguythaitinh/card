@@ -8,7 +8,7 @@ const BrowserMarketplace: FC = () => {
 	return (
 		<View style={styles.container}>
 			<ScrollView>
-				<HeadingSection />
+				{/* <HeadingSection /> */}
 				<Text style={styles.text}>Marketplace</Text>
 			</ScrollView>
 		</View>
