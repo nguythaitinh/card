@@ -13,8 +13,14 @@ const { Flag } = stormIcons;
 export const TopNavigation: FC = () => {
 	const { sizes } = useSnapshot(themeState);
 
-	const containerStyle = {
-		backgroundColor: '#331e1e',
+	const containerStyle: ViewStyle = {
+		zIndex: 1,
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		right: 0,
+		borderBottomWidth: 1,
+		borderColor: 'rgba(255, 255, 255, 0.02)',
 	};
 
 	const innerContainerStyle: ViewStyle = {
@@ -42,7 +48,6 @@ export default TopNavigation;
 
 const flagColors: string[] = ['#220d0d', '#301717', '#4a2828', '#FFFFFF'];
 const styles = StyleSheet.create({
-	container: {},
 	flagContainer: {
 		width: 120,
 	},
