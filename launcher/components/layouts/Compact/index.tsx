@@ -2,7 +2,6 @@ import React, { FC, ReactNode } from 'react';
 import { View, ViewStyle } from 'react-native';
 import { themeState } from '@metacraft/ui';
 import { useSnapshot } from 'utils/hook';
-import { iStyles } from 'utils/styles';
 
 import TopNavigation from './TopNavigation';
 
@@ -23,16 +22,10 @@ export const CompactLayout: FC<Props> = ({
 		paddingTop: sizes.topNavigation,
 	};
 
-	const innerStyle = [
-		iStyles.contentContainer,
-		{ flex: 1 },
-		contentContainerStyle,
-	];
-
 	return (
 		<View style={[containerStyle, style]}>
 			<TopNavigation />
-			<View style={innerStyle}>{children}</View>
+			<View style={[{ flex: 1 }, contentContainerStyle]}>{children}</View>
 		</View>
 	);
 };

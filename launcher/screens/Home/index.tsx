@@ -19,6 +19,9 @@ export default LauncherHome;
 
 const styles = StyleSheet.create({
 	contentContainer: {
+		width: '100%',
+		maxWidth: 1600,
+		marginHorizontal: 'auto',
 		flexDirection: 'row',
 	},
 	innerContainer: {

@@ -1,17 +1,19 @@
 import React, { FC } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { Text } from '@metacraft/ui';
+import CompactLayout from 'components/layouts/Compact';
+import { iStyles } from 'utils/styles';
 
 import HeadingSection from './sections/Heading';
 
 const BrowserMarketplace: FC = () => {
 	return (
-		<View style={styles.container}>
-			<ScrollView>
-				{/* <HeadingSection /> */}
+		<CompactLayout>
+			<ScrollView contentContainerStyle={iStyles.contentContainer}>
+				{/*<HeadingSection />*/}
 				<Text style={styles.text}>Marketplace</Text>
 			</ScrollView>
-		</View>
+		</CompactLayout>
 	);
 };
 
