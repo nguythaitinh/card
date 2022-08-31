@@ -64,7 +64,7 @@ jobs:
           aws_bucket: "under-realm-${{ steps.branch.outputs.BRANCH_NAME }}"
           aws_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          source_dir: metacraft
+          source_dir: wings
           destination_dir: ''
 
       - name: Invalidate CloudFront cache
