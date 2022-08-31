@@ -4,7 +4,9 @@
 	"description": "",
 	"main": "index.web.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"gen": "node tool/gen",
+		"invalidate": "node tool/invalidate"
 	},
 	"keywords": [],
 	"author": "",
@@ -55,6 +57,7 @@
 		"eslint-plugin-react-hooks": "^4.2.0",
 		"eslint-plugin-simple-import-sort": "^7.0.0",
 		"metro-react-native-babel-preset": "^0.66.2",
+		"mustache": "^4.2.0",
 		"prettier": "^2.4.0",
 		"typescript": "^4.6.4"
 	},

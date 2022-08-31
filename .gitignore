@@ -8,6 +8,11 @@
 metacraft/
 assets/cg
 
+# Terraform automations
+/*.tf
+.terraform
+.terraform.lock.hcl
+
 node_modules/
 npm-debug.log
 yarn-error.log
