@@ -36,7 +36,7 @@ export interface NavigationConfig {
 
 export const navigationItems: NavigationConfig[] = [
 	{
-		title: 'DASHBOARD',
+		title: 'HOME',
 		route: {
 			name: 'Home',
 		},
@@ -44,7 +44,7 @@ export const navigationItems: NavigationConfig[] = [
 	{
 		title: 'MARKETPLACE',
 		route: {
-			name: 'AuthResponse',
+			name: 'Marketplace',
 		},
 	},
 	{

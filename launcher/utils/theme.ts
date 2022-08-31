@@ -5,7 +5,7 @@ export const launcherTheme: ThemeState = {
 	dark: true,
 	defaultFontFamily: 'Poppins',
 	colors: {
-		primary: '#388BDF',
+		primary: '#351f1f',
 		secondary: '#EB5757',
 		background: '#0d1117',
 		card: '#FFFFFF',

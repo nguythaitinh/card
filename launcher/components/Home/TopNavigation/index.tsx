@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { stormIcons } from '@metacraft/icons';
 import { themeState } from '@metacraft/ui';
+import { navigate } from 'stacks/Browser/shared';
 import { useSnapshot } from 'utils/hook';
 import { iStyles } from 'utils/styles';
 
@@ -11,7 +12,7 @@ import { navigationItems } from './shared';
 const { Flag } = stormIcons;
 
 export const TopNavigation: FC = () => {
-	const { sizes } = useSnapshot(themeState);
+	const { colors, sizes } = useSnapshot(themeState);
 
 	const containerStyle: ViewStyle = {
 		zIndex: 1,
@@ -19,6 +20,7 @@ export const TopNavigation: FC = () => {
 		top: 0,
 		left: 0,
 		right: 0,
+		backgroundColor: colors.primary,
 		borderBottomWidth: 1,
 		borderColor: 'rgba(255, 255, 255, 0.02)',
 	};
@@ -36,7 +38,13 @@ export const TopNavigation: FC = () => {
 				</TouchableOpacity>
 				<View style={styles.navContainer}>
 					{navigationItems.map((item, i) => {
-						return <NavigationItem key={i} config={item} />;
+						return (
+							<NavigationItem
+								key={i}
+								config={item}
+								onPress={({ route }) => navigate(route.name)}
+							/>
+						);
 					})}
 				</View>
 			</View>

@@ -9,6 +9,7 @@ import CardGame from 'screens/CardGame';
 import Home from 'screens/Home';
 import Marketplace from 'screens/Marketplace';
 import { useSnapshot } from 'utils/hook';
+import { iStyles } from 'utils/styles';
 
 import { linking, navigationRef, RootParamList, screenOptions } from './shared';
 
@@ -27,7 +28,7 @@ export const BrowserStack: FC = () => {
 		<NavigationContainer ref={navigationRef} linking={linking} theme={theme}>
 			<View style={containerStyle}>
 				<TopNavigation />
-				<View style={styles.innerContainer}>
+				<View style={[iStyles.contentContainer, styles.innerContainer]}>
 					<View style={styles.screenContainer}>
 						<Stack.Navigator screenOptions={screenOptions}>
 							<Stack.Screen name="Home" component={Home} />
@@ -48,12 +49,8 @@ export const styles = StyleSheet.create({
 	innerContainer: {
 		flex: 1,
 		flexDirection: 'row',
-		width: '100%',
-		maxWidth: 1280,
-		margin: 'auto',
 	},
 	screenContainer: {
 		flex: 1,
-		backgroundColor: 'red',
 	},
 });
