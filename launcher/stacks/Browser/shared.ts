@@ -18,9 +18,14 @@ export type CardParamList = {
 	id: string;
 };
 
+export type MarketplaceParamList = {
+	Dashboard: undefined;
+};
+
 export type RootParamList = {
 	CardGame: NavigatorScreenParams<CardParamList>;
 	Home: NavigatorScreenParams<HomeParamList>;
+	Marketplace: NavigatorScreenParams<MarketplaceParamList>;
 	AuthResponse: undefined;
 };
 
@@ -31,6 +36,12 @@ export const linking: LinkingOptions<RootParamList> = {
 			CardGame: '/card/:id',
 			Home: {
 				path: '/',
+				screens: {
+					Dashboard: '/',
+				},
+			},
+			Marketplace: {
+				path: '/marketplace',
 				screens: {
 					Dashboard: '/',
 				},

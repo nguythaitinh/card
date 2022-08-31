@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import CardGame from 'screens/CardGame';
 import Home from 'screens/Home';
+import Marketplace from 'screens/Marketplace';
 import { useSnapshot } from 'utils/hook';
 
 import { linking, navigationRef, RootParamList, screenOptions } from './shared';
@@ -18,6 +19,7 @@ export const BrowserStack: FC = () => {
 			<Stack.Navigator screenOptions={screenOptions}>
 				<Stack.Screen name="Home" component={Home} />
 				<Stack.Screen name="CardGame" component={CardGame} />
+				<Stack.Screen name="Marketplace" component={Marketplace} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
