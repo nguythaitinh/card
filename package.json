@@ -37,6 +37,7 @@
 		"valtio": "^1.6.4"
 	},
 	"devDependencies": {
+		"@metacraft/tsconfig": "^0.0.10",
 		"@swc-node/register": "^1.5.1",
 		"@types/fbjs": "^3.0.2",
 		"@types/numeral": "^2.0.2",

@@ -19,7 +19,15 @@ const setEnvironments = (configs, internal) => {
 const copyAssets = (configs) => {
 	configs.plugins.push(
 		new CopyPlugin({
-			patterns: [{ from: resolve(process.cwd(), 'assets/'), to: './' }],
+			patterns: [
+				{
+					from: resolve(process.cwd(), 'assets/'),
+					to: './',
+					filter: (uri) => {
+						return !(uri.endsWith('.ejs') || uri.endsWith('.sass'));
+					},
+				},
+			],
 		}),
 	);
 
@@ -48,6 +56,7 @@ const splitBundle = (configs) => {
 
 module.exports = {
 	useBabel: true,
+	buildId: () => 'app',
 	webpackMiddlewares: [setEnvironments, copyAssets, splitBundle],
 	moduleAlias: {
 		global: {
