@@ -1,6 +1,7 @@
 {
 	"extends": "@metacraft/tsconfig/application.json",
 	"compilerOptions": {
+		"baseUrl": ".",
 		"paths": {
 			"components/*": ["./launcher/components/*"],
 			"stacks/*": ["./launcher/stacks/*"],

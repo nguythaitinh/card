@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { stormIcons } from '@metacraft/icons';
 import { themeState } from '@metacraft/ui';
+import AuthenticationBundle from 'components/AuthenticationBundle';
 import { navigate } from 'stacks/Browser/shared';
 import { useSnapshot } from 'utils/hook';
 import { iStyles } from 'utils/styles';
@@ -47,6 +48,7 @@ export const TopNavigation: FC = () => {
 						);
 					})}
 				</View>
+				<AuthenticationBundle />
 			</View>
 		</View>
 	);

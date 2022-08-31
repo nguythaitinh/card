@@ -1607,6 +1607,11 @@
     react "^18.0.0"
     react-native-svg "^13.0.0"
 
+"@metacraft/tsconfig@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@metacraft/tsconfig/-/tsconfig-0.0.10.tgz#a7e3e7c26807acca0eea8607a5f32e9168fa74cf"
+  integrity sha512-BG2ZreVA46ZTrTLVlYLw4CgnU4uAULDy5Y24czkgyerNqLOja8EruCmK5Aoio5YADvio6i49AGHVRtjKH3093Q==
+
 "@metacraft/ui@^0.0.54":
   version "0.0.54"
   resolved "https://registry.yarnpkg.com/@metacraft/ui/-/ui-0.0.54.tgz#2eddbf0d5aee05e625eb585664c87bc10ea9c3fc"

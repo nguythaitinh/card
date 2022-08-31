@@ -1,10 +1,7 @@
 import { FC, useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { modalActions } from '@metacraft/ui';
+import { Button, modalActions, Text } from '@metacraft/ui';
 import { googleSignIn } from 'utils/lib/auth';
-
-import Button from '../../Button';
-import Text from '../../Text';
 
 const walletIconSize = 18;
 const styles = StyleSheet.create({

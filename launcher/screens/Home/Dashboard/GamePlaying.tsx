@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { modalActions, ModalConfigs } from '@metacraft/ui';
+import { Button, modalActions, ModalConfigs } from '@metacraft/ui';
 import Avatar from 'components/Avatar';
-import Button from 'components/Button';
 import { liveActions } from 'utils/state/live';
 import { CardDuelHistory } from 'utils/types/graphql';
 

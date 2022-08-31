@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { TouchableOpacity, View } from 'react-native';
+import { Text } from '@metacraft/ui';
 import ShardIcon from 'components/icons/DiamondMineral';
 import EyeIcon from 'components/icons/Eye';
 import EyeClosedIcon from 'components/icons/EyeClosed';
-import Text from 'components/Text';
 import { formatNumber, memiToUSD } from 'utils/helper';
 import { useSnapshot } from 'utils/hook';
 import { appActions, appState } from 'utils/state/app';
