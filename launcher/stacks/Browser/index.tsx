@@ -31,6 +31,7 @@ export const BrowserStack: FC = () => {
 					<View style={styles.screenContainer}>
 						<Stack.Navigator screenOptions={screenOptions}>
 							<Stack.Screen name="Home" component={Home} />
+							<Stack.Screen name="Marketplace" component={Marketplace} />
 							<Stack.Screen name="CardGame" component={CardGame} />
 						</Stack.Navigator>
 					</View>
