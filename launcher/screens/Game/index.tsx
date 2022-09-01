@@ -6,7 +6,7 @@ import {
 	View,
 } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { CardParamList } from 'stacks/Browser/shared';
+import { GameParamList } from 'stacks/Browser/shared';
 import { useSnapshot } from 'utils/hook';
 import { AccountState, accountState } from 'utils/state/account';
 
@@ -19,13 +19,13 @@ const initialLayout: LayoutRectangle = {
 	height: 0,
 };
 
-const iFrameSrc = 'http://localhost:7456';
-// const iFrameSrc = '/cg/index.html';
+// const iFrameSrc = 'http://localhost:7456';
+const iFrameSrc = '/game/index.html';
 
 export const CardGame: FC = (props) => {
 	const { profile } = useSnapshot<AccountState>(accountState);
 	const route = useRoute();
-	const params: CardParamList = route.params as never;
+	const params: GameParamList = route.params as never;
 	const iFrameRef = useRef<HTMLIFrameElement>(null);
 	const [layout, setLayout] = useState<LayoutRectangle>(initialLayout);
 	const frameStyle = {

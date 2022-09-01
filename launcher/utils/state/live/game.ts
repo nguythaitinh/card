@@ -33,5 +33,5 @@ export const acceptGameInvitation = async (
 export const resumePlayingGame = async (
 	history: CardDuelHistory,
 ): Promise<void> => {
-	navigate('CardGame', { id: history.id } as never);
+	navigate('Game', { id: history.id } as never);
 };

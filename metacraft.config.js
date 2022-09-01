@@ -21,6 +21,10 @@ const copyAssets = (configs) => {
 		new CopyPlugin({
 			patterns: [
 				{
+					from: resolve(process.cwd(), 'game/build/web-desktop'),
+					to: './game/',
+				},
+				{
 					from: resolve(process.cwd(), 'assets/'),
 					to: './',
 					filter: (uri) => {
