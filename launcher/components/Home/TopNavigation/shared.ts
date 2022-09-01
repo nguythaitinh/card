@@ -42,9 +42,9 @@ export const navigationItems: NavigationConfig[] = [
 		},
 	},
 	{
-		title: 'PROFILE',
+		title: 'MARKETPLACE',
 		route: {
-			name: 'AuthResponse',
+			name: 'Marketplace',
 		},
 	},
 	{

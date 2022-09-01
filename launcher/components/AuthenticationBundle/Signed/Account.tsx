@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { TouchableOpacity, View } from 'react-native';
+import { Text } from '@metacraft/ui';
 import Avatar from 'components/Avatar';
-import Text from 'components/Text';
 import { Profile } from 'utils/types/graphql';
 
 import { styles } from './internal';

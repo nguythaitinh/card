@@ -3,9 +3,7 @@ import { Hub, HubCallback } from '@aws-amplify/core';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootParamList } from 'stacks/Browser/shared';
-import { useSnapshot } from 'utils/hook';
 import { accountActions } from 'utils/state/account';
-import { ThemeState, themeState } from 'utils/state/theme';
 
 interface InitConfig {
 	withProfileFetch: boolean;
@@ -37,8 +35,4 @@ export const useAppInit = ({
 
 export const useRootNavigation = (): StackNavigationProp<RootParamList> => {
 	return useNavigation<StackNavigationProp<RootParamList>>();
-};
-
-export const useTheme = (): ThemeState => {
-	return useSnapshot(themeState);
 };

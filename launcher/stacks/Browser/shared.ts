@@ -14,13 +14,18 @@ export type HomeParamList = {
 	Dashboard: undefined;
 };
 
-export type CardParamList = {
+export type GameParamList = {
 	id: string;
 };
 
+export type MarketplaceParamList = {
+	Dashboard: undefined;
+};
+
 export type RootParamList = {
-	CardGame: NavigatorScreenParams<CardParamList>;
+	Game: NavigatorScreenParams<GameParamList>;
 	Home: NavigatorScreenParams<HomeParamList>;
+	Marketplace: NavigatorScreenParams<MarketplaceParamList>;
 	AuthResponse: undefined;
 };
 
@@ -28,14 +33,20 @@ export const linking: LinkingOptions<RootParamList> = {
 	prefixes: ['https://stormgate.io'],
 	config: {
 		screens: {
-			CardGame: '/card/:id',
 			Home: {
 				path: '/',
 				screens: {
 					Dashboard: '/',
 				},
 			},
+			Marketplace: {
+				path: '/marketplace',
+				screens: {
+					Dashboard: '/',
+				},
+			},
 			AuthResponse: '/authreponse',
+			Game: '/game/:id',
 		},
 	},
 };
@@ -47,6 +58,6 @@ export const navigate = (
 	params?: RootParamList[keyof RootParamList],
 ): void => {
 	if (navigationRef.isReady()) {
-		navigationRef.navigate(name, params);
+		navigationRef.navigate(name as never, params as never);
 	}
 };

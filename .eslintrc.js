@@ -60,6 +60,9 @@ module.exports = {
 		'launcher/utils/types/graphql.ts',
 		'game/assets/scripts/lib/graphql.ts',
 	],
+	env: {
+		node: true,
+	},
 	globals: {
 		module: true,
 		require: true,

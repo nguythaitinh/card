@@ -7,7 +7,11 @@ import { Profile } from 'utils/types/graphql';
 import BuddyItem, { BuddyProps } from './BuddyItem';
 import BuddyMenu from './Menu';
 
-export const Buddies: FC = () => {
+interface Props {
+	width: number;
+}
+
+export const Buddies: FC<Props> = ({ width }) => {
 	const { list } = useBuddies();
 
 	const onBuddyPress = (profile: Profile, bindingRef: RefObject<View>) => {
@@ -27,7 +31,7 @@ export const Buddies: FC = () => {
 	};
 
 	return (
-		<View style={styles.container}>
+		<View style={[styles.container, { width }]}>
 			<FlatList
 				showsVerticalScrollIndicator={false}
 				data={list}
@@ -41,7 +45,6 @@ export default Buddies;
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
 		paddingVertical: 12,
 		paddingLeft: 16,
 	},

@@ -5,8 +5,14 @@
 .idea
 .vscode
 
+metacraft/
 wings/
 assets/cg
+
+# Terraform automations
+/*.tf
+.terraform
+.terraform.lock.hcl
 
 node_modules/
 npm-debug.log

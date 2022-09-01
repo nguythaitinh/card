@@ -1,9 +1,5 @@
-import { FC } from 'react';
 import { StyleSheet } from 'react-native';
-
-import { RootParamList } from '../../stacks/Browser/shared';
-import DiamondIcon from '../icons/Diamond';
-import ShapesIcon from '../icons/Shapes';
+import { RootParamList } from 'stacks/Browser/shared';
 
 export const styles = StyleSheet.create({
 	container: {},
@@ -31,7 +27,7 @@ export interface NavIconProps {
 }
 
 export interface NavigationConfig {
-	Icon: FC<NavIconProps>;
+	// Icon: FC<NavIconProps>;
 	title: string;
 	route: {
 		name: keyof RootParamList;
@@ -40,21 +36,18 @@ export interface NavigationConfig {
 
 export const navigationItems: NavigationConfig[] = [
 	{
-		Icon: ShapesIcon,
 		title: 'HOME',
 		route: {
 			name: 'Home',
 		},
 	},
 	{
-		Icon: DiamondIcon,
-		title: 'PROFILE',
+		title: 'MARKETPLACE',
 		route: {
-			name: 'AuthResponse',
+			name: 'Marketplace',
 		},
 	},
 	{
-		Icon: DiamondIcon,
 		title: 'COLLECTION',
 		route: {
 			name: 'AuthResponse',
