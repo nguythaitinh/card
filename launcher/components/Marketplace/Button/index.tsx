@@ -36,7 +36,7 @@ export const UnderRealmButton: FC<Props> = ({
 	useHoveredStyle = useDefaultHoveredStyle,
 }) => {
 	const [layout, setLayout] = useState(idleLayout);
-	const source = resources.marketplace.underRealmInteractMaterial.hover;
+	const source = resources.marketplace.underRealmInteractMaterial.normal;
 
 	const middle = {
 		position: 'absolute',
