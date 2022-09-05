@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { Text } from '@metacraft/ui';
 import CompactLayout from 'components/layouts/Compact';
+import UnderRealmButton from 'components/Marketplace/Button';
 import { iStyles } from 'utils/styles';
 
 import BoxSellingSection from './sections/BoxSelling';
@@ -16,9 +17,10 @@ const BrowserMarketplace: FC = () => {
 					styles.scrollContentContainer,
 				]}
 			>
-				{/* <HeadingSection /> */}
+				<HeadingSection />
 				<BoxSellingSection />
 				<Text style={styles.text}>Marketplace</Text>
+				<UnderRealmButton title="Login" />
 			</ScrollView>
 		</CompactLayout>
 	);
