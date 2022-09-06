@@ -6,7 +6,7 @@ interface MarketplaceSizes {
 }
 
 export const marketplaceSizes: MarketplaceSizes = {
-	responsiveHeadings: [35, 35, 30, 25],
+	responsiveHeadings: [45, 45, 38, 30],
 };
 
 export const marketplaceStyle = StyleSheet.create({
