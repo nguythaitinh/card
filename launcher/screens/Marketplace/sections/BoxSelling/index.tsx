@@ -1,17 +1,16 @@
 import React, { FC } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ViewStyle } from 'react-native';
 import { Text } from '@metacraft/ui';
 import Separator from 'components/icons/underRealm/Separator';
 import { marketplaceSizes, marketplaceStyle } from 'screens/Marketplace/shared';
-import resources from 'utils/resources';
 
-export const BoxSellingSection: FC = () => {
+interface Props {
+	style?: ViewStyle;
+}
+
+export const BoxSellingSection: FC<Props> = ({ style }) => {
 	return (
-		<View style={styles.container}>
-			<Image
-				style={[marketplaceStyle.background, { opacity: 0.3 }]}
-				source={resources.marketplace.mainBackground}
-			/>
+		<View style={[styles.container, style]}>
 			<View style={styles.titleContainer}>
 				<Text
 					style={marketplaceStyle.heading}
@@ -32,7 +31,6 @@ export default BoxSellingSection;
 
 const styles = StyleSheet.create({
 	container: {
-		justifyContent: 'center',
 		alignItems: 'center',
 		paddingTop: 100,
 		paddingBottom: 30,

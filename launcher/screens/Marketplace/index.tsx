@@ -1,27 +1,93 @@
 import React, { FC } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { Text } from '@metacraft/ui';
+import { LayoutRectangle, StyleSheet, View } from 'react-native';
+import Animated, {
+	useAnimatedScrollHandler,
+	useAnimatedStyle,
+	useSharedValue,
+} from 'react-native-reanimated';
+import { AppState, appState, Text } from '@metacraft/ui';
 import CompactLayout from 'components/layouts/Compact';
 import UnderRealmButton from 'components/Marketplace/Button';
+import { idleLayout } from 'utils/helper';
+import { useSnapshot } from 'utils/hook';
+import resources from 'utils/resources';
 import { iStyles } from 'utils/styles';
 
 import BoxSellingSection from './sections/BoxSelling';
 import HeadingSection from './sections/Heading';
 
 const BrowserMarketplace: FC = () => {
+	const headingLayout = useSharedValue<LayoutRectangle>(idleLayout);
+	const scrollOffset = useSharedValue(0);
+	const contentOffsetVertical = useSharedValue(0);
+	const { windowDimensions } = useSnapshot<AppState>(appState);
+	const scaledWidth = Math.min(
+		windowDimensions.width,
+		iStyles.contentContainer.maxWidth,
+	);
+
+	const scrollHandler = useAnimatedScrollHandler(
+		{
+			onScroll: ({ contentOffset }) => {
+				contentOffsetVertical.value = contentOffset.y;
+				if (contentOffset.y < headingLayout.value.height) {
+					scrollOffset.value = headingLayout.value.height - contentOffset.y;
+				} else {
+					scrollOffset.value = 0;
+				}
+			},
+		},
+		[headingLayout, scrollOffset.value],
+	);
+
+	const backgroundStyle = useAnimatedStyle(() => ({
+		opacity: 0.5,
+		width: scaledWidth,
+		height: windowDimensions.height,
+		position: 'absolute',
+		transform: [
+			{
+				translateY: scrollOffset.value,
+			},
+		],
+	}));
+
 	return (
 		<CompactLayout>
-			<ScrollView
-				contentContainerStyle={[
-					iStyles.contentContainer,
-					styles.scrollContentContainer,
-				]}
+			<View style={iStyles.contentContainer}>
+				<View
+					style={{
+						position: 'absolute',
+						width: scaledWidth,
+						height: windowDimensions.height,
+						backgroundColor: '#150101',
+					}}
+				/>
+				<Animated.Image
+					source={resources.marketplace.mainBackground}
+					style={backgroundStyle}
+				/>
+			</View>
+
+			<Animated.ScrollView
+				contentContainerStyle={iStyles.contentContainer}
+				onScroll={scrollHandler}
+				scrollEventThrottle={10}
+				showsVerticalScrollIndicator={false}
 			>
-				<HeadingSection />
-				<BoxSellingSection />
+				<HeadingSection
+					onLayout={({ nativeEvent }) => {
+						headingLayout.value = nativeEvent.layout;
+						scrollOffset.value = Math.max(
+							nativeEvent.layout.height - contentOffsetVertical.value,
+							0,
+						);
+					}}
+				/>
+				<BoxSellingSection style={{ height: 1500 }} />
 				<Text style={styles.text}>Marketplace</Text>
 				<UnderRealmButton title="Login" />
-			</ScrollView>
+			</Animated.ScrollView>
 		</CompactLayout>
 	);
 };
@@ -29,10 +95,6 @@ const BrowserMarketplace: FC = () => {
 export default BrowserMarketplace;
 
 const styles = StyleSheet.create({
-	scrollContentContainer: {
-		flex: 1,
-		backgroundColor: '#150101',
-	},
 	text: {
 		color: '#fff',
 	},
