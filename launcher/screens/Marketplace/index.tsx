@@ -84,7 +84,7 @@ const BrowserMarketplace: FC = () => {
 						);
 					}}
 				/>
-				<BoxSellingSection style={{ height: 1500 }} />
+				<BoxSellingSection />
 				<Text style={styles.text}>Marketplace</Text>
 				<UnderRealmButton title="Login" />
 			</Animated.ScrollView>

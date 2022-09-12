@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
 import { Text } from '@metacraft/ui';
 import Separator from 'components/icons/underRealm/Separator';
+import Card from 'components/Marketplace/Card';
 import { marketplaceSizes, marketplaceStyle } from 'screens/Marketplace/shared';
 
 interface Props {
@@ -22,6 +23,20 @@ export const BoxSellingSection: FC<Props> = ({ style }) => {
 				<Text style={styles.subtitle} responsiveSizes={[18, 18, 16, 14]}>
 					Subtitle text
 				</Text>
+			</View>
+			<View
+				style={{
+					flex: 1,
+					flexDirection: 'row',
+					justifyContent: 'center',
+					marginVertical: 25,
+				}}
+			>
+				<Card animationFlipDisable={true} />
+				<Card animationHoveredDisable={true} />
+				<Card animationFlipDisable={true} animationHoveredDisable={true} />
+				<Card imageSource="https://picsum.photos/200/300" />
+				<Card />
 			</View>
 		</View>
 	);
