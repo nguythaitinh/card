@@ -9,5 +9,8 @@ export default {
 				right: { uri: '/marketplace/under-realm-right-edge.png' },
 			},
 		},
+		card: {
+			back: { uri: '/marketplace/under-realm-card-back.png' },
+		},
 	},
 };
