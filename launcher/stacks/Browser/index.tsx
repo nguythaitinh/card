@@ -5,29 +5,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import GameScreen from '../../screens/Game';
 import HomeScreen from '../../screens/Home';
-import MarketplaceScreen from '../../screens/Marketplace';
-import DetailCardScreen from '../../screens/Marketplace/DetailCard';
 import { useSnapshot } from '../../utils/hook';
 
-import {
-	linking,
-	MarketplaceParamList,
-	navigationRef,
-	RootParamList,
-	screenOptions,
-} from './shared';
+import MarketplaceStackScreen from './Marketplace';
+import { linking, navigationRef, RootParamList, screenOptions } from './shared';
 
 const Stack = createStackNavigator<RootParamList>();
-const MarketplaceStack = createStackNavigator<MarketplaceParamList>();
-
-const MarketplaceStackScreen: FC = () => {
-	return (
-		<MarketplaceStack.Navigator screenOptions={screenOptions}>
-			<MarketplaceStack.Screen name="Dashboard" component={MarketplaceScreen} />
-			<MarketplaceStack.Screen name="DetailCard" component={DetailCardScreen} />
-		</MarketplaceStack.Navigator>
-	);
-};
 
 export const BrowserStack: FC = () => {
 	const theme = useSnapshot(themeState);
