@@ -2,10 +2,11 @@ import { FC } from 'react';
 import { themeState } from '@metacraft/ui';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import GameScreen from 'screens/Game';
-import HomeScreen from 'screens/Home';
-import MarketplaceScreen from 'screens/Marketplace';
-import { useSnapshot } from 'utils/hook';
+
+import GameScreen from '../../screens/Game';
+import HomeScreen from '../../screens/Home';
+import MarketplaceScreen from '../../screens/Marketplace';
+import { useSnapshot } from '../../utils/hook';
 
 import { linking, navigationRef, RootParamList, screenOptions } from './shared';
 

@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
 import { Text } from '@metacraft/ui';
-import Separator from 'components/icons/underRealm/Separator';
-import Card from 'components/Marketplace/Card';
-import { marketplaceSizes, marketplaceStyle } from 'screens/Marketplace/shared';
+
+import Separator from '../../../../components/icons/underRealm/Separator';
+import Card from '../../../../components/Marketplace/Card';
+import { marketplaceSizes, marketplaceStyle } from '../../shared';
 
 interface Props {
 	style?: ViewStyle;
