@@ -9,5 +9,8 @@ export default {
 				right: require('../../../assets/marketplace/under-realm-right-edge.png'),
 			},
 		},
+		card: {
+			back: require('../../../assets/marketplace/under-realm-card-back.png'),
+		},
 	},
 };
