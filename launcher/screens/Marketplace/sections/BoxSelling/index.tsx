@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
 import { Text } from '@metacraft/ui';
+import { useNavigation } from '@react-navigation/native';
 
 import Separator from '../../../../components/icons/underRealm/Separator';
 import Card from '../../../../components/Marketplace/Card';
@@ -11,6 +12,8 @@ interface Props {
 }
 
 export const BoxSellingSection: FC<Props> = ({ style }) => {
+	const navigation = useNavigation();
+
 	return (
 		<View style={[styles.container, style]}>
 			<View style={styles.titleContainer}>
@@ -33,11 +36,26 @@ export const BoxSellingSection: FC<Props> = ({ style }) => {
 					marginVertical: 25,
 				}}
 			>
-				<Card animationFlipDisable={true} />
-				<Card animationHoveredDisable={true} />
-				<Card animationFlipDisable={true} animationHoveredDisable={true} />
-				<Card imageSource="https://picsum.photos/200/300" />
-				<Card />
+				<Card
+					animationFlipDisable={true}
+					onPress={() => navigation.navigate('DetailCard', { id: '001' })}
+				/>
+				<Card
+					animationHoveredDisable={true}
+					onPress={() => navigation.navigate('DetailCard', { id: '001' })}
+				/>
+				<Card
+					animationFlipDisable={true}
+					animationHoveredDisable={true}
+					onPress={() => navigation.navigate('DetailCard', { id: '001' })}
+				/>
+				<Card
+					imageSource="https://picsum.photos/200/300"
+					onPress={() => navigation.navigate('DetailCard', { id: '001' })}
+				/>
+				<Card
+					onPress={() => navigation.navigate('DetailCard', { id: '001' })}
+				/>
 			</View>
 		</View>
 	);

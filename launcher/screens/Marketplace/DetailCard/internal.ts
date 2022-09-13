@@ -8,6 +8,17 @@ export const styles = StyleSheet.create({
 		backgroundColor: '#150101',
 		position: 'relative',
 	},
+	closeButtonPosition: {
+		position: 'absolute',
+		top: 50,
+		right: 50,
+	},
+	closeButton: {
+		fontSize: 100,
+		fontWeight: '500',
+		color: '#fff',
+		lineHeight: 0,
+	},
 	container: {
 		flexDirection: 'row',
 	},
