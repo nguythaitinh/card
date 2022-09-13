@@ -11,8 +11,9 @@ import {
 } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { Hoverable } from '@metacraft/ui';
-import { idleLayout } from 'utils/helper';
-import resources from 'utils/resources';
+
+import { idleLayout } from '../../../utils/helper';
+import resources from '../../../utils/resources';
 
 import { HoveredStyleFunc, useDefaultHoveredStyle } from './shared';
 
