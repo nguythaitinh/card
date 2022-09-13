@@ -4,9 +4,14 @@ export default {
 		mainBackground: require('../../../assets/marketplace/main-background.png'),
 		underRealmInteractMaterial: {
 			normal: {
-				left: require('../../../assets/marketplace/under-realm-left-edge.png'),
-				middle: require('../../../assets/marketplace/under-realm-middle.png'),
-				right: require('../../../assets/marketplace/under-realm-right-edge.png'),
+				left: require('../../../assets/marketplace/under-realm-normal-left-edge.png'),
+				middle: require('../../../assets/marketplace/under-realm-normal-middle.png'),
+				right: require('../../../assets/marketplace/under-realm-normal-right-edge.png'),
+			},
+			hover: {
+				left: require('../../../assets/marketplace/under-realm-hover-left-edge.png'),
+				middle: require('../../../assets/marketplace/under-realm-hover-middle.png'),
+				right: require('../../../assets/marketplace/under-realm-hover-right-edge.png'),
 			},
 		},
 		card: {

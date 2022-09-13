@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Image, TextInput, TouchableOpacity, View } from 'react-native';
 import { Text } from '@metacraft/ui';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import UnderRealmButton from '../../../components/Marketplace/Button';
 import Card from '../../../components/Marketplace/Card';
@@ -9,11 +9,26 @@ import Card from '../../../components/Marketplace/Card';
 import { styles } from './internal';
 
 export const DetailCard: FC = () => {
+	const navigation = useNavigation();
+	const handleClose = () => {
+		if (navigation.canGoBack()) {
+			navigation.goBack();
+		} else {
+			navigation.navigate('Dashboard' as never);
+		}
+	};
+
 	const route = useRoute();
 	const { id } = route.params as never;
 
 	return (
 		<View style={styles.overlay}>
+			<TouchableOpacity
+				style={styles.closeButtonPosition}
+				onPress={handleClose}
+			>
+				<Text style={styles.closeButton}>&#215;</Text>
+			</TouchableOpacity>
 			<View style={styles.container}>
 				<View style={styles.cardImageContainer}>
 					<Card animationFlipDisable={true} />
