@@ -12,5 +12,5 @@ export type HoveredStyleFunc = (
 
 export const useDefaultHoveredStyle: HoveredStyleFunc = (isHovered) =>
 	useAnimatedStyle(() => ({
-		opacity: withTiming(isHovered.value ? 0 : 1, { duration: 120 }),
+		opacity: withTiming(isHovered.value ? 0 : 1, { duration: 250 }),
 	}));

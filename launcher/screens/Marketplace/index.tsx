@@ -1,14 +1,13 @@
 import React, { FC } from 'react';
-import { LayoutRectangle, StyleSheet, View } from 'react-native';
+import { LayoutRectangle, View } from 'react-native';
 import Animated, {
 	useAnimatedScrollHandler,
 	useAnimatedStyle,
 	useSharedValue,
 } from 'react-native-reanimated';
-import { AppState, appState, Text } from '@metacraft/ui';
+import { AppState, appState } from '@metacraft/ui';
 
 import CompactLayout from '../../components/layouts/Compact';
-import UnderRealmButton from '../../components/Marketplace/Button';
 import { idleLayout } from '../../utils/helper';
 import { useSnapshot } from '../../utils/hook';
 import resources from '../../utils/resources';
@@ -86,17 +85,9 @@ const BrowserMarketplace: FC = () => {
 					}}
 				/>
 				<BoxSellingSection />
-				<Text style={styles.text}>Marketplace</Text>
-				<UnderRealmButton title="Login" />
 			</Animated.ScrollView>
 		</CompactLayout>
 	);
 };
 
 export default BrowserMarketplace;
-
-const styles = StyleSheet.create({
-	text: {
-		color: '#fff',
-	},
-});
