@@ -15,7 +15,8 @@ import Animated, {
 	withTiming,
 } from 'react-native-reanimated';
 import { Hoverable } from '@metacraft/ui';
-import resources from 'utils/resources';
+
+import resources from '../../../utils/resources';
 
 const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 const AnimatedView = Animated.createAnimatedComponent(View);

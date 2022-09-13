@@ -20,6 +20,9 @@ export type GameParamList = {
 
 export type MarketplaceParamList = {
 	Dashboard: undefined;
+	DetailCard: {
+		id: string;
+	};
 };
 
 export type RootParamList = {
@@ -43,6 +46,7 @@ export const linking: LinkingOptions<RootParamList> = {
 				path: '/marketplace',
 				screens: {
 					Dashboard: '/',
+					DetailCard: '/detail/:id',
 				},
 			},
 			AuthResponse: '/authreponse',
