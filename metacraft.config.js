@@ -1,6 +1,24 @@
 const { resolve } = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
+const compatible = (configs, { modules }) => {
+	const { webpack } = modules;
+	configs.resolve.fallback = {
+		assert: require.resolve('assert'),
+		stream: require.resolve('stream-browserify'),
+		buffer: require.resolve('buffer'),
+		crypto: false,
+	};
+
+	configs.plugins.push(
+		new webpack.ProvidePlugin({
+			Buffer: ['buffer', 'Buffer'],
+		}),
+	);
+
+	return configs;
+};
+
 const setEnvironments = (configs, internal) => {
 	const { webpack } = internal.modules;
 	const { DefinePlugin } = webpack;
@@ -34,19 +52,35 @@ const copyAssets = (configs) => {
 	return configs;
 };
 
+const externals = (configs) => {
+	configs.externals = {
+		rxjs: 'rxjs',
+		react: 'React',
+		lodash: '_',
+		'amazon-cognito-identity-js': 'AmazonCognitoIdentity',
+		'react-dom': 'ReactDOM',
+		'react-art': 'ReactART',
+		'@blocto/sdk': 'BloctoSDK',
+		'@solana/web3.js': 'solanaWeb3',
+	};
+
+	return configs;
+};
+
 const splitBundle = (configs) => {
 	configs.entry = {
 		app: {
 			...configs.entry.app,
-			dependOn: 'react-core',
+			dependOn: ['rn-libs'],
 		},
-		'react-core': {
+		'rn-libs': {
 			import: [
-				'react',
-				'react-dom',
 				'react-native',
-				'react-art',
+				'react-native-reanimated',
+				'react-native-gesture-handler',
 				'@react-native-async-storage/async-storage',
+				'@react-navigation/native',
+				'@react-navigation/stack',
 			],
 		},
 	};
@@ -56,8 +90,16 @@ const splitBundle = (configs) => {
 
 module.exports = {
 	useBabel: true,
+	publicPath: () => process.env.PUBLIC_URL || '/',
+	keepPreviousBuild: () => true,
 	buildId: () => 'app',
-	webpackMiddlewares: [setEnvironments, copyAssets, splitBundle],
+	webpackMiddlewares: [
+		compatible,
+		setEnvironments,
+		copyAssets,
+		externals,
+		splitBundle,
+	],
 	moduleAlias: {
 		global: {
 			'react-native': 'react-native-web',
