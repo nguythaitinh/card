@@ -23,6 +23,7 @@ export type MarketplaceParamList = {
 	DetailCard: {
 		id: string;
 	};
+	Mint: undefined;
 };
 
 export type RootParamList = {
@@ -47,6 +48,7 @@ export const linking: LinkingOptions<RootParamList> = {
 				screens: {
 					Dashboard: '/',
 					DetailCard: '/detail/:id',
+					Mint: '/mint',
 				},
 			},
 			AuthResponse: '/authreponse',
