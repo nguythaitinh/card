@@ -17,5 +17,6 @@ export default {
 		card: {
 			back: require('../../../assets/marketplace/under-realm-card-back.png'),
 		},
+		mintBanner: require('../../../assets/marketplace/mint-banner.png'),
 	},
 };
