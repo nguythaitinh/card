@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { Image, ScaledSize, StyleSheet, View } from 'react-native';
 import { Text } from '@metacraft/ui';
 
-import resources from '../../../../utils/resources';
-import { iStyles } from '../../../../utils/styles';
-import { marketplaceSizes, marketplaceStyle } from '../../shared';
+import resources from '../../../../../utils/resources';
+import { iStyles } from '../../../../../utils/styles';
+import { marketplaceSizes, marketplaceStyle } from '../../../shared';
 
 interface Props {
 	dimensions: ScaledSize;
