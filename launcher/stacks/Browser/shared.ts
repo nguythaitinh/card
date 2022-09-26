@@ -25,10 +25,15 @@ export type MarketplaceParamList = {
 	};
 };
 
+export type MintParamList = {
+	Dashboard: undefined;
+};
+
 export type RootParamList = {
 	Game: NavigatorScreenParams<GameParamList>;
 	Home: NavigatorScreenParams<HomeParamList>;
 	Marketplace: NavigatorScreenParams<MarketplaceParamList>;
+	Mint: NavigatorScreenParams<MintParamList>;
 	AuthResponse: undefined;
 };
 
@@ -47,6 +52,12 @@ export const linking: LinkingOptions<RootParamList> = {
 				screens: {
 					Dashboard: '/',
 					DetailCard: '/detail/:id',
+				},
+			},
+			Mint: {
+				path: '/mint',
+				screens: {
+					Dashboard: '/',
 				},
 			},
 			AuthResponse: '/authreponse',
