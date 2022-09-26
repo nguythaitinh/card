@@ -18,5 +18,6 @@ export default {
 			back: require('../../../assets/marketplace/under-realm-card-back.png'),
 		},
 		mintBanner: require('../../../assets/marketplace/mint-banner.png'),
+		coinUsd: require('../../../assets/marketplace/coin-usd.png'),
 	},
 };

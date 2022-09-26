@@ -18,5 +18,6 @@ export default {
 			back: { uri: '/marketplace/under-realm-card-back.png' },
 		},
 		mintBanner: { uri: '/marketplace/mint-banner.png' },
+		coinUsd: { uri: '/marketplace/coin-usd.png' },
 	},
 };
