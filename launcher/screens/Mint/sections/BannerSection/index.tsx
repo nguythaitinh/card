@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { Image, ScaledSize, StyleSheet, View } from 'react-native';
 import { Text } from '@metacraft/ui';
 
-import resources from '../../../../../utils/resources';
-import { iStyles } from '../../../../../utils/styles';
-import { marketplaceSizes, marketplaceStyle } from '../../../shared';
+import resources from '../../../../utils/resources';
+import { iStyles } from '../../../../utils/styles';
+import { mintSizes, mintStyle } from '../../shared';
 
 interface Props {
 	dimensions: ScaledSize;
@@ -22,12 +22,12 @@ export const BannerSection: FC<Props> = ({ dimensions }) => {
 		<View style={[styles.container, { height }]}>
 			<Image
 				source={resources.marketplace.mintBanner}
-				style={marketplaceStyle.background}
+				style={mintStyle.background}
 			/>
 			<View style={styles.contentContainer}>
 				<Text
-					style={marketplaceStyle.heading}
-					responsiveSizes={marketplaceSizes.responsiveHeadings}
+					style={mintStyle.heading}
+					responsiveSizes={mintSizes.responsiveHeadings}
 				>
 					Get Genesis NFT Card
 				</Text>

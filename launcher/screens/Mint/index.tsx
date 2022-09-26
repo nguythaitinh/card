@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { AppState, appState } from '@metacraft/ui';
 
-import { useSnapshot } from '../../../utils/hook/alias';
+import { useSnapshot } from '../../utils/hook/alias';
 
 import BannerSection from './sections/BannerSection';
 import PackListSection from './sections/PackListSection';

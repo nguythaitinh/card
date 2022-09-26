@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, ViewStyle } from 'react-native';
 import { Text } from '@metacraft/ui';
 import resources from 'launcher/utils/resources';
 
-import Card from '../../../../../components/Marketplace/Card';
+import Card from '../../../../components/Marketplace/Card';
 
 interface Props {
 	packRarity: string;

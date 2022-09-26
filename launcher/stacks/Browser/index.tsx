@@ -8,6 +8,7 @@ import HomeScreen from '../../screens/Home';
 import { useSnapshot } from '../../utils/hook';
 
 import MarketplaceStackScreen from './Marketplace';
+import MintStack from './Mint';
 import { linking, navigationRef, RootParamList, screenOptions } from './shared';
 
 const Stack = createStackNavigator<RootParamList>();
@@ -20,6 +21,7 @@ export const BrowserStack: FC = () => {
 			<Stack.Navigator screenOptions={screenOptions}>
 				<Stack.Screen name="Home" component={HomeScreen} />
 				<Stack.Screen name="Marketplace" component={MarketplaceStackScreen} />
+				<Stack.Screen name="Mint" component={MintStack} />
 				<Stack.Screen name="Game" component={GameScreen} />
 			</Stack.Navigator>
 		</NavigationContainer>

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from '@metacraft/ui';
 
-import { iStyles } from '../../../../../utils/styles';
+import { iStyles } from '../../../../utils/styles';
 
 import { packInfo } from './internal';
 import ListingItem from './ListingItem';
