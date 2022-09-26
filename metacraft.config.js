@@ -3,18 +3,20 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 const compatible = (configs, { modules }) => {
 	const { webpack } = modules;
-	configs.resolve.fallback = {
-		assert: require.resolve('assert'),
-		stream: require.resolve('stream-browserify'),
-		buffer: require.resolve('buffer'),
-		crypto: false,
-	};
+	const bufferPlugin = { Buffer: ['buffer', 'Buffer'] };
 
-	configs.plugins.push(
-		new webpack.ProvidePlugin({
-			Buffer: ['buffer', 'Buffer'],
-		}),
-	);
+	configs.plugins.push(new webpack.ProvidePlugin(bufferPlugin));
+	configs.ignoreWarnings = [/Failed to parse source map/];
+	configs.resolve.fallback = {
+		crypto: require.resolve('crypto-browserify'),
+		stream: require.resolve('stream-browserify'),
+		util: require.resolve('util'),
+		assert: require.resolve('assert'),
+		fs: false,
+		process: false,
+		path: false,
+		zlib: false,
+	};
 
 	return configs;
 };
