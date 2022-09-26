@@ -1,6 +1,7 @@
-import React, { FC, useState } from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
-import { Hoverable, Text } from '@metacraft/ui';
+import React, { FC } from 'react';
+import { Image, StyleSheet, View, ViewStyle } from 'react-native';
+import { Text } from '@metacraft/ui';
+import resources from 'launcher/utils/resources';
 
 import Card from '../../../../../components/Marketplace/Card';
 
@@ -17,8 +18,6 @@ export const ListingItem: FC<Props> = ({
 	packRemaining,
 	price,
 }) => {
-	const [isHovered, setIsHovered] = useState<boolean>(false);
-
 	const progressBarInner = {
 		position: 'absolute',
 		top: 0,
@@ -29,52 +28,57 @@ export const ListingItem: FC<Props> = ({
 		backgroundColor: '#dabe8c',
 	} as ViewStyle;
 
-	const packQuant = { color: isHovered ? '#d0c5a4' : '#7b705e' };
-
 	return (
-		<Hoverable
-			onHoverIn={() => setIsHovered(true)}
-			onHoverOut={() => setIsHovered(false)}
-		>
-			<View>
-				<Card animationFlipDisable />
-				<View style={styles.contentContainer}>
-					<View style={styles.packInfo}>
-						<Text style={styles.packTitle} responsiveSizes={[16]}>
-							{packRarity}
-							{''} Pack
-						</Text>
-						<Text style={packQuant}>
-							{packRemaining}/{packTotal}
-						</Text>
-						<View style={styles.progressBarContainer}>
-							<View style={progressBarInner} />
-						</View>
+		<View style={styles.container}>
+			<Card animationFlipDisable />
+			<View style={styles.contentContainer}>
+				<View style={styles.packInfo}>
+					<Text style={styles.packTitle} responsiveSizes={[16]}>
+						{packRarity}
+						{''} Pack
+					</Text>
+					<Text style={styles.packQuant}>
+						{packRemaining}/{packTotal}
+					</Text>
+					<View style={styles.progressBarContainer}>
+						<View style={progressBarInner} />
+					</View>
+					<View style={styles.priceContainer}>
+						<Image
+							source={resources.marketplace.coinUsd}
+							style={styles.coinIcon}
+						/>
 						<Text>USDC {price}</Text>
 					</View>
 				</View>
 			</View>
-		</Hoverable>
+		</View>
 	);
 };
 
 export default ListingItem;
 
 const styles = StyleSheet.create({
+	container: {
+		alignItems: 'center',
+		marginHorizontal: 20,
+		width: 200,
+	},
 	contentContainer: {
 		paddingTop: 15,
-		paddingHorizontal: 15,
 	},
 	packInfo: {
 		flexDirection: 'row',
 		flexWrap: 'wrap',
-		justifyContent: 'center',
+		justifyContent: 'space-between',
 		alignItems: 'flex-end',
 		alignContent: 'center',
 	},
 	packTitle: {
 		fontWeight: '500',
-		flex: 1,
+	},
+	packQuant: {
+		color: '#7b705e',
 	},
 	progressBarContainer: {
 		position: 'relative',
@@ -86,5 +90,16 @@ const styles = StyleSheet.create({
 	},
 	packPrice: {
 		textAlign: 'center',
+	},
+	priceContainer: {
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	coinIcon: {
+		width: 15,
+		height: 15,
+		marginRight: 10,
 	},
 });

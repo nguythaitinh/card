@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from '@metacraft/ui';
 
-import Card from '../../../../../components/Marketplace/Card';
 import { iStyles } from '../../../../../utils/styles';
 
 import { packInfo } from './internal';
