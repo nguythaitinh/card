@@ -19,7 +19,7 @@ export const BannerSection: FC<Props> = ({ dimensions }) => {
 	const height = Math.max((scaledWidth / 63) * 25, 250);
 
 	return (
-		<View style={[styles.container, { height }]}>
+		<View style={[iStyles.contentContainer, styles.container, { height }]}>
 			<Image
 				source={resources.marketplace.mintBanner}
 				style={mintStyle.background}
