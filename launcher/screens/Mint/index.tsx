@@ -6,6 +6,7 @@ import { useSnapshot } from '../../utils/hook/alias';
 
 import BannerSection from './sections/BannerSection';
 import PackListSection from './sections/PackListSection';
+import WhyBuyNftSection from './sections/WhyBuyNftSection';
 
 export const MintScreen: FC = () => {
 	const { windowDimensions } = useSnapshot<AppState>(appState);
@@ -14,6 +15,7 @@ export const MintScreen: FC = () => {
 		<ScrollView style={styles.container}>
 			<BannerSection dimensions={windowDimensions} />
 			<PackListSection />
+			<WhyBuyNftSection dimensions={windowDimensions} />
 		</ScrollView>
 	);
 };
