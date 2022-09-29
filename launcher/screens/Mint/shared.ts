@@ -1,15 +1,15 @@
 import { StyleSheet } from 'react-native';
 import { ScaledSizes } from '@metacraft/ui';
 
-interface MarketplaceSizes {
+interface MintSizes {
 	responsiveHeadings: ScaledSizes;
 }
 
-export const marketplaceSizes: MarketplaceSizes = {
+export const mintSizes: MintSizes = {
 	responsiveHeadings: [45, 45, 38, 30],
 };
 
-export const marketplaceStyle = StyleSheet.create({
+export const mintStyle = StyleSheet.create({
 	heading: {
 		fontWeight: '600',
 		color: '#fff',

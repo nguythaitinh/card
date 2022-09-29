@@ -1,14 +1,18 @@
 import React, { FC } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, LayoutChangeEvent, StyleSheet, View } from 'react-native';
 import { Text } from '@metacraft/ui';
-import { UnderRealmIcon } from 'components/icons/underRealm/MarkLogo';
-import resources from 'utils/resources';
 
+import { UnderRealmIcon } from '../../../../components/icons/underRealm/MarkLogo';
+import resources from '../../../../utils/resources';
 import { marketplaceSizes, marketplaceStyle } from '../../shared';
 
-export const HeadingSection: FC = () => {
+interface Props {
+	onLayout: (event: LayoutChangeEvent) => void;
+}
+
+export const HeadingSection: FC<Props> = ({ onLayout }) => {
 	return (
-		<View style={styles.container}>
+		<View style={styles.container} onLayout={(event) => onLayout(event)}>
 			<Image
 				style={marketplaceStyle.background}
 				source={resources.marketplace.headingBackground}
@@ -32,7 +36,6 @@ export default HeadingSection;
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
 		paddingTop: 80,
