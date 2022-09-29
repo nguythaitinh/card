@@ -169,7 +169,5 @@ const Card: FC<Props> = ({
 export default Card;
 
 const styles = StyleSheet.create({
-	container: {
-		marginHorizontal: 15,
-	},
+	container: {},
 });
