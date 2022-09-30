@@ -35,6 +35,11 @@ export default {
 			patternBottomLeft: require('../../../assets/marketplace/mint-bottom-left-pattern.png'),
 			patternBottomRight: require('../../../assets/marketplace/mint-bottom-right-pattern.png'),
 		},
+		faq: {
+			top: require('../../../assets/marketplace/faq-top.png'),
+			middle: require('../../../assets/marketplace/faq-middle.png'),
+			bottom: require('../../../assets/marketplace/faq-bottom.png'),
+		},
 		chevronDown: require('../../../assets/marketplace/chevron-down.png'),
 		titleSeparator: require('../../../assets/marketplace/title-separator.png'),
 		buyButtonBackground: require('../../../assets/marketplace/buy-button-bg.png'),
