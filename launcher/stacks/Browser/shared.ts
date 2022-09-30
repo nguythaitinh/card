@@ -27,6 +27,9 @@ export type MarketplaceParamList = {
 
 export type MintParamList = {
 	Dashboard: undefined;
+	DetailPack: {
+		id: string;
+	};
 };
 
 export type RootParamList = {
@@ -58,6 +61,7 @@ export const linking: LinkingOptions<RootParamList> = {
 				path: '/mint',
 				screens: {
 					Dashboard: '/',
+					DetailPack: '/:id',
 				},
 			},
 			AuthResponse: '/authreponse',
