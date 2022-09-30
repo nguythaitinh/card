@@ -35,5 +35,9 @@ export default {
 			patternBottomLeft: { uri: '/marketplace/mint-bottom-left-pattern.png' },
 			patternBottomRight: { uri: '/marketplace/mint-bottom-right-pattern.png' },
 		},
+		chevronDown: { uri: '/marketplace/chevron-down.png' },
+		titleSeparator: { uri: '/marketplace/title-separator.png' },
+		buyButtonBackground: { uri: '/marketplace/buy-button-bg.png' },
+		buyButtonDash: { uri: '/marketplace/buy-button-inner-dash.png' },
 	},
 };
