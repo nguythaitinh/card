@@ -12,7 +12,7 @@ export const MintScreen: FC = () => {
 	const { windowDimensions } = useSnapshot<AppState>(appState);
 
 	return (
-		<ScrollView style={styles.container}>
+		<ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
 			<BannerSection dimensions={windowDimensions} />
 			<PackListSection />
 			<WhyBuyNftSection dimensions={windowDimensions} />
