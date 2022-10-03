@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { Text } from '@metacraft/ui';
 
 import { iStyles } from '../../../../utils/styles';
@@ -17,7 +17,7 @@ export const PackListSection: FC = () => {
 				A NFT is all you need to start your journey in Under Realm. Increase
 				your chances to win by owning a genenis NFT
 			</Text>
-			<View style={styles.packListing}>
+			<ScrollView contentContainerStyle={styles.packListing} horizontal>
 				{packInfo.map((item) => (
 					<ListingItem
 						key={item.rarity}
@@ -27,7 +27,7 @@ export const PackListSection: FC = () => {
 						price={item.price}
 					/>
 				))}
-			</View>
+			</ScrollView>
 		</View>
 	);
 };
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
 		marginHorizontal: 'auto',
 	},
 	packListing: {
+		marginHorizontal: 'auto',
 		paddingVertical: 100,
 		flexDirection: 'row',
 		justifyContent: 'center',
