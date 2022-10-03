@@ -16,6 +16,7 @@ export default {
 		},
 		card: {
 			back: { uri: '/marketplace/under-realm-card-back.png' },
+			front: { uri: '/marketplace/under-realm-card-front.png' },
 		},
 		mintBanner: { uri: '/marketplace/mint-banner.png' },
 		coinUsd: { uri: '/marketplace/coin-usd.png' },
@@ -34,6 +35,11 @@ export default {
 			patternTopRight: { uri: '/marketplace/mint-top-right-pattern.png' },
 			patternBottomLeft: { uri: '/marketplace/mint-bottom-left-pattern.png' },
 			patternBottomRight: { uri: '/marketplace/mint-bottom-right-pattern.png' },
+		},
+		faq: {
+			top: { uri: '/marketplace/faq-top.png' },
+			middle: { uri: '/marketplace/faq-middle.png' },
+			bottom: { uri: '/marketplace/faq-bottom.png' },
 		},
 		chevronDown: { uri: '/marketplace/chevron-down.png' },
 		titleSeparator: { uri: '/marketplace/title-separator.png' },

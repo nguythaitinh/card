@@ -16,6 +16,7 @@ export default {
 		},
 		card: {
 			back: require('../../../assets/marketplace/under-realm-card-back.png'),
+			front: require('../../../assets/marketplace/under-realm-card-front.png'),
 		},
 		mintBanner: require('../../../assets/marketplace/mint-banner.png'),
 		coinUsd: require('../../../assets/marketplace/coin-usd.png'),
@@ -34,6 +35,11 @@ export default {
 			patternTopRight: require('../../../assets/marketplace/mint-top-right-pattern.png'),
 			patternBottomLeft: require('../../../assets/marketplace/mint-bottom-left-pattern.png'),
 			patternBottomRight: require('../../../assets/marketplace/mint-bottom-right-pattern.png'),
+		},
+		faq: {
+			top: require('../../../assets/marketplace/faq-top.png'),
+			middle: require('../../../assets/marketplace/faq-middle.png'),
+			bottom: require('../../../assets/marketplace/faq-bottom.png'),
 		},
 		chevronDown: require('../../../assets/marketplace/chevron-down.png'),
 		titleSeparator: require('../../../assets/marketplace/title-separator.png'),

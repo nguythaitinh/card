@@ -1,0 +1,116 @@
+import React, { FC, ReactNode, useState } from 'react';
+import {
+	Image,
+	LayoutRectangle,
+	StyleSheet,
+	TextStyle,
+	View,
+} from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Animated, {
+	useAnimatedStyle,
+	useSharedValue,
+	withTiming,
+} from 'react-native-reanimated';
+import { Text } from '@metacraft/ui';
+import { idleLayout } from 'launcher/utils/helper';
+import resources from 'launcher/utils/resources';
+
+interface Props {
+	title?: string | ReactNode;
+	content?: string;
+	children?: string | ReactNode;
+	titleStyle?: TextStyle;
+	chevronImage?: ReactNode;
+}
+
+export const Accordion: FC<Props> = ({
+	title,
+	content,
+	children,
+	titleStyle,
+	chevronImage,
+}) => {
+	const [isExpanded, setIsExpanded] = useState(false);
+	const titleIsString = typeof title === 'string';
+	const chevronAngle = useSharedValue(0);
+	const contentHeight = useSharedValue(0);
+	const [titleLayout, setTitleLayout] = useState<LayoutRectangle>(idleLayout);
+	const [contentLayout, setContentLayout] =
+		useState<LayoutRectangle>(idleLayout);
+
+	const animatedChevronStyle = useAnimatedStyle(() => {
+		return {
+			transform: [{ rotate: withTiming(-chevronAngle.value + 'deg') }],
+		};
+	});
+
+	const animatedHeightStyle = useAnimatedStyle(() => {
+		return {
+			height: withTiming(contentHeight.value),
+		};
+	});
+
+	return (
+		<Animated.View style={[styles.container, animatedHeightStyle]}>
+			<TouchableOpacity
+				onLayout={({ nativeEvent }) => {
+					setTitleLayout(nativeEvent.layout);
+					contentHeight.value = nativeEvent.layout.height;
+				}}
+				style={styles.titleContainer}
+				onPress={() => {
+					setIsExpanded(!isExpanded);
+					chevronAngle.value = isExpanded ? 0 : 180;
+					contentHeight.value = !isExpanded
+						? titleLayout?.height + contentLayout?.height
+						: titleLayout?.height;
+				}}
+			>
+				{titleIsString ? (
+					<Text style={[styles.titleText, titleStyle]}>
+						{title || 'Title is missing'}
+					</Text>
+				) : (
+					<View style={styles.titleText}>{title}</View>
+				)}
+				<Animated.View style={[styles.chevronContainer, animatedChevronStyle]}>
+					{chevronImage || (
+						<Image
+							source={resources.marketplace.chevronDown}
+							style={{ width: 19, height: 10 }}
+						/>
+					)}
+				</Animated.View>
+			</TouchableOpacity>
+			<View
+				onLayout={({ nativeEvent }) => {
+					setContentLayout(nativeEvent.layout);
+				}}
+			>
+				{children || <Text style={styles.contentText}>{content}</Text>}
+			</View>
+		</Animated.View>
+	);
+};
+
+export default Accordion;
+
+const styles = StyleSheet.create({
+	container: {
+		overflow: 'hidden',
+	},
+	titleContainer: {
+		flexDirection: 'row',
+	},
+	titleText: {
+		flex: 1,
+	},
+	chevronContainer: {
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	contentText: {
+		textAlign: 'justify',
+	},
+});
