@@ -101,6 +101,7 @@ const Card: FC<Props> = ({
 			);
 
 			return {
+				backfaceVisibility: 'hidden',
 				transform: [{ rotateY: `${rotateY}deg` }],
 				opacity,
 			};
@@ -111,8 +112,8 @@ const Card: FC<Props> = ({
 		return useAnimatedStyle(() => {
 			if (animationFlipDisable) return { opacity: isUp ? 0 : 1 } as ViewStyle;
 			const rotateY = isUp.value
-				? interpolate(xFlipOffset.value, [width, 0], [180, 0])
-				: interpolate(xFlipOffset.value, [0, width], [0, 180]);
+				? interpolate(xFlipOffset.value, [width, 0], [360, 180])
+				: interpolate(xFlipOffset.value, [0, width], [180, 360]);
 
 			const opacity = interpolate(
 				xFlipOffset.value,
@@ -121,6 +122,7 @@ const Card: FC<Props> = ({
 			);
 
 			return {
+				backfaceVisibility: 'hidden',
 				transform: [{ rotateY: `${rotateY}deg` }],
 				opacity,
 			};
@@ -150,15 +152,16 @@ const Card: FC<Props> = ({
 					style={[
 						cardSize,
 						{
-							backgroundColor: '#000',
 							position: 'absolute',
 							top: 0,
 						},
 						useFlipFrontStyle(isUp),
 					]}
 				>
-					{imageSource && (
+					{imageSource ? (
 						<Image style={cardSize} source={{ uri: imageSource }} />
+					) : (
+						<Image style={cardSize} source={resources.marketplace.card.front} />
 					)}
 				</AnimatedView>
 			</AnimatedTouchable>
