@@ -89,7 +89,8 @@ const Card: FC<Props> = ({
 
 	const useFlipBackStyle = (isUp: SharedValue<boolean>) => {
 		return useAnimatedStyle(() => {
-			if (animationFlipDisable) return {} as ViewStyle;
+			if (animationFlipDisable)
+				return { opacity: isUp.value ? 1 : 0 } as ViewStyle;
 			const rotateY = isUp.value
 				? interpolate(xFlipOffset.value, [0, width], [0, 180])
 				: interpolate(xFlipOffset.value, [width, 0], [180, 0]);
@@ -110,7 +111,8 @@ const Card: FC<Props> = ({
 
 	const useFlipFrontStyle = (isUp: SharedValue<boolean>) => {
 		return useAnimatedStyle(() => {
-			if (animationFlipDisable) return { opacity: isUp ? 0 : 1 } as ViewStyle;
+			if (animationFlipDisable)
+				return { opacity: isUp.value ? 0 : 1 } as ViewStyle;
 			const rotateY = isUp.value
 				? interpolate(xFlipOffset.value, [width, 0], [360, 180])
 				: interpolate(xFlipOffset.value, [0, width], [180, 360]);
@@ -138,10 +140,12 @@ const Card: FC<Props> = ({
 		>
 			<AnimatedTouchable
 				onPress={() => {
-					isUp.value = !isUp.value;
-					xFlipOffset.value = withTiming(isUp.value ? 0 : width, {
-						duration: 1000,
-					});
+					if (!animationFlipDisable) {
+						isUp.value = !isUp.value;
+						xFlipOffset.value = withTiming(isUp.value ? 0 : width, {
+							duration: 1000,
+						});
+					}
 					onPress?.();
 				}}
 			>
