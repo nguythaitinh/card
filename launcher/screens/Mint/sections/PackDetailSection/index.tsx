@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import {
 	Image,
 	ImageBackground,
@@ -8,22 +8,22 @@ import {
 	ViewStyle,
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Text } from '@metacraft/ui';
+import {
+	AnimateDirections,
+	BindDirections,
+	modalActions,
+	Text,
+} from '@metacraft/ui';
 import resources from 'launcher/utils/resources';
 
 import Card from '../../../../components/Marketplace/Card';
 import { iStyles } from '../../../../utils/styles';
-
+import Popup from '../../Popup';
 interface Props {
 	dimensions: ScaledSize;
 }
 
 export const PackDetailSection: FC<Props> = ({ dimensions }) => {
-	const scaledWidth = Math.min(
-		iStyles.contentContainer.maxWidth / dimensions.width,
-		1,
-	);
-
 	const progressBarInner = {
 		position: 'absolute',
 		top: 0,
@@ -34,18 +34,34 @@ export const PackDetailSection: FC<Props> = ({ dimensions }) => {
 		backgroundColor: '#dabe8c',
 	} as ViewStyle;
 
+	const containerRef = useRef<View>(null);
+
+	const showPopup = () => {
+		modalActions.show({
+			id: 'Successful Buying',
+			component: () => <Popup dimensions={dimensions} />,
+			bindingDirection: BindDirections.Inner,
+			animateDirection: AnimateDirections.BottomRight,
+			bindingRef: containerRef,
+			maskActiveOpacity: 0.9,
+			maskStyle: {
+				backgroundColor: 'rgb(17, 9, 9)',
+			},
+		});
+	};
+
 	return (
 		<View style={[iStyles.contentContainer, { paddingVertical: 100 }]}>
 			<View style={styles.container}>
 				<View style={styles.innerContainer}>
 					<Card
-						size={350 * scaledWidth}
+						size={350}
 						animationFlipDisable={true}
 						animationHoveredDisable={true}
 					/>
 				</View>
 				<View style={styles.innerContainer}>
-					<View style={{ width: 350 * scaledWidth, alignItems: 'center' }}>
+					<View style={{ width: 350, alignItems: 'center' }}>
 						<ImageBackground
 							source={resources.marketplace.titleSeparator}
 							style={{ width: '100%', paddingVertical: 15 }}
@@ -73,7 +89,7 @@ export const PackDetailSection: FC<Props> = ({ dimensions }) => {
 							<Text style={{ marginLeft: 20, color: '#ddd2af' }}>600/694</Text>
 						</View>
 						<View style={{ marginTop: 20, width: '100%' }}>
-							<TouchableOpacity>
+							<TouchableOpacity onPress={showPopup}>
 								<ImageBackground
 									source={resources.marketplace.buyButtonBackground}
 									style={{
