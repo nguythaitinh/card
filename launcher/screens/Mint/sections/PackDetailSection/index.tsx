@@ -9,21 +9,22 @@ import {
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Text } from '@metacraft/ui';
-import { useRoute } from '@react-navigation/native';
 import Card from 'components/Marketplace/Card';
 import resources from 'launcher/utils/resources';
-import { packMap } from 'screens/Mint/shared';
+import { PackStats } from 'screens/Mint/shared';
 import { iStyles } from 'utils/styles';
 
 interface Props {
 	dimensions: ScaledSize;
-	onPurchase?: (volume: number) => void;
+	pack: PackStats;
+	onPurchase?: (pack: PackStats, volume: number) => void;
 }
 
-export const PackDetailSection: FC<Props> = ({ dimensions, onPurchase }) => {
-	const route = useRoute();
-	const { id } = route.params as { id: string };
-	const pack = packMap[id];
+export const PackDetailSection: FC<Props> = ({
+	dimensions,
+	pack,
+	onPurchase,
+}) => {
 	const scaledWidth = Math.min(
 		iStyles.contentContainer.maxWidth / dimensions.width,
 		1,
@@ -81,7 +82,7 @@ export const PackDetailSection: FC<Props> = ({ dimensions, onPurchase }) => {
 						{[1, 5, 10].map((amount) => {
 							return (
 								<View key={amount} style={{ marginTop: 20, width: '100%' }}>
-									<TouchableOpacity onPress={() => onPurchase?.(amount)}>
+									<TouchableOpacity onPress={() => onPurchase?.(pack, amount)}>
 										<ImageBackground
 											source={resources.marketplace.buyButtonBackground}
 											style={{
