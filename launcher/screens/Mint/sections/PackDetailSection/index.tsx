@@ -9,16 +9,21 @@ import {
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Text } from '@metacraft/ui';
+import { useRoute } from '@react-navigation/native';
+import Card from 'components/Marketplace/Card';
 import resources from 'launcher/utils/resources';
-
-import Card from '../../../../components/Marketplace/Card';
-import { iStyles } from '../../../../utils/styles';
+import { packMap } from 'screens/Mint/shared';
+import { iStyles } from 'utils/styles';
 
 interface Props {
 	dimensions: ScaledSize;
+	onPurchase?: (volume: number) => void;
 }
 
-export const PackDetailSection: FC<Props> = ({ dimensions }) => {
+export const PackDetailSection: FC<Props> = ({ dimensions, onPurchase }) => {
+	const route = useRoute();
+	const { id } = route.params as { id: string };
+	const pack = packMap[id];
 	const scaledWidth = Math.min(
 		iStyles.contentContainer.maxWidth / dimensions.width,
 		1,
@@ -54,12 +59,13 @@ export const PackDetailSection: FC<Props> = ({ dimensions }) => {
 								responsiveSizes={[20]}
 								style={[styles.title, { textAlign: 'center' }]}
 							>
-								Silver Pack
+								{pack.title} Pack
 							</Text>
 						</ImageBackground>
 						<Text style={{ textAlign: 'center', paddingVertical: 15 }}>
 							Legendary is the highest level of... with enhanced chance
 							receiving higher rarity card
+							{pack.sugarId}
 						</Text>
 						<View
 							style={[
@@ -75,7 +81,7 @@ export const PackDetailSection: FC<Props> = ({ dimensions }) => {
 						{[1, 5, 10].map((amount) => {
 							return (
 								<View key={amount} style={{ marginTop: 20, width: '100%' }}>
-									<TouchableOpacity>
+									<TouchableOpacity onPress={() => onPurchase?.(amount)}>
 										<ImageBackground
 											source={resources.marketplace.buyButtonBackground}
 											style={{
