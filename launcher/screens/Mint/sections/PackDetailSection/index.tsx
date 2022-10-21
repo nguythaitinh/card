@@ -72,84 +72,36 @@ export const PackDetailSection: FC<Props> = ({ dimensions }) => {
 							</View>
 							<Text style={{ marginLeft: 20, color: '#ddd2af' }}>600/694</Text>
 						</View>
-						<View style={{ marginTop: 20, width: '100%' }}>
-							<TouchableOpacity>
-								<ImageBackground
-									source={resources.marketplace.buyButtonBackground}
-									style={{
-										flexDirection: 'row',
-										alignItems: 'center',
-										paddingVertical: 13,
-										paddingHorizontal: 30,
-									}}
-								>
-									<Text>1 Card</Text>
-									<Image
-										source={resources.marketplace.buyButtonDash}
-										style={{ width: 86, height: 2, marginLeft: 10 }}
-									/>
-									<View style={styles.priceContainer}>
-										<Image
-											source={resources.marketplace.coinUsd}
-											style={styles.coinIcon}
-										/>
-										<Text>USDC 18</Text>
-									</View>
-								</ImageBackground>
-							</TouchableOpacity>
-						</View>
-						<View style={{ marginTop: 20, width: '100%' }}>
-							<TouchableOpacity>
-								<ImageBackground
-									source={resources.marketplace.buyButtonBackground}
-									style={{
-										flexDirection: 'row',
-										alignItems: 'center',
-										paddingVertical: 13,
-										paddingHorizontal: 30,
-									}}
-								>
-									<Text>1 Card</Text>
-									<Image
-										source={resources.marketplace.buyButtonDash}
-										style={{ width: 86, height: 2, marginLeft: 10 }}
-									/>
-									<View style={styles.priceContainer}>
-										<Image
-											source={resources.marketplace.coinUsd}
-											style={styles.coinIcon}
-										/>
-										<Text>USDC 18</Text>
-									</View>
-								</ImageBackground>
-							</TouchableOpacity>
-						</View>
-						<View style={{ marginTop: 20, width: '100%' }}>
-							<TouchableOpacity>
-								<ImageBackground
-									source={resources.marketplace.buyButtonBackground}
-									style={{
-										flexDirection: 'row',
-										alignItems: 'center',
-										paddingVertical: 13,
-										paddingHorizontal: 30,
-									}}
-								>
-									<Text>1 Card</Text>
-									<Image
-										source={resources.marketplace.buyButtonDash}
-										style={{ width: 86, height: 2, marginLeft: 10 }}
-									/>
-									<View style={styles.priceContainer}>
-										<Image
-											source={resources.marketplace.coinUsd}
-											style={styles.coinIcon}
-										/>
-										<Text>USDC 18</Text>
-									</View>
-								</ImageBackground>
-							</TouchableOpacity>
-						</View>
+						{[1, 5, 10].map((amount) => {
+							return (
+								<View key={amount} style={{ marginTop: 20, width: '100%' }}>
+									<TouchableOpacity>
+										<ImageBackground
+											source={resources.marketplace.buyButtonBackground}
+											style={{
+												flexDirection: 'row',
+												alignItems: 'center',
+												paddingVertical: 13,
+												paddingHorizontal: 30,
+											}}
+										>
+											<Text>{amount} Card</Text>
+											<Image
+												source={resources.marketplace.buyButtonDash}
+												style={{ width: 86, height: 2, marginLeft: 10 }}
+											/>
+											<View style={styles.priceContainer}>
+												<Image
+													source={resources.marketplace.coinUsd}
+													style={styles.coinIcon}
+												/>
+												<Text>USDC 18</Text>
+											</View>
+										</ImageBackground>
+									</TouchableOpacity>
+								</View>
+							);
+						})}
 					</View>
 				</View>
 			</View>
