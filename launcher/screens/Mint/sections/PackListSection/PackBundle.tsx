@@ -1,44 +1,38 @@
 import React, { FC } from 'react';
 import { Image, StyleSheet, View, ViewStyle } from 'react-native';
 import { Text } from '@metacraft/ui';
-import resources from 'launcher/utils/resources';
-
-import Card from '../../../../components/Marketplace/Card';
+import Card from 'components/Marketplace/Card';
+import { PackStats } from 'screens/Mint/shared';
+import resources from 'utils/resources';
 
 interface Props {
-	packRarity: string;
-	packTotal: number;
-	packRemaining: number;
-	price: number;
+	item: PackStats;
+	onPress?: (item: PackStats) => void;
 }
 
-export const ListingItem: FC<Props> = ({
-	packRarity,
-	packTotal,
-	packRemaining,
-	price,
-}) => {
+export const PackBundle: FC<Props> = ({ item, onPress }) => {
+	const { title, total, remaining, unitPrice } = item;
 	const progressBarInner = {
 		position: 'absolute',
 		top: 0,
 		bottom: 0,
 		left: 0,
-		width: (packRemaining / packTotal) * 100 + '%',
+		width: (remaining / total) * 100 + '%',
 		borderRadius: 10,
 		backgroundColor: '#dabe8c',
 	} as ViewStyle;
 
 	return (
 		<View style={styles.container}>
-			<Card animationFlipDisable />
+			<Card animationFlipDisable onPress={() => onPress?.(item)} />
 			<View style={styles.contentContainer}>
 				<View style={styles.packInfo}>
 					<Text style={styles.packTitle} responsiveSizes={[16]}>
-						{packRarity}
+						{title}
 						{''} Pack
 					</Text>
 					<Text style={styles.packQuant}>
-						{packRemaining}/{packTotal}
+						{remaining}/{total}
 					</Text>
 					<View style={styles.progressBarContainer}>
 						<View style={progressBarInner} />
@@ -48,7 +42,7 @@ export const ListingItem: FC<Props> = ({
 							source={resources.marketplace.coinUsd}
 							style={styles.coinIcon}
 						/>
-						<Text>USDC {price}</Text>
+						<Text>USDC {unitPrice}</Text>
 					</View>
 				</View>
 			</View>
@@ -56,7 +50,7 @@ export const ListingItem: FC<Props> = ({
 	);
 };
 
-export default ListingItem;
+export default PackBundle;
 
 const styles = StyleSheet.create({
 	container: {

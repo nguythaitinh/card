@@ -1,13 +1,20 @@
 import React, { FC } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Text } from '@metacraft/ui';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { packList, PackStats } from 'screens/Mint/shared';
+import { MintParamList } from 'stacks/Browser/shared';
+import { iStyles } from 'utils/styles';
 
-import { iStyles } from '../../../../utils/styles';
-
-import { packInfo } from './internal';
-import ListingItem from './ListingItem';
+import PackBundle from './PackBundle';
 
 export const PackListSection: FC = () => {
+	const navigation = useNavigation<StackNavigationProp<MintParamList>>();
+	const onPackPress = (pack: PackStats) => {
+		navigation.navigate('DetailPack', { id: pack.route });
+	};
+
 	return (
 		<View style={iStyles.contentContainer}>
 			<Text style={styles.packTotal} responsiveSizes={[30, 30, 25, 20]}>
@@ -15,17 +22,11 @@ export const PackListSection: FC = () => {
 			</Text>
 			<Text style={styles.packDescribe}>
 				A NFT is all you need to start your journey in Under Realm. Increase
-				your chances to win by owning a genenis NFT
+				your chances to win by owning a genesis NFT
 			</Text>
 			<ScrollView contentContainerStyle={styles.packListing} horizontal>
-				{packInfo.map((item) => (
-					<ListingItem
-						key={item.rarity}
-						packRarity={item.rarity}
-						packTotal={item.total}
-						packRemaining={item.total}
-						price={item.price}
-					/>
+				{packList.map((item) => (
+					<PackBundle key={item.route} item={item} onPress={onPackPress} />
 				))}
 			</ScrollView>
 		</View>
