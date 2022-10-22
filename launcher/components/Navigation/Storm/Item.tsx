@@ -7,11 +7,15 @@ import { NavigationConfig } from '../shared';
 
 interface Props {
 	item: NavigationConfig;
+	onNavigate?: (item: NavigationConfig) => void;
 }
 
-export const NavigationItem: FC<Props> = ({ item }) => {
+export const NavigationItem: FC<Props> = ({ item, onNavigate }) => {
 	return (
-		<TouchableOpacity style={styles.container}>
+		<TouchableOpacity
+			style={styles.container}
+			onPress={() => onNavigate?.(item)}
+		>
 			<Text style={styles.title}>{item.title}</Text>
 		</TouchableOpacity>
 	);

@@ -58,11 +58,14 @@ export const ScrollLayout: FC<Props> = ({ children, style }) => {
 
 export default ScrollLayout;
 
+const dualHeight = navigationHeight.storm + navigationHeight.local;
 export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 	},
-	contentContainer: {},
+	contentContainer: {
+		paddingTop: dualHeight,
+	},
 	navContainer: {
 		position: 'absolute',
 		top: 0,
