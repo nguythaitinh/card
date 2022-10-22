@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { stormIcons } from '@metacraft/icons';
 import { themeState } from '@metacraft/ui';
-import AuthenticationBundle from 'components/AuthenticationBundle';
+import AuthenticationBundle from 'components/Navigation/AuthenticationBundle';
 import { navigate } from 'stacks/Browser/shared';
 import { useSnapshot } from 'utils/hook';
 import { iStyles } from 'utils/styles';
@@ -12,7 +12,7 @@ import { navigationItems } from './shared';
 
 const { Flag } = stormIcons;
 
-export const TopNavigation: FC = () => {
+export const LocalNavigation: FC = () => {
 	const { colors, sizes } = useSnapshot(themeState);
 
 	const containerStyle: ViewStyle = {
@@ -54,7 +54,7 @@ export const TopNavigation: FC = () => {
 	);
 };
 
-export default TopNavigation;
+export default LocalNavigation;
 
 const flagColors: string[] = ['#220d0d', '#301717', '#4a2828', '#FFFFFF'];
 const styles = StyleSheet.create({
