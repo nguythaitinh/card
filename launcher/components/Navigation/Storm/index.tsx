@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
 	},
 	brandingIcon: {
 		justifyContent: 'center',
-		marginHorizontal: 22,
+		marginLeft: 62,
+		marginRight: 24,
 		paddingHorizontal: 8,
 		height: navigationHeight.storm,
 	},
