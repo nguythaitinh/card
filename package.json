@@ -13,6 +13,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"@apollo/client": "^3.6.9",
+		"@cocrafts/kernel": "^0.0.18",
 		"@metacraft/engines-under-realm": "^0.0.14",
 		"@metacraft/icons": "^0.0.20",
 		"@metacraft/ui": "^0.0.54",
@@ -28,6 +29,7 @@
 		"@solana/wallet-adapter-solflare": "^0.6.15",
 		"@tauri-apps/api": "^1.0.2",
 		"aws-amplify": "^4.3.35",
+		"bs58": "^5.0.0",
 		"color2k": "^2.0.0",
 		"graphql": "^16.6.0",
 		"numeral": "^2.0.6",
