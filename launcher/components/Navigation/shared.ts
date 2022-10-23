@@ -27,6 +27,21 @@ export const stormNavigations: NavigationConfig[] = [
 	},
 ];
 
+export const localNavigations: NavigationConfig[] = [
+	{
+		title: 'Game',
+	},
+	{
+		title: 'Card',
+	},
+	{
+		title: 'Community',
+	},
+	{
+		title: 'Support',
+	},
+];
+
 export const navigationHeight = {
 	storm: 40,
 	local: 68,

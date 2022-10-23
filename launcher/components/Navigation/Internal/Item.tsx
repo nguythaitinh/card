@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from '@metacraft/ui';
 
-import { NavigationConfig } from '../shared';
+import { NavigationConfig, navigationHeight } from '../shared';
 
 interface Props {
 	item: NavigationConfig;
@@ -19,5 +19,10 @@ export const NavigationItem: FC<Props> = ({ item }) => {
 export default NavigationItem;
 
 const styles = StyleSheet.create({
-	container: {},
+	container: {
+		marginHorizontal: 9,
+		paddingHorizontal: 9,
+		height: navigationHeight.local,
+		justifyContent: 'center',
+	},
 });

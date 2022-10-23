@@ -6,9 +6,14 @@ import {
 	TouchableOpacity,
 	View,
 } from 'react-native';
-import { navigationHeight } from 'components/Navigation/shared';
+import {
+	localNavigations,
+	navigationHeight,
+} from 'components/Navigation/shared';
 import resources from 'utils/resources';
 import { iStyles } from 'utils/styles';
+
+import NavigationItem from './Item';
 
 export const InternalNavigation: FC = () => {
 	return (
@@ -21,6 +26,9 @@ export const InternalNavigation: FC = () => {
 				<TouchableOpacity activeOpacity={0.9}>
 					<Image source={resources.navigation.logo} style={styles.logo} />
 				</TouchableOpacity>
+				{localNavigations.map((item) => {
+					return <NavigationItem key={item.title} item={item} />;
+				})}
 			</View>
 		</ImageBackground>
 	);
@@ -38,7 +46,8 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 	},
 	logo: {
-		marginHorizontal: -24,
+		marginLeft: -24,
+		marginRight: -64,
 		width: (249 / 101) * logoHeight,
 		height: logoHeight,
 	},
