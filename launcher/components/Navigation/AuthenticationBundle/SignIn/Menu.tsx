@@ -3,6 +3,27 @@ import { StyleSheet, View } from 'react-native';
 import { Button, modalActions, Text } from '@metacraft/ui';
 import { googleSignIn } from 'utils/lib/auth';
 
+export const Menu: FC = () => {
+	const signInGoogle = useCallback(async () => {
+		modalActions.hide('signInOptions');
+		await googleSignIn();
+	}, []);
+
+	return (
+		<View style={styles.container}>
+			<Text style={styles.heading}>Simple Sign-In</Text>
+			<Button
+				outline
+				style={styles.buttonContainer}
+				title="Sign-In with Google"
+				onPress={signInGoogle}
+			/>
+		</View>
+	);
+};
+
+export default Menu;
+
 const walletIconSize = 18;
 const styles = StyleSheet.create({
 	container: {
@@ -51,24 +72,3 @@ const styles = StyleSheet.create({
 		color: 'rgba(255, 255, 255, 0.1)',
 	},
 });
-
-export const Menu: FC = () => {
-	const signInGoogle = useCallback(async () => {
-		modalActions.hide('signInOptions');
-		await googleSignIn();
-	}, []);
-
-	return (
-		<View style={styles.container}>
-			<Text style={styles.heading}>Simple Sign-In</Text>
-			<Button
-				outline
-				style={styles.buttonContainer}
-				title="Sign-In with Google"
-				onPress={signInGoogle}
-			/>
-		</View>
-	);
-};
-
-export default Menu;

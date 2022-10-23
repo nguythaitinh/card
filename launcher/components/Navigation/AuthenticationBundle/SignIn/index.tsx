@@ -1,17 +1,8 @@
 import { FC, useRef } from 'react';
-import { StyleSheet, View } from 'react-native';
-import {
-	AnimateDirections,
-	BindDirections,
-	Button,
-	modalActions,
-} from '@metacraft/ui';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { AnimateDirections, BindDirections, modalActions } from '@metacraft/ui';
 
 import SignInMenu from './Menu';
-
-const styles = StyleSheet.create({
-	container: {},
-});
 
 export const SignIn: FC = () => {
 	const containerRef = useRef<View>(null);
@@ -28,9 +19,18 @@ export const SignIn: FC = () => {
 
 	return (
 		<View ref={containerRef} style={styles.container}>
-			<Button outline title="Sign In" onPress={showSignInOptions} />
+			<TouchableOpacity onPress={showSignInOptions}>
+				<Text style={styles.buttonTitle}>Sign In</Text>
+			</TouchableOpacity>
 		</View>
 	);
 };
 
 export default SignIn;
+
+const styles = StyleSheet.create({
+	container: {},
+	buttonTitle: {
+		color: '#FFFFFF',
+	},
+});

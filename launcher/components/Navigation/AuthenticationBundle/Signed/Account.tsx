@@ -17,19 +17,15 @@ export const Account: FC<Props> = ({ profile, onPress, onAvatarPress }) => {
 
 	return (
 		<TouchableOpacity onPress={onPress} style={styles.container}>
+			<View style={styles.infoContainer}>
+				<Text style={styles.primaryText}>{name}</Text>
+			</View>
 			<Avatar
-				size={38}
+				size={20}
 				imageUri={avatarUrl as string}
 				characters={address}
 				onPress={onAvatarPress}
 			/>
-			<View style={styles.infoContainer}>
-				<Text style={styles.primaryText}>{name}</Text>
-				<View style={styles.onlineContainer}>
-					<View style={styles.onlineDot} />
-					<Text style={styles.onlineText}>Online</Text>
-				</View>
-			</View>
 		</TouchableOpacity>
 	);
 };

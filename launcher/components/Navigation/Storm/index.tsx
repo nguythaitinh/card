@@ -4,6 +4,7 @@ import { stormIcons } from '@metacraft/icons';
 import { navigationHeight } from 'components/Navigation/shared';
 import { iStyles } from 'utils/styles';
 
+import AuthenicationBundle from '../AuthenticationBundle';
 import { NavigationConfig, stormNavigations } from '../shared';
 
 import NavigationItem from './Item';
@@ -21,15 +22,18 @@ export const StormNavigation: FC = () => {
 				<TouchableOpacity style={styles.brandingIcon}>
 					<Dragon size={18} />
 				</TouchableOpacity>
-				{stormNavigations.map((item) => {
-					return (
-						<NavigationItem
-							key={item.title}
-							item={item}
-							onNavigate={onNavigate}
-						/>
-					);
-				})}
+				<View style={styles.navContainer}>
+					{stormNavigations.map((item) => {
+						return (
+							<NavigationItem
+								key={item.title}
+								item={item}
+								onNavigate={onNavigate}
+							/>
+						);
+					})}
+				</View>
+				<AuthenicationBundle />
 			</View>
 		</View>
 	);
@@ -50,5 +54,9 @@ const styles = StyleSheet.create({
 		marginRight: 24,
 		paddingHorizontal: 8,
 		height: navigationHeight.storm,
+	},
+	navContainer: {
+		flex: 1,
+		flexDirection: 'row',
 	},
 });
