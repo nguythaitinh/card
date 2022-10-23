@@ -1,4 +1,8 @@
 export default {
+	navigation: {
+		bg: { uri: '/marketplace/navigation-bg.png' },
+		logo: { uri: '/marketplace/flag.png' },
+	},
 	marketplace: {
 		headingBackground: { uri: '/marketplace/heading-background.png' },
 		mainBackground: { uri: '/marketplace/main-background.png' },
