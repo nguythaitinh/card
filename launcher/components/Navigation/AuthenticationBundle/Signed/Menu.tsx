@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Hyperlink, modalActions, Text } from '@metacraft/ui';
 import { signOut } from 'utils/lib/auth';
-import { noUserSelect } from 'utils/styles';
+import { noSelect } from 'utils/styles';
 
 const styles = StyleSheet.create({
 	container: {
-		...noUserSelect,
+		...noSelect,
 		minWidth: 120,
 		backgroundColor: 'rgba(255, 255, 255, 0.05)',
 		paddingVertical: 8,

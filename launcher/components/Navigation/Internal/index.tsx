@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {
 	localNavigations,
+	mintNavigation,
 	navigationHeight,
 } from 'components/Navigation/shared';
 import resources from 'utils/resources';
@@ -26,9 +27,14 @@ export const InternalNavigation: FC = () => {
 				<TouchableOpacity activeOpacity={0.9}>
 					<Image source={resources.navigation.logo} style={styles.logo} />
 				</TouchableOpacity>
-				{localNavigations.map((item) => {
-					return <NavigationItem key={item.title} item={item} />;
-				})}
+				<View style={styles.navigationContainer}>
+					{localNavigations.map((item) => {
+						return <NavigationItem key={item.title} item={item} />;
+					})}
+				</View>
+				<View style={styles.commandContainer}>
+					<NavigationItem item={mintNavigation} />
+				</View>
 			</View>
 		</ImageBackground>
 	);
@@ -50,5 +56,13 @@ const styles = StyleSheet.create({
 		marginRight: -64,
 		width: (249 / 101) * logoHeight,
 		height: logoHeight,
+	},
+	navigationContainer: {
+		flex: 1,
+		flexDirection: 'row',
+	},
+	commandContainer: {
+		flexDirection: 'row',
+		paddingRight: 20,
 	},
 });

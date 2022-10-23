@@ -11,7 +11,7 @@ interface Props {
 export const NavigationItem: FC<Props> = ({ item }) => {
 	return (
 		<View style={styles.container}>
-			<Text>{item.title}</Text>
+			<Text style={styles.title}>{item.title}</Text>
 		</View>
 	);
 };
@@ -24,5 +24,8 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 9,
 		height: navigationHeight.local,
 		justifyContent: 'center',
+	},
+	title: {
+		color: '#cdc8b5',
 	},
 });

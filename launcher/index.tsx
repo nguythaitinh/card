@@ -12,12 +12,15 @@ import { clusterApiUrl } from '@solana/web3.js';
 import BrowserStack from 'stacks/Browser';
 import { graphQlClient } from 'utils/graphql';
 import { useAppInit, useSnapshot } from 'utils/hook';
+import { accountState } from 'utils/state/account';
 import { appState } from 'utils/state/app';
 import { launcherTheme } from 'utils/theme';
 
 export const App: FC = () => {
 	const { network } = useSnapshot(appState);
 	const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+	const { profile, loading, forceConnect } = useSnapshot(accountState);
+	const autoConnect = forceConnect || (!loading && !profile.id);
 
 	const wallets = useMemo(
 		() => [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
@@ -37,7 +40,11 @@ export const App: FC = () => {
 	return (
 		<ApolloProvider client={graphQlClient}>
 			<ConnectionProvider endpoint={endpoint}>
-				<WalletProvider autoConnect={true} wallets={wallets} onError={useError}>
+				<WalletProvider
+					autoConnect={autoConnect}
+					wallets={wallets}
+					onError={useError}
+				>
 					<MetacraftProvider theme={launcherTheme}>
 						<BrowserStack />
 					</MetacraftProvider>

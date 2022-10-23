@@ -1,8 +1,7 @@
 import { FC, useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { AnimateDirections, BindDirections, modalActions } from '@metacraft/ui';
-
-import SignInMenu from './Menu';
+import { AnimateDirections, modalActions } from '@metacraft/ui';
+import SignInOptions from 'components/modals/SignInOptions';
 
 export const SignIn: FC = () => {
 	const containerRef = useRef<View>(null);
@@ -10,9 +9,7 @@ export const SignIn: FC = () => {
 	const showSignInOptions = () => {
 		modalActions.show({
 			id: 'signInOptions',
-			component: SignInMenu,
-			bindingRef: containerRef,
-			bindingDirection: BindDirections.BottomLeft,
+			component: SignInOptions,
 			animateDirection: AnimateDirections.BottomLeft,
 		});
 	};

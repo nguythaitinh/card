@@ -27,6 +27,10 @@ export const stormNavigations: NavigationConfig[] = [
 	},
 ];
 
+export const mintNavigation: NavigationConfig = {
+	title: 'Mint',
+};
+
 export const localNavigations: NavigationConfig[] = [
 	{
 		title: 'Game',
