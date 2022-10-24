@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import { Image, ScaledSize, StyleSheet, View } from 'react-native';
 import { Text } from '@metacraft/ui';
-
-import resources from '../../../../utils/resources';
-import { iStyles } from '../../../../utils/styles';
-import { mintSizes, mintStyle } from '../../shared';
+import { mintSizes, mintStyle } from 'screens/Mint/shared';
+import resources from 'utils/resources';
+import { iStyles } from 'utils/styles';
 
 interface Props {
 	dimensions: ScaledSize;
@@ -20,10 +19,7 @@ export const BannerSection: FC<Props> = ({ dimensions }) => {
 
 	return (
 		<View style={[iStyles.contentContainer, styles.container, { height }]}>
-			<Image
-				source={resources.marketplace.mintBanner}
-				style={mintStyle.background}
-			/>
+			<Image source={resources.mint.keyVisual} style={mintStyle.background} />
 			<View style={styles.contentContainer}>
 				<Text
 					style={mintStyle.heading}

@@ -3,6 +3,9 @@ export default {
 		bg: { uri: '/marketplace/navigation-bg.png' },
 		logo: { uri: '/marketplace/flag.png' },
 	},
+	mint: {
+		keyVisual: { uri: '/mint/key-visual.png' },
+	},
 	marketplace: {
 		headingBackground: { uri: '/marketplace/heading-background.png' },
 		mainBackground: { uri: '/marketplace/main-background.png' },
