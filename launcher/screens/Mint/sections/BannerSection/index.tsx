@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
-import { Image, ScaledSize, StyleSheet, View } from 'react-native';
-import { Text } from '@metacraft/ui';
-import { mintSizes, mintStyle } from 'screens/Mint/shared';
+import { ImageBackground, ScaledSize, StyleSheet, View } from 'react-native';
+import { ScaledSizes, Text } from '@metacraft/ui';
 import resources from 'utils/resources';
 import { iStyles } from 'utils/styles';
 
@@ -9,30 +8,24 @@ interface Props {
 	dimensions: ScaledSize;
 }
 
-export const BannerSection: FC<Props> = ({ dimensions }) => {
-	const scaledWidth = Math.min(
-		dimensions.width,
-		iStyles.contentContainer.maxWidth,
-	);
-
-	const height = Math.max((scaledWidth / 63) * 25, 250);
-
+export const BannerSection: FC<Props> = () => {
 	return (
-		<View style={[iStyles.contentContainer, styles.container, { height }]}>
-			<Image source={resources.mint.keyVisual} style={mintStyle.background} />
+		<ImageBackground
+			style={[iStyles.contentContainer, styles.container, { height: 724 }]}
+			source={resources.mint.keyVisual}
+		>
 			<View style={styles.contentContainer}>
-				<Text
-					style={mintStyle.heading}
-					responsiveSizes={mintSizes.responsiveHeadings}
-				>
+				<Text style={styles.heading} responsiveSizes={responsiveHeadings}>
 					Get Genesis NFT Card
 				</Text>
 			</View>
-		</View>
+		</ImageBackground>
 	);
 };
 
 export default BannerSection;
+
+const responsiveHeadings: ScaledSizes = [45, 45, 38, 30];
 
 const styles = StyleSheet.create({
 	container: {
@@ -45,5 +38,10 @@ const styles = StyleSheet.create({
 	contentContainer: {
 		position: 'relative',
 		alignItems: 'center',
+	},
+	heading: {
+		fontWeight: '600',
+		color: '#fff',
+		textAlign: 'center',
 	},
 });

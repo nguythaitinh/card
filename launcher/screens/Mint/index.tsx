@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { StyleSheet } from 'react-native';
 import { AppState, appState } from '@metacraft/ui';
 import ScrollLayout from 'components/layouts/Scroll';
 import { useSnapshot } from 'utils/hook';
@@ -12,7 +13,7 @@ export const MintScreen: FC = () => {
 	const { windowDimensions } = useSnapshot<AppState>(appState);
 
 	return (
-		<ScrollLayout>
+		<ScrollLayout contentContainerStyle={styles.container}>
 			<BannerSection dimensions={windowDimensions} />
 			<PackListSection />
 			<WhyBuyNftSection dimensions={windowDimensions} />
@@ -22,3 +23,9 @@ export const MintScreen: FC = () => {
 };
 
 export default MintScreen;
+
+const styles = StyleSheet.create({
+	container: {
+		backgroundColor: '#0d0712',
+	},
+});
