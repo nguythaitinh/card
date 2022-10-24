@@ -28,6 +28,10 @@ export type MarketplaceParamList = {
 	};
 };
 
+export type CardsParamList = {
+	Dashboard: undefined;
+};
+
 export type MintParamList = {
 	Dashboard: undefined;
 	DetailPack: {
@@ -38,6 +42,7 @@ export type MintParamList = {
 export type RootParamList = {
 	Home: NavigatorScreenParams<HomeParamList>;
 	Game: NavigatorScreenParams<GameParamList>;
+	Cards: NavigatorScreenParams<CardsParamList>;
 	Marketplace: NavigatorScreenParams<MarketplaceParamList>;
 	Mint: NavigatorScreenParams<MintParamList>;
 	AuthResponse: undefined;
@@ -58,6 +63,12 @@ export const linking: LinkingOptions<RootParamList> = {
 				screens: {
 					Dashboard: '/',
 					Duel: '/duel/:id',
+				},
+			},
+			Cards: {
+				path: '/cards',
+				screens: {
+					Dashboard: '/',
 				},
 			},
 			Marketplace: {

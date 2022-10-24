@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from 'screens/Home';
 import { useSnapshot } from 'utils/hook';
 
+import CardsStack from './Cards';
 import GameStack from './Game';
 import MarketplaceStack from './Marketplace';
 import MintStack from './Mint';
@@ -20,6 +21,7 @@ export const BrowserStack: FC = () => {
 			<Stack.Navigator screenOptions={screenOptions}>
 				<Stack.Screen name="Home" component={HomeScreen} />
 				<Stack.Screen name="Game" component={GameStack} />
+				<Stack.Screen name="Cards" component={CardsStack} />
 				<Stack.Screen name="Marketplace" component={MarketplaceStack} />
 				<Stack.Screen name="Mint" component={MintStack} />
 			</Stack.Navigator>
