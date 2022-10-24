@@ -1,8 +1,7 @@
 import React, { FC, ReactNode } from 'react';
-import { View, ViewStyle } from 'react-native';
-import { themeState } from '@metacraft/ui';
-import LegacyNavigation from 'components/Navigation/Legacy';
-import { useSnapshot } from 'utils/hook';
+import { StyleSheet, View, ViewStyle } from 'react-native';
+import InternalNavigation from 'components/Navigation/Internal';
+import StormNavigation from 'components/Navigation/Storm';
 
 interface Props {
 	children?: ReactNode;
@@ -15,18 +14,27 @@ export const CompactLayout: FC<Props> = ({
 	style,
 	contentContainerStyle,
 }) => {
-	const { sizes } = useSnapshot(themeState);
-	const containerStyle = {
-		flex: 1,
-		paddingTop: sizes.topNavigation,
-	};
-
 	return (
-		<View style={[containerStyle, style]}>
-			<LegacyNavigation />
-			<View style={[{ flex: 1 }, contentContainerStyle]}>{children}</View>
+		<View style={[style, styles.container]}>
+			<View style={styles.navigationContainer}>
+				<StormNavigation />
+				<InternalNavigation />
+			</View>
+			<View style={[styles.innerContainer, contentContainerStyle]}>
+				{children}
+			</View>
 		</View>
 	);
 };
 
 export default CompactLayout;
+
+export const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	},
+	navigationContainer: {},
+	innerContainer: {
+		flex: 1,
+	},
+});
