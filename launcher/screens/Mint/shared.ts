@@ -24,6 +24,10 @@ export const mintStyle = StyleSheet.create({
 	},
 });
 
+export type Rarity = 'Rare' | 'Epic' | 'Mythical' | 'Legendary' | 'Immortal';
+
+type RarityRate = Record<Rarity, number>;
+
 export interface PackStats {
 	title: string;
 	route: string;
@@ -31,6 +35,7 @@ export interface PackStats {
 	remaining: number;
 	unitPrice: number;
 	sugarId: string;
+	rarity: RarityRate;
 }
 
 export const packList: PackStats[] = [
@@ -41,6 +46,13 @@ export const packList: PackStats[] = [
 		remaining: 951,
 		unitPrice: 18,
 		sugarId: 'HnDJapRRFfhuusQGx2TEfA8wcLTUibAasMq5KYbm3kCD',
+		rarity: {
+			Rare: 60,
+			Epic: 25,
+			Mythical: 10,
+			Legendary: 5,
+			Immortal: 0,
+		},
 	},
 	{
 		title: 'Silver',
@@ -49,6 +61,13 @@ export const packList: PackStats[] = [
 		remaining: 694,
 		unitPrice: 18,
 		sugarId: 'HnDJapRRFfhuusQGx2TEfA8wcLTUibAasMq5KYbm3kCD',
+		rarity: {
+			Rare: 60,
+			Epic: 25,
+			Mythical: 10,
+			Legendary: 5,
+			Immortal: 0,
+		},
 	},
 	{
 		title: 'Gold',
@@ -57,6 +76,13 @@ export const packList: PackStats[] = [
 		remaining: 491,
 		unitPrice: 18,
 		sugarId: 'HnDJapRRFfhuusQGx2TEfA8wcLTUibAasMq5KYbm3kCD',
+		rarity: {
+			Rare: 60,
+			Epic: 25,
+			Mythical: 10,
+			Legendary: 5,
+			Immortal: 0,
+		},
 	},
 	{
 		title: 'Platinum',
@@ -65,6 +91,13 @@ export const packList: PackStats[] = [
 		remaining: 215,
 		unitPrice: 18,
 		sugarId: 'HnDJapRRFfhuusQGx2TEfA8wcLTUibAasMq5KYbm3kCD',
+		rarity: {
+			Rare: 60,
+			Epic: 25,
+			Mythical: 10,
+			Legendary: 5,
+			Immortal: 0,
+		},
 	},
 	{
 		title: 'Titan',
@@ -73,6 +106,13 @@ export const packList: PackStats[] = [
 		remaining: 39,
 		unitPrice: 18,
 		sugarId: 'HnDJapRRFfhuusQGx2TEfA8wcLTUibAasMq5KYbm3kCD',
+		rarity: {
+			Rare: 60,
+			Epic: 25,
+			Mythical: 10,
+			Legendary: 5,
+			Immortal: 0,
+		},
 	},
 ];
 
