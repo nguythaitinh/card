@@ -14,7 +14,7 @@ export const MintScreen: FC = () => {
 
 	return (
 		<ScrollLayout contentContainerStyle={styles.container}>
-			<BannerSection dimensions={windowDimensions} />
+			<BannerSection />
 			<PackListSection />
 			<WhyBuyNftSection dimensions={windowDimensions} />
 			<FaqSection />

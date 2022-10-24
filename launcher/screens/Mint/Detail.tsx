@@ -20,7 +20,6 @@ import ScrollLayout from 'components/layouts/Scroll';
 import { packMap } from 'screens/Mint/shared';
 import { useSnapshot } from 'utils/hook';
 
-import BannerSection from './sections/BannerSection';
 import PackDetailSection from './sections/PackDetailSection';
 import Popup from './Popup';
 
@@ -86,7 +85,6 @@ export const DetailScreen: FC = () => {
 
 	return (
 		<ScrollLayout contentContainerStyle={styles.container}>
-			<BannerSection dimensions={windowDimensions} />
 			<PackDetailSection
 				isLoading={isLoading}
 				pack={pack}
