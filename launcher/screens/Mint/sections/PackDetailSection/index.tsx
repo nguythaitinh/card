@@ -22,7 +22,7 @@ import { iStyles } from 'utils/styles';
 interface Props {
 	isLoading?: boolean;
 	pack: PackStats;
-	candyMachine: CandyMachineV2 | null;
+	candyMachine?: CandyMachineV2;
 	onPurchase?: (candyMachine: CandyMachineV2, volume: number) => void;
 }
 

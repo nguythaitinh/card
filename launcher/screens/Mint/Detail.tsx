@@ -27,12 +27,13 @@ import Popup from './Popup';
 export const DetailScreen: FC = () => {
 	const { windowDimensions } = useSnapshot<AppState>(appState);
 	const { connect, publicKey, signMessage, signTransaction } = useWallet();
+	const mplRef = useRef<Metaplex>();
+	const sugarRef = useRef<CandyMachineV2>();
 	const { connection } = useConnection();
 	const route = useRoute();
 	const { id } = route.params as { id: string };
 	const pack = packMap[id];
 	const containerRef = useRef<View>(null);
-	const [candyMachine, setCandyMachine] = useState<null | CandyMachineV2>(null);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const showPopup = (nft: NftWithToken) => {
@@ -49,50 +50,48 @@ export const DetailScreen: FC = () => {
 		});
 	};
 
-	const metaplex = Metaplex.make(connection).use(
-		walletAdapterIdentity({
-			publicKey,
-			signMessage,
-			signTransaction,
-		}),
-	);
-
-	const getCandyMachine = useCallback(async (): Promise<void> => {
-		setCandyMachine(
-			await metaplex.candyMachinesV2().findByAddress({
-				address: new PublicKey(pack.sugarId),
-			}),
-		);
-		setIsLoading(false);
-	}, [metaplex, pack.sugarId]);
-
 	const onPurchase = useCallback(
 		async (candyMachine: CandyMachineV2, amount: number): Promise<void> => {
-			const result = await metaplex.candyMachinesV2().mint({
+			const result = await mplRef.current?.candyMachinesV2().mint({
 				candyMachine,
 				newOwner: publicKey as never,
 			});
 
-			result.nft && showPopup(result.nft);
-
+			result?.nft && showPopup(result.nft);
 			console.log(result, '<--');
 		},
 		[connect, connection, publicKey, signMessage],
 	);
 
 	useEffect(() => {
-		setIsLoading(true);
-		getCandyMachine();
-	}, []);
+		const injectRefs = async () => {
+			setIsLoading(true);
+
+			const address = new PublicKey(pack.sugarId);
+			const walletAdapter = walletAdapterIdentity({
+				publicKey,
+				signMessage,
+				signTransaction,
+			});
+			const metaplex = await Metaplex.make(connection).use(walletAdapter);
+			const sugar = await metaplex.candyMachinesV2().findByAddress({ address });
+
+			setIsLoading(false);
+			mplRef.current = metaplex;
+			sugarRef.current = sugar;
+		};
+
+		injectRefs();
+	}, [pack.sugarId, connection, publicKey, signMessage, signTransaction]);
 
 	return (
-		<ScrollLayout style={styles.container}>
+		<ScrollLayout contentContainerStyle={styles.container}>
 			<BannerSection dimensions={windowDimensions} />
 			<PackDetailSection
 				isLoading={isLoading}
 				pack={pack}
 				onPurchase={onPurchase}
-				candyMachine={candyMachine}
+				candyMachine={sugarRef.current}
 			/>
 		</ScrollLayout>
 	);
@@ -102,6 +101,6 @@ export default DetailScreen;
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+		backgroundColor: '#0d0712',
 	},
 });
