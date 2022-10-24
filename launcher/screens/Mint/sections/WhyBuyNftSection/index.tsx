@@ -115,7 +115,7 @@ export const WhyBuyNftSection: FC<Props> = ({ dimensions }) => {
 					))}
 					<UnderRealmButton
 						style={{
-							width: 250,
+							width: 220,
 							marginLeft: 30,
 						}}
 						onPress={() =>
@@ -125,8 +125,7 @@ export const WhyBuyNftSection: FC<Props> = ({ dimensions }) => {
 						}
 					>
 						<View style={{ alignItems: 'center' }}>
-							<Text responsiveSizes={[13]}>Read details</Text>
-							<Text responsiveSizes={[13]}>on Substack</Text>
+							<Text>Read details</Text>
 						</View>
 					</UnderRealmButton>
 				</View>

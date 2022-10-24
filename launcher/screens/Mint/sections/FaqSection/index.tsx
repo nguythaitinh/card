@@ -4,6 +4,7 @@ import { Text } from '@metacraft/ui';
 import { iStyles } from 'launcher/utils/styles';
 
 import FaqItem from './FaqItem';
+import { faqList } from './internal';
 
 const FaqSection: FC = () => {
 	return (
@@ -12,9 +13,9 @@ const FaqSection: FC = () => {
 				FAQ
 			</Text>
 			<View style={styles.contentContainer}>
-				<FaqItem />
-				<FaqItem />
-				<FaqItem />
+				{faqList.map((item, index) => (
+					<FaqItem title={item.title} content={item.content} key={index} />
+				))}
 			</View>
 		</View>
 	);
