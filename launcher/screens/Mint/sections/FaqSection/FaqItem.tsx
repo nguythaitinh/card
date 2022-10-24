@@ -1,12 +1,17 @@
 import React, { FC, useState } from 'react';
 import { Image, LayoutRectangle, StyleSheet, View } from 'react-native';
-import { Text } from '@metacraft/ui';
+import { Markdown, Text } from '@metacraft/ui';
 
 import Accordion from '../../../../components/Marketplace/Accordion';
 import { idleLayout } from '../../../../utils/helper';
 import resources from '../../../../utils/resources';
 
-export const FaqItem: FC = () => {
+interface Props {
+	title: string;
+	content: string[];
+}
+
+export const FaqItem: FC<Props> = ({ title, content }) => {
 	const [layout, setLayout] = useState<LayoutRectangle>(idleLayout);
 	const ratioTop = 71 / 1160;
 	const ratioBottom = 33 / 1160;
@@ -48,14 +53,18 @@ export const FaqItem: FC = () => {
 					right: 0,
 				}}
 			/>
+
 			<Accordion
 				title={
 					<Text responsiveSizes={[18]} style={styles.title}>
-						How to claim?
+						{title}
 					</Text>
 				}
-				content="Hmmm?"
-			/>
+			>
+				{content.map((item, index) => (
+					<Markdown content={item} key={index} />
+				))}
+			</Accordion>
 		</View>
 	);
 };
