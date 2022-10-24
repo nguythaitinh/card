@@ -3,6 +3,7 @@ import {
 	ActivityIndicator,
 	Image,
 	ImageBackground,
+	Linking,
 	StyleSheet,
 	View,
 	ViewStyle,
@@ -32,15 +33,21 @@ export const PackDetailSection: FC<Props> = ({
 	onPurchase,
 }) => {
 	const { connected, disconnect } = useWallet();
-	const progressBarInner = {
-		position: 'absolute',
-		top: 0,
-		bottom: 0,
-		left: 0,
-		width: (600 / 694) * 100 + '%',
-		borderRadius: 10,
-		backgroundColor: '#dabe8c',
-	} as ViewStyle;
+	const progressBarInner =
+		candyMachine &&
+		({
+			position: 'absolute',
+			top: 0,
+			bottom: 0,
+			left: 0,
+			width:
+				(candyMachine?.itemsRemaining.toNumber() /
+					candyMachine?.itemsAvailable.toNumber()) *
+					100 +
+				'%',
+			borderRadius: 10,
+			backgroundColor: '#dabe8c',
+		} as ViewStyle);
 
 	const onConnectWalletPress = (): void => {
 		modalActions.show({
@@ -79,9 +86,8 @@ export const PackDetailSection: FC<Props> = ({
 									{pack.title} Pack
 								</Text>
 							</ImageBackground>
-							<Text style={{ textAlign: 'center', paddingVertical: 15 }}>
-								Legendary is the highest level of... with enhanced chance
-								receiving higher rarity card
+							<Text style={{ width: '100%', paddingVertical: 15 }}>
+								Number of Card/Pack: 1 Card
 							</Text>
 							{/* <Text>{pack.sugarId}</Text> */}
 							{isLoading ? (
@@ -98,7 +104,7 @@ export const PackDetailSection: FC<Props> = ({
 											<View style={progressBarInner} />
 										</View>
 										<Text style={{ marginLeft: 20, color: '#ddd2af' }}>
-											{`${candyMachine?.itemsRemaining}/${pack.total}`}
+											{`${candyMachine?.itemsRemaining}/${candyMachine?.itemsAvailable}`}
 										</Text>
 									</View>
 									{candyMachine &&
@@ -117,7 +123,7 @@ export const PackDetailSection: FC<Props> = ({
 															source={resources.marketplace.buyButtonBackground}
 															style={styles.buttonBackground}
 														>
-															<Text>{amount} Card</Text>
+															<Text>{amount} Pack</Text>
 															<Image
 																source={resources.marketplace.buyButtonDash}
 																style={{ width: 86, height: 2, marginLeft: 10 }}
@@ -131,6 +137,19 @@ export const PackDetailSection: FC<Props> = ({
 															</View>
 														</ImageBackground>
 													</TouchableOpacity>
+													{!connected && (
+														<View
+															style={{
+																position: 'absolute',
+																left: 0,
+																top: 0,
+																right: 0,
+																bottom: 0,
+																opacity: 0.5,
+																backgroundColor: '#000',
+															}}
+														/>
+													)}
 												</View>
 											);
 										})
@@ -163,32 +182,30 @@ export const PackDetailSection: FC<Props> = ({
 									</Text>
 								)}
 							</View>
+							<View style={{ width: 350 }}>
+								<Text responsiveSizes={[20]} style={styles.title}>
+									Rarity Rate
+								</Text>
+								<View style={styles.stripeSeparator} />
+								{Object.keys(pack.rarity).map((item) => (
+									<View
+										style={[
+											styles.rowContainer,
+											{ justifyContent: 'space-between', paddingVertical: 5 },
+										]}
+										key={item}
+									>
+										<Text style={styles.rarityTitle}>{item}</Text>
+										<Text style={styles.rarityValue}>{`${
+											pack.rarity[item as Rarity]
+										}%`}</Text>
+									</View>
+								))}
+							</View>
 						</View>
 					</View>
 				</View>
 				<View style={styles.rowContainer}>
-					<View style={styles.innerContainer}>
-						<View style={{ width: 350 }}>
-							<Text responsiveSizes={[20]} style={styles.title}>
-								Rarity Rate
-							</Text>
-							<View style={styles.stripeSeparator} />
-							{Object.keys(pack.rarity).map((item) => (
-								<View
-									style={[
-										styles.rowContainer,
-										{ justifyContent: 'space-between', paddingVertical: 5 },
-									]}
-									key={item}
-								>
-									<Text style={styles.rarityTitle}>{item}</Text>
-									<Text style={styles.rarityValue}>{`${
-										pack.rarity[item as Rarity]
-									}%`}</Text>
-								</View>
-							))}
-						</View>
-					</View>
 					<View style={styles.innerContainer}>
 						<View style={{ width: 350 }}>
 							<Accordion
@@ -200,8 +217,20 @@ export const PackDetailSection: FC<Props> = ({
 										<View style={[styles.stripeSeparator, { width: 350 }]} />
 									</Fragment>
 								}
-							/>
+							>
+								<Hyperlink
+									title="Check this Candy Machine information on Solscan"
+									onPress={() =>
+										Linking.openURL(
+											`https://solscan.io/account/${pack.sugarId}`,
+										)
+									}
+								/>
+							</Accordion>
 						</View>
+					</View>
+					<View style={styles.innerContainer}>
+						<View style={{ width: 350 }} />
 					</View>
 				</View>
 			</View>
