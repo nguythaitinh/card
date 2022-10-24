@@ -2,12 +2,11 @@ import { FC } from 'react';
 import { themeState } from '@metacraft/ui';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from 'screens/Home';
+import { useSnapshot } from 'utils/hook';
 
-import GameScreen from '../../screens/Game';
-import HomeScreen from '../../screens/Home';
-import { useSnapshot } from '../../utils/hook';
-
-import MarketplaceStackScreen from './Marketplace';
+import GameStack from './Game';
+import MarketplaceStack from './Marketplace';
 import MintStack from './Mint';
 import { linking, navigationRef, RootParamList, screenOptions } from './shared';
 
@@ -20,9 +19,9 @@ export const BrowserStack: FC = () => {
 		<NavigationContainer ref={navigationRef} linking={linking} theme={theme}>
 			<Stack.Navigator screenOptions={screenOptions}>
 				<Stack.Screen name="Home" component={HomeScreen} />
-				<Stack.Screen name="Marketplace" component={MarketplaceStackScreen} />
+				<Stack.Screen name="Game" component={GameStack} />
+				<Stack.Screen name="Marketplace" component={MarketplaceStack} />
 				<Stack.Screen name="Mint" component={MintStack} />
-				<Stack.Screen name="Game" component={GameScreen} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

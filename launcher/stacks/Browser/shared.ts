@@ -15,7 +15,10 @@ export type HomeParamList = {
 };
 
 export type GameParamList = {
-	id: string;
+	Dashboard: undefined;
+	Duel: {
+		id: string;
+	};
 };
 
 export type MarketplaceParamList = {
@@ -33,21 +36,28 @@ export type MintParamList = {
 };
 
 export type RootParamList = {
-	Game: NavigatorScreenParams<GameParamList>;
 	Home: NavigatorScreenParams<HomeParamList>;
+	Game: NavigatorScreenParams<GameParamList>;
 	Marketplace: NavigatorScreenParams<MarketplaceParamList>;
 	Mint: NavigatorScreenParams<MintParamList>;
 	AuthResponse: undefined;
 };
 
 export const linking: LinkingOptions<RootParamList> = {
-	prefixes: ['https://stormgate.io'],
+	prefixes: ['https://underrealm.stormgate.io'],
 	config: {
 		screens: {
 			Home: {
 				path: '/',
 				screens: {
 					Dashboard: '/',
+				},
+			},
+			Game: {
+				path: '/game',
+				screens: {
+					Dashboard: '/',
+					Duel: '/duel/:id',
 				},
 			},
 			Marketplace: {
@@ -65,7 +75,6 @@ export const linking: LinkingOptions<RootParamList> = {
 				},
 			},
 			AuthResponse: '/authreponse',
-			Game: '/game/:id',
 		},
 	},
 };

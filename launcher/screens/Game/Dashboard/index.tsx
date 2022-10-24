@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Button from 'components/Button';
+import { Button } from '@metacraft/ui';
 
 import GameInvitations from './GameInvitations';
 
-export const HomeDashboard: FC = () => {
+export const GameDashboard: FC = () => {
 	return (
 		<View style={styles.container}>
 			<Button
@@ -18,7 +18,7 @@ export const HomeDashboard: FC = () => {
 	);
 };
 
-export default HomeDashboard;
+export default GameDashboard;
 
 const styles = StyleSheet.create({
 	container: {

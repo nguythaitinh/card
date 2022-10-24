@@ -1,57 +1,31 @@
-import { FC, useRef, useState } from 'react';
-import {
-	LayoutChangeEvent,
-	LayoutRectangle,
-	StyleSheet,
-	View,
-} from 'react-native';
-import { useRoute } from '@react-navigation/native';
-import { GameParamList } from 'stacks/Browser/shared';
-import { useSnapshot } from 'utils/hook';
-import { AccountState, accountState } from 'utils/state/account';
+import React, { FC } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Text } from '@metacraft/ui';
+import Buddies from 'components/Buddies';
+import CompactLayout from 'components/layouts/Compact';
 
-import { useBridge } from './bridge';
-
-const initialLayout: LayoutRectangle = {
-	x: 0,
-	y: 0,
-	width: 0,
-	height: 0,
-};
-
-// const iFrameSrc = 'http://localhost:7456';
-const iFrameSrc = '/game/index.html';
-
-export const CardGame: FC = (props) => {
-	const { profile } = useSnapshot<AccountState>(accountState);
-	const route = useRoute();
-	const params: GameParamList = route.params as never;
-	const iFrameRef = useRef<HTMLIFrameElement>(null);
-	const [layout, setLayout] = useState<LayoutRectangle>(initialLayout);
-	const frameStyle = {
-		width: layout.width,
-		height: layout.height,
-	};
-	const onContainerLayout = ({ nativeEvent }: LayoutChangeEvent) => {
-		setLayout(nativeEvent.layout);
-	};
-
-	useBridge(params?.id, iFrameRef);
-
+export const LauncherScreen: FC = () => {
 	return (
-		<View style={styles.container} onLayout={onContainerLayout}>
-			{layout.width > 0 && (
-				<iframe ref={iFrameRef} style={frameStyle} src={iFrameSrc}></iframe>
-			)}
-		</View>
+		<CompactLayout contentContainerStyle={styles.contentContainer}>
+			<View style={styles.innerContainer}>
+				<Text>Launcher</Text>
+			</View>
+			<Buddies width={280} />
+		</CompactLayout>
 	);
 };
 
-export default CardGame;
+export default LauncherScreen;
 
 const styles = StyleSheet.create({
-	container: {
+	contentContainer: {
+		width: '100%',
+		maxWidth: 1600,
+		marginHorizontal: 'auto',
+		flexDirection: 'row',
+	},
+	innerContainer: {
 		flex: 1,
-		// backgroundColor: 'red',
+		paddingTop: 60,
 	},
 });

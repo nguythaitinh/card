@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Button } from '@metacraft/ui';
 import Avatar from 'components/Avatar';
-import Button from 'components/Button';
 import { GameInvitation } from 'utils/types/graphql';
 
 interface Props {
