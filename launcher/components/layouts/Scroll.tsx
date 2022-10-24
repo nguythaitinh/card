@@ -13,10 +13,14 @@ import StormNavigation from 'components/Navigation/Storm';
 interface Props {
 	children?: ReactNode;
 	style?: ViewStyle;
-	contentContainerStyle?: ViewStyle;
+	contentContainerStyle?: ViewStyle | ViewStyle[];
 }
 
-export const ScrollLayout: FC<Props> = ({ children, style }) => {
+export const ScrollLayout: FC<Props> = ({
+	children,
+	style,
+	contentContainerStyle,
+}) => {
 	const scrollOffset = useSharedValue(0);
 	const translate = useDerivedValue(() => {
 		return scrollOffset.value > navigationHeight.storm
@@ -39,13 +43,13 @@ export const ScrollLayout: FC<Props> = ({ children, style }) => {
 	}));
 
 	return (
-		<View style={styles.container}>
+		<View style={[styles.container, style]}>
 			<Animated.View style={navigationStyle}>
 				<StormNavigation />
 				<InternalNavigation />
 			</Animated.View>
 			<Animated.ScrollView
-				style={[styles.contentContainer, style]}
+				style={[styles.contentContainer, contentContainerStyle]}
 				onScroll={scrollHandler}
 				showsVerticalScrollIndicator={false}
 				scrollEventThrottle={5}
