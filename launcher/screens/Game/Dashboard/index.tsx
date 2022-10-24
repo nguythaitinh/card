@@ -1,12 +1,13 @@
 import { FC } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Button } from '@metacraft/ui';
+import CompactLayout from 'components/layouts/Compact';
 
 import GameInvitations from './GameInvitations';
 
 export const GameDashboard: FC = () => {
 	return (
-		<View style={styles.container}>
+		<CompactLayout>
 			<Button
 				outline
 				title="PLAY"
@@ -14,16 +15,13 @@ export const GameDashboard: FC = () => {
 				titleStyle={styles.playTitle}
 			/>
 			<GameInvitations />
-		</View>
+		</CompactLayout>
 	);
 };
 
 export default GameDashboard;
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-	},
 	playButton: {
 		top: 50,
 		left: 50,
