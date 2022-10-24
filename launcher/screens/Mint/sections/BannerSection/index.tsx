@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ImageBackground, ScaledSize, StyleSheet, View } from 'react-native';
+import { ImageBackground, StyleSheet, View, ViewStyle } from 'react-native';
 import { stormIcons } from '@metacraft/icons';
 import { ScaledSizes, Text } from '@metacraft/ui';
 import resources from 'utils/resources';
@@ -8,15 +8,22 @@ import { iStyles } from 'utils/styles';
 const { Realm } = stormIcons;
 
 interface Props {
-	dimensions: ScaledSize;
+	style?: ViewStyle;
 }
 
-export const BannerSection: FC<Props> = () => {
+export const BannerSection: FC<Props> = ({ style }) => {
 	return (
 		<ImageBackground
-			style={[iStyles.contentContainer, styles.container, { height: 678 }]}
+			style={[iStyles.contentContainer, styles.container, style]}
 			source={resources.mint.keyVisual}
 		>
+			<View style={styles.maskContainer}>
+				<Realm
+					style={styles.realmIcon}
+					size={300}
+					color="rgba(255, 255, 255, 0.12)"
+				/>
+			</View>
 			<View style={styles.contentContainer}>
 				<Text style={styles.heading} responsiveSizes={responsiveHeadings}>
 					Get Genesis NFT Card
@@ -43,11 +50,22 @@ const styles = StyleSheet.create({
 		paddingTop: 70,
 		paddingBottom: 20,
 		marginBottom: 10,
+		height: 678,
 	},
 	contentContainer: {
 		position: 'relative',
 		alignItems: 'center',
 	},
+	maskContainer: {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		right: 0,
+		bottom: 0,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	realmIcon: {},
 	heading: {
 		color: '#fff',
 		fontWeight: '600',
