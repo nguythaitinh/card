@@ -58,180 +58,169 @@ export const PackDetailSection: FC<Props> = ({
 		});
 	};
 
-	const onDisconnectPress = () => {
-		disconnect();
-	};
-
 	return (
-		<View style={[iStyles.contentContainer, { paddingVertical: 100 }]}>
-			<View style={styles.container}>
-				<View style={styles.rowContainer}>
-					<View style={styles.innerContainer}>
-						<Card
-							size={350}
-							animationFlipDisable={true}
-							animationHoveredDisable={true}
-						/>
-					</View>
-					<View style={styles.innerContainer}>
-						<View style={{ width: 350, alignItems: 'center' }}>
-							<ImageBackground
-								source={resources.marketplace.titleSeparator}
-								style={{ width: '100%', paddingVertical: 15 }}
+		<View style={[iStyles.contentContainer, styles.container]}>
+			<View style={styles.rowContainer}>
+				<View style={styles.innerContainer}>
+					<Card
+						size={350}
+						animationFlipDisable={true}
+						animationHoveredDisable={true}
+					/>
+				</View>
+				<View style={styles.innerContainer}>
+					<View style={{ width: 350, alignItems: 'center' }}>
+						<ImageBackground
+							source={resources.marketplace.titleSeparator}
+							style={{ width: '100%', paddingVertical: 15 }}
+						>
+							<Text
+								responsiveSizes={[20]}
+								style={[styles.title, { textAlign: 'center' }]}
 							>
-								<Text
-									responsiveSizes={[20]}
-									style={[styles.title, { textAlign: 'center' }]}
-								>
-									{pack.title} Pack
-								</Text>
-							</ImageBackground>
-							<Text style={{ width: '100%', paddingVertical: 15 }}>
-								Number of Card/Pack: 1 Card
+								{pack.title} Pack
 							</Text>
-							{/* <Text>{pack.sugarId}</Text> */}
-							{isLoading ? (
-								<ActivityIndicator size="large" />
-							) : (
-								<Fragment>
-									<View
-										style={[
-											styles.rowContainer,
-											{ width: '100%', alignItems: 'center' },
-										]}
-									>
-										<View style={styles.progressBarContainer}>
-											<View style={progressBarInner} />
-										</View>
-										<Text style={{ marginLeft: 20, color: '#ddd2af' }}>
-											{`${candyMachine?.itemsRemaining}/${candyMachine?.itemsAvailable}`}
-										</Text>
+						</ImageBackground>
+						<Text style={{ width: '100%', paddingVertical: 15 }}>
+							Number of Card/Pack: 1 Card
+						</Text>
+						{/* <Text>{pack.sugarId}</Text> */}
+						{isLoading ? (
+							<ActivityIndicator size="large" />
+						) : (
+							<Fragment>
+								<View
+									style={[
+										styles.rowContainer,
+										{ width: '100%', alignItems: 'center' },
+									]}
+								>
+									<View style={styles.progressBarContainer}>
+										<View style={progressBarInner} />
 									</View>
-									{candyMachine &&
-									candyMachine.itemsRemaining > toBigNumber(0) ? (
-										[1].map((amount) => {
-											return (
-												<View
-													key={amount}
-													style={{ marginTop: 20, width: '100%' }}
-												>
-													<TouchableOpacity
-														disabled={!connected}
-														onPress={() => onPurchase?.(candyMachine, amount)}
-													>
-														<ImageBackground
-															source={resources.marketplace.buyButtonBackground}
-															style={styles.buttonBackground}
-														>
-															<Text>{amount} Pack</Text>
-															<Image
-																source={resources.marketplace.buyButtonDash}
-																style={{ width: 86, height: 2, marginLeft: 10 }}
-															/>
-															<View style={styles.priceContainer}>
-																<Image
-																	source={resources.marketplace.coinUsd}
-																	style={styles.coinIcon}
-																/>
-																<Text>USDC {amount * pack.unitPrice}</Text>
-															</View>
-														</ImageBackground>
-													</TouchableOpacity>
-													{!connected && (
-														<View
-															style={{
-																position: 'absolute',
-																left: 0,
-																top: 0,
-																right: 0,
-																bottom: 0,
-																opacity: 0.5,
-																backgroundColor: '#000',
-															}}
-														/>
-													)}
-												</View>
-											);
-										})
-									) : (
-										<Text
-											responsiveSizes={[25]}
-											style={{ marginTop: 15, fontWeight: '600' }}
-										>
-											SOLD OUT
-										</Text>
-									)}
-								</Fragment>
-							)}
-
-							<View style={{ marginTop: 15, opacity: 0.5 }}>
-								{connected ? (
-									<Text style={{ fontWeight: '300', fontSize: 12 }}>
-										<Hyperlink
-											title="Disconnect Wallet"
-											onPress={onDisconnectPress}
-										/>
+									<Text style={{ marginLeft: 20, color: '#ddd2af' }}>
+										{`${candyMachine?.itemsRemaining}/${candyMachine?.itemsAvailable}`}
 									</Text>
+								</View>
+								{candyMachine &&
+								candyMachine.itemsRemaining > toBigNumber(0) ? (
+									[1].map((amount) => {
+										return (
+											<View
+												key={amount}
+												style={{ marginTop: 20, width: '100%' }}
+											>
+												<TouchableOpacity
+													disabled={!connected}
+													onPress={() => onPurchase?.(candyMachine, amount)}
+												>
+													<ImageBackground
+														source={resources.marketplace.buyButtonBackground}
+														style={styles.buttonBackground}
+													>
+														<Text>{amount} Pack</Text>
+														<Image
+															source={resources.marketplace.buyButtonDash}
+															style={{ width: 86, height: 2, marginLeft: 10 }}
+														/>
+														<View style={styles.priceContainer}>
+															<Image
+																source={resources.marketplace.coinUsd}
+																style={styles.coinIcon}
+															/>
+															<Text>USDC {amount * pack.unitPrice}</Text>
+														</View>
+													</ImageBackground>
+												</TouchableOpacity>
+												{!connected && (
+													<View
+														style={{
+															position: 'absolute',
+															left: 0,
+															top: 0,
+															right: 0,
+															bottom: 0,
+															opacity: 0.5,
+															backgroundColor: '#000',
+														}}
+													/>
+												)}
+											</View>
+										);
+									})
 								) : (
-									<Text style={{ fontWeight: '300', fontSize: 12 }}>
-										<Hyperlink
-											title="Connect Wallet"
-											onPress={onConnectWalletPress}
-										/>{' '}
-										to buy
+									<Text
+										responsiveSizes={[25]}
+										style={{ marginTop: 15, fontWeight: '600' }}
+									>
+										SOLD OUT
 									</Text>
 								)}
-							</View>
-							<View style={{ width: 350 }}>
-								<Text responsiveSizes={[20]} style={styles.title}>
-									Rarity Rate
+							</Fragment>
+						)}
+
+						<View style={{ marginTop: 15, opacity: 0.5 }}>
+							{connected ? (
+								<Text style={{ fontWeight: '300', fontSize: 12 }}>
+									<Hyperlink title="Disconnect Wallet" onPress={disconnect} />
 								</Text>
-								<View style={styles.stripeSeparator} />
-								{Object.keys(pack.rarity).map((item) => (
-									<View
-										style={[
-											styles.rowContainer,
-											{ justifyContent: 'space-between', paddingVertical: 5 },
-										]}
-										key={item}
-									>
-										<Text style={styles.rarityTitle}>{item}</Text>
-										<Text style={styles.rarityValue}>{`${
-											pack.rarity[item as Rarity]
-										}%`}</Text>
-									</View>
-								))}
-							</View>
+							) : (
+								<Text style={{ fontWeight: '300', fontSize: 12 }}>
+									<Hyperlink
+										title="Connect Wallet"
+										onPress={onConnectWalletPress}
+									/>{' '}
+									to buy
+								</Text>
+							)}
+						</View>
+						<View style={{ width: 350 }}>
+							<Text responsiveSizes={[20]} style={styles.title}>
+								Rarity Rate
+							</Text>
+							<View style={styles.stripeSeparator} />
+							{Object.keys(pack.rarity).map((item) => (
+								<View
+									style={[
+										styles.rowContainer,
+										{ justifyContent: 'space-between', paddingVertical: 5 },
+									]}
+									key={item}
+								>
+									<Text style={styles.rarityTitle}>{item}</Text>
+									<Text style={styles.rarityValue}>{`${
+										pack.rarity[item as Rarity]
+									}%`}</Text>
+								</View>
+							))}
 						</View>
 					</View>
 				</View>
-				<View style={styles.rowContainer}>
-					<View style={styles.innerContainer}>
-						<View style={{ width: 350 }}>
-							<Accordion
-								title={
-									<Fragment>
-										<Text responsiveSizes={[20]} style={styles.title}>
-											Information
-										</Text>
-										<View style={[styles.stripeSeparator, { width: 350 }]} />
-									</Fragment>
+			</View>
+			<View style={styles.rowContainer}>
+				<View style={styles.innerContainer}>
+					<View style={{ width: 350 }}>
+						<Accordion
+							title={
+								<Fragment>
+									<Text responsiveSizes={[20]} style={styles.title}>
+										Information
+									</Text>
+									<View style={[styles.stripeSeparator, { width: 350 }]} />
+								</Fragment>
+							}
+						>
+							<Hyperlink
+								title="Check this Candy Machine information on Solscan"
+								onPress={() =>
+									Linking.openURL(`https://solscan.io/account/${pack.sugarId}`)
 								}
-							>
-								<Hyperlink
-									title="Check this Candy Machine information on Solscan"
-									onPress={() =>
-										Linking.openURL(
-											`https://solscan.io/account/${pack.sugarId}`,
-										)
-									}
-								/>
-							</Accordion>
-						</View>
+							/>
+						</Accordion>
 					</View>
-					<View style={styles.innerContainer}>
-						<View style={{ width: 350 }} />
-					</View>
+				</View>
+				<View style={styles.innerContainer}>
+					<View style={{ width: 350 }} />
 				</View>
 			</View>
 		</View>
@@ -241,7 +230,9 @@ export const PackDetailSection: FC<Props> = ({
 export default PackDetailSection;
 
 const styles = StyleSheet.create({
-	container: {},
+	container: {
+		paddingVertical: 100,
+	},
 	rowContainer: {
 		flexDirection: 'row',
 		justifyContent: 'center',
