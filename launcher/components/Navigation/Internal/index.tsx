@@ -48,9 +48,7 @@ export const InternalNavigation: FC = () => {
 						);
 					})}
 				</View>
-				<View style={styles.commandContainer}>
-					<NavigationItem item={mintNav} onNavigate={onNavigate} />
-				</View>
+				<View style={styles.commandContainer} />
 			</View>
 		</ImageBackground>
 	);
