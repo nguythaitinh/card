@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { ActivityIndicator, StyleSheet, View, ViewStyle } from 'react-native';
-import { themeState } from '@metacraft/ui';
 import { useSnapshot } from 'utils/hook';
 import { AccountState, accountState } from 'utils/state/account';
 
@@ -13,15 +12,7 @@ interface Props {
 
 export const AuthenticationBundle: FC<Props> = ({ style }) => {
 	const { profile, loading } = useSnapshot<AccountState>(accountState);
-	const { sizes } = useSnapshot(themeState);
-	const containerStyle = [
-		styles.container,
-		{
-			width: sizes.leftNavigation,
-			height: sizes.topNavigation + 1,
-		},
-		style,
-	];
+	const containerStyle = [styles.container, style];
 
 	return (
 		<View style={containerStyle}>
@@ -40,11 +31,12 @@ export const AuthenticationBundle: FC<Props> = ({ style }) => {
 
 export default AuthenticationBundle;
 
-const commandSize = 32;
+const commandSize = 24;
 const styles = StyleSheet.create({
 	container: {
 		justifyContent: 'center',
 		paddingLeft: 6,
+		paddingRight: 38,
 	},
 	loadingContainer: {
 		width: commandSize,

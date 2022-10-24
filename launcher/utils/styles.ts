@@ -8,7 +8,7 @@ export const iStyles = StyleSheet.create({
 	},
 });
 
-export const noUserSelect = Platform.select({
+export const noSelect = Platform.select({
 	web: { userSelect: 'none' },
 	default: {},
 });

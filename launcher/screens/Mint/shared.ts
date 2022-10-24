@@ -23,3 +23,61 @@ export const mintStyle = StyleSheet.create({
 		right: 0,
 	},
 });
+
+export interface PackStats {
+	title: string;
+	route: string;
+	total: number;
+	remaining: number;
+	unitPrice: number;
+	sugarId: string;
+}
+
+export const packList: PackStats[] = [
+	{
+		title: 'Bronze',
+		route: 'bronze',
+		total: 951,
+		remaining: 951,
+		unitPrice: 18,
+		sugarId: 'HnDJapRRFfhuusQGx2TEfA8wcLTUibAasMq5KYbm3kCD',
+	},
+	{
+		title: 'Silver',
+		route: 'silver',
+		total: 694,
+		remaining: 694,
+		unitPrice: 18,
+		sugarId: 'HnDJapRRFfhuusQGx2TEfA8wcLTUibAasMq5KYbm3kCD',
+	},
+	{
+		title: 'Gold',
+		route: 'gold',
+		total: 491,
+		remaining: 491,
+		unitPrice: 18,
+		sugarId: 'HnDJapRRFfhuusQGx2TEfA8wcLTUibAasMq5KYbm3kCD',
+	},
+	{
+		title: 'Platinum',
+		route: 'platinum',
+		total: 215,
+		remaining: 215,
+		unitPrice: 18,
+		sugarId: 'HnDJapRRFfhuusQGx2TEfA8wcLTUibAasMq5KYbm3kCD',
+	},
+	{
+		title: 'Titan',
+		route: 'titan',
+		total: 39,
+		remaining: 39,
+		unitPrice: 18,
+		sugarId: 'HnDJapRRFfhuusQGx2TEfA8wcLTUibAasMq5KYbm3kCD',
+	},
+];
+
+type PackMap = Record<string, PackStats>;
+export const packMap: PackMap = packList.reduce((a, i) => {
+	a[i.route] = i;
+	return a;
+}, {} as PackMap);

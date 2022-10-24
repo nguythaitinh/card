@@ -14,16 +14,29 @@ import {
 	modalActions,
 	Text,
 } from '@metacraft/ui';
+import Card from 'components/Marketplace/Card';
 import resources from 'launcher/utils/resources';
+import { PackStats } from 'screens/Mint/shared';
+import { iStyles } from 'utils/styles';
 
-import Card from '../../../../components/Marketplace/Card';
-import { iStyles } from '../../../../utils/styles';
 import Popup from '../../Popup';
+
 interface Props {
 	dimensions: ScaledSize;
+	pack: PackStats;
+	onPurchase?: (pack: PackStats, volume: number) => void;
 }
 
-export const PackDetailSection: FC<Props> = ({ dimensions }) => {
+export const PackDetailSection: FC<Props> = ({
+	dimensions,
+	pack,
+	onPurchase,
+}) => {
+	const scaledWidth = Math.min(
+		iStyles.contentContainer.maxWidth / dimensions.width,
+		1,
+	);
+
 	const progressBarInner = {
 		position: 'absolute',
 		top: 0,
@@ -70,12 +83,13 @@ export const PackDetailSection: FC<Props> = ({ dimensions }) => {
 								responsiveSizes={[20]}
 								style={[styles.title, { textAlign: 'center' }]}
 							>
-								Silver Pack
+								{pack.title} Pack
 							</Text>
 						</ImageBackground>
 						<Text style={{ textAlign: 'center', paddingVertical: 15 }}>
 							Legendary is the highest level of... with enhanced chance
 							receiving higher rarity card
+							{pack.sugarId}
 						</Text>
 						<View
 							style={[
@@ -88,84 +102,36 @@ export const PackDetailSection: FC<Props> = ({ dimensions }) => {
 							</View>
 							<Text style={{ marginLeft: 20, color: '#ddd2af' }}>600/694</Text>
 						</View>
-						<View style={{ marginTop: 20, width: '100%' }}>
-							<TouchableOpacity onPress={showPopup}>
-								<ImageBackground
-									source={resources.marketplace.buyButtonBackground}
-									style={{
-										flexDirection: 'row',
-										alignItems: 'center',
-										paddingVertical: 13,
-										paddingHorizontal: 30,
-									}}
-								>
-									<Text>1 Card</Text>
-									<Image
-										source={resources.marketplace.buyButtonDash}
-										style={{ width: 86, height: 2, marginLeft: 10 }}
-									/>
-									<View style={styles.priceContainer}>
-										<Image
-											source={resources.marketplace.coinUsd}
-											style={styles.coinIcon}
-										/>
-										<Text>USDC 18</Text>
-									</View>
-								</ImageBackground>
-							</TouchableOpacity>
-						</View>
-						<View style={{ marginTop: 20, width: '100%' }}>
-							<TouchableOpacity>
-								<ImageBackground
-									source={resources.marketplace.buyButtonBackground}
-									style={{
-										flexDirection: 'row',
-										alignItems: 'center',
-										paddingVertical: 13,
-										paddingHorizontal: 30,
-									}}
-								>
-									<Text>1 Card</Text>
-									<Image
-										source={resources.marketplace.buyButtonDash}
-										style={{ width: 86, height: 2, marginLeft: 10 }}
-									/>
-									<View style={styles.priceContainer}>
-										<Image
-											source={resources.marketplace.coinUsd}
-											style={styles.coinIcon}
-										/>
-										<Text>USDC 18</Text>
-									</View>
-								</ImageBackground>
-							</TouchableOpacity>
-						</View>
-						<View style={{ marginTop: 20, width: '100%' }}>
-							<TouchableOpacity>
-								<ImageBackground
-									source={resources.marketplace.buyButtonBackground}
-									style={{
-										flexDirection: 'row',
-										alignItems: 'center',
-										paddingVertical: 13,
-										paddingHorizontal: 30,
-									}}
-								>
-									<Text>1 Card</Text>
-									<Image
-										source={resources.marketplace.buyButtonDash}
-										style={{ width: 86, height: 2, marginLeft: 10 }}
-									/>
-									<View style={styles.priceContainer}>
-										<Image
-											source={resources.marketplace.coinUsd}
-											style={styles.coinIcon}
-										/>
-										<Text>USDC 18</Text>
-									</View>
-								</ImageBackground>
-							</TouchableOpacity>
-						</View>
+						{[1, 5, 10].map((amount) => {
+							return (
+								<View key={amount} style={{ marginTop: 20, width: '100%' }}>
+									<TouchableOpacity onPress={() => onPurchase?.(pack, amount)}>
+										<ImageBackground
+											source={resources.marketplace.buyButtonBackground}
+											style={{
+												flexDirection: 'row',
+												alignItems: 'center',
+												paddingVertical: 13,
+												paddingHorizontal: 30,
+											}}
+										>
+											<Text>{amount} Card</Text>
+											<Image
+												source={resources.marketplace.buyButtonDash}
+												style={{ width: 86, height: 2, marginLeft: 10 }}
+											/>
+											<View style={styles.priceContainer}>
+												<Image
+													source={resources.marketplace.coinUsd}
+													style={styles.coinIcon}
+												/>
+												<Text>USDC 18</Text>
+											</View>
+										</ImageBackground>
+									</TouchableOpacity>
+								</View>
+							);
+						})}
 					</View>
 				</View>
 			</View>

@@ -1,4 +1,8 @@
 export default {
+	navigation: {
+		bg: require('../../../assets/marketplace/navigation-bg.png'),
+		logo: require('../../../assets/marketplace/flag.png'),
+	},
 	marketplace: {
 		headingBackground: require('../../../assets/marketplace/heading-background.png'),
 		mainBackground: require('../../../assets/marketplace/main-background.png'),
