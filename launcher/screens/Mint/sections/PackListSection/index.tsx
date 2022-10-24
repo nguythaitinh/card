@@ -14,13 +14,6 @@ export const PackListSection: FC = () => {
 
 	return (
 		<View style={iStyles.contentContainer}>
-			<Text style={styles.packTotal} responsiveSizes={[30, 30, 25, 20]}>
-				2390 NFTs
-			</Text>
-			<Text style={styles.packDescribe}>
-				A NFT is all you need to start your journey in Under Realm. Increase
-				your chances to win by owning a genesis NFT
-			</Text>
 			<ScrollView contentContainerStyle={styles.packListing} horizontal>
 				{packList.map((item) => (
 					<PackBundle key={item.route} item={item} onPress={onPackPress} />
@@ -33,21 +26,10 @@ export const PackListSection: FC = () => {
 export default PackListSection;
 
 const styles = StyleSheet.create({
-	packTotal: {
-		marginVertical: 15,
-		textAlign: 'center',
-		fontWeight: 'bold',
-		color: '#cdc8b5',
-	},
-	packDescribe: {
-		textAlign: 'center',
-		paddingHorizontal: 15,
-		maxWidth: 650,
-		marginHorizontal: 'auto',
-	},
 	packListing: {
 		marginHorizontal: 'auto',
-		paddingVertical: 100,
+		paddingTop: 18,
+		paddingBottom: 100,
 		flexDirection: 'row',
 		justifyContent: 'center',
 	},
