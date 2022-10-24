@@ -71,53 +71,55 @@ export const WhyBuyNftSection: FC<Props> = ({ dimensions }) => {
 				style={styles.patternBottomRight}
 			/>
 			<View style={styles.contentContainer}>
-				<View
-					style={{
-						flex: 1,
-						flexBasis: 400,
-						paddingRight: dimensions.width < 1120 ? 0 : 100,
-						maxWidth: 600,
-					}}
-				>
-					<Text responsiveSizes={[35, 35, 30, 25]} style={styles.title}>
-						Why buy Genesis NFT Card now?
-					</Text>
-					{whyBuyNft.map((item, index) => (
-						<View key={index} style={{ flexDirection: 'row' }}>
-							<Image
-								source={resources.marketplace.mintWhyBuyNft.bloodDrop}
-								style={{ width: 24, height: 35, marginRight: 10 }}
-							/>
-							<View style={{ flex: 1, marginBottom: 40 }}>
-								<Text
-									responsiveSizes={[20]}
-									style={{
-										paddingVertical: 5,
-										color: '#beafa6',
-										marginBottom: 10,
-									}}
-								>
-									{item.title}
-								</Text>
-								<Markdown content={item.detail} />
+				<View style={styles.whyImageContainer}>
+					<Image
+						style={styles.whyImage}
+						source={resources.mint.cards}
+						resizeMode="contain"
+					/>
+				</View>
+				<View style={styles.infoContainer}>
+					<View style={styles.infoInner}>
+						<Text responsiveSizes={[35, 35, 30, 25]} style={styles.title}>
+							Why buy Genesis NFT Card now?
+						</Text>
+						{whyBuyNft.map((item, index) => (
+							<View key={index} style={{ flexDirection: 'row' }}>
+								<Image
+									source={resources.marketplace.mintWhyBuyNft.bloodDrop}
+									style={{ width: 24, height: 35, marginRight: 10 }}
+								/>
+								<View style={{ flex: 1, marginBottom: 40 }}>
+									<Text
+										responsiveSizes={[20]}
+										style={{
+											paddingVertical: 5,
+											color: '#beafa6',
+											marginBottom: 10,
+										}}
+									>
+										{item.title}
+									</Text>
+									<Markdown content={item.detail} />
+								</View>
 							</View>
-						</View>
-					))}
-					<UnderRealmButton
-						style={{
-							width: 220,
-							marginLeft: 30,
-						}}
-						onPress={() =>
-							Linking.openURL(
-								'https://stormgate.substack.com/?utm_source=substack&utm_medium=web&utm_campaign=reader2&utm_source=%2Fsearch%2Fstormgate&utm_medium=reader2',
-							)
-						}
-					>
-						<View style={{ alignItems: 'center' }}>
-							<Text>Read details</Text>
-						</View>
-					</UnderRealmButton>
+						))}
+						<UnderRealmButton
+							style={{
+								width: 220,
+								marginLeft: 30,
+							}}
+							onPress={() =>
+								Linking.openURL(
+									'https://stormgate.substack.com/?utm_source=substack&utm_medium=web&utm_campaign=reader2&utm_source=%2Fsearch%2Fstormgate&utm_medium=reader2',
+								)
+							}
+						>
+							<View style={{ alignItems: 'center' }}>
+								<Text>Read details</Text>
+							</View>
+						</UnderRealmButton>
+					</View>
 				</View>
 			</View>
 		</View>

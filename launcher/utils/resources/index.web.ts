@@ -5,6 +5,7 @@ export default {
 	},
 	mint: {
 		keyVisual: { uri: '/mint/key-visual.png' },
+		cards: { uri: '/mint/cards.png' },
 	},
 	marketplace: {
 		headingBackground: { uri: '/marketplace/heading-background.png' },

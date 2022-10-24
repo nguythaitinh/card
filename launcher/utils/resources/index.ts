@@ -5,6 +5,7 @@ export default {
 	},
 	mint: {
 		keyVisual: require('../../../assets/mint/key-visual.png'),
+		cards: require('../../../assets/mint/cards.png'),
 	},
 	marketplace: {
 		headingBackground: require('../../../assets/marketplace/heading-background.png'),

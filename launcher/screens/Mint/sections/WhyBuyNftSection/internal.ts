@@ -103,12 +103,29 @@ export const styles = StyleSheet.create({
 	contentContainer: {
 		flexDirection: 'row',
 		flexWrap: 'wrap',
-		justifyContent: 'center',
+		overflow: 'hidden',
 	},
 	title: {
 		fontWeight: '500',
 		marginBottom: 20,
 		marginLeft: 34,
+	},
+	whyImageContainer: {
+		flex: 1,
+		alignItems: 'center',
+		minWidth: 490,
+	},
+	whyImage: {
+		marginTop: 120,
+		width: 600,
+		height: 608,
+	},
+	infoContainer: {
+		flex: 1,
+		minWidth: 490,
+	},
+	infoInner: {
+		maxWidth: 500,
 	},
 });
 
