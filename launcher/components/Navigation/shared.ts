@@ -56,10 +56,10 @@ export const localNavigations: NavigationConfig[] = [
 	// 	title: 'Marketplace',
 	// 	route: 'Marketplace',
 	// },
-	{
-		title: 'Cards',
-		route: 'Cards',
-	},
+	// {
+	// 	title: 'Cards',
+	// 	route: 'Cards',
+	// },
 	// {
 	// 	title: 'Support',
 	// },
