@@ -49,5 +49,7 @@ export default {
 		titleSeparator: require('../../../assets/marketplace/title-separator.png'),
 		buyButtonBackground: require('../../../assets/marketplace/buy-button-bg.png'),
 		buyButtonDash: require('../../../assets/marketplace/buy-button-inner-dash.png'),
+		popupBorder: require('../../../assets/marketplace/popup-border.png'),
+		popupBackground: require('../../../assets/marketplace/popup-bg.png'),
 	},
 };

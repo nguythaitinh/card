@@ -49,5 +49,7 @@ export default {
 		titleSeparator: { uri: '/marketplace/title-separator.png' },
 		buyButtonBackground: { uri: '/marketplace/buy-button-bg.png' },
 		buyButtonDash: { uri: '/marketplace/buy-button-inner-dash.png' },
+		popupBorder: { uri: '/marketplace/popup-border.png' },
+		popupBackground: { uri: '/marketplace/popup-bg.png' },
 	},
 };
