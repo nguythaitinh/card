@@ -4,7 +4,13 @@ export interface NavigationConfig {
 	title: string;
 	url?: string;
 	route?: keyof RootParamList;
+	params?: RootParamList[keyof RootParamList];
 }
+
+export const stormGateNav = {
+	title: 'StormGate',
+	url: 'https://stormgate.io',
+};
 
 export const stormNavigations: NavigationConfig[] = [
 	{
@@ -35,8 +41,9 @@ export const homeNav: NavigationConfig = {
 };
 
 export const mintNav: NavigationConfig = {
-	title: 'Mint',
+	title: 'Genesis Mint',
 	route: 'Mint',
+	params: { screen: 'Dashboard' },
 };
 
 export const localNavigations: NavigationConfig[] = [

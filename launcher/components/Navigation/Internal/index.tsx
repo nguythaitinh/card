@@ -9,7 +9,6 @@ import {
 import {
 	homeNav,
 	localNavigations,
-	mintNav,
 	NavigationConfig,
 	navigationHeight,
 } from 'components/Navigation/shared';
@@ -21,7 +20,7 @@ import NavigationItem from './Item';
 
 export const InternalNavigation: FC = () => {
 	const onNavigate = (item: NavigationConfig) => {
-		navigate(item.route as never);
+		navigate(item.route as never, item.params);
 	};
 
 	return (
