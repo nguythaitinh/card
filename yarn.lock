@@ -4843,10 +4843,10 @@
   resolved "https://registry.yarnpkg.com/@metacraft/engines-under-realm/-/engines-under-realm-0.0.14.tgz#05079854039979bbf65c52e892aac0d38c0b5c95"
   integrity sha512-UKQd4STJdVRKn2D88ijUke4pP7qULbz2lMUGep9h+z1zFmPCTzI8Z8QtFFZ6RMtrf65CO1gQYRJdWRrkEYI3zQ==
 
-"@metacraft/icons@^0.0.20":
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/@metacraft/icons/-/icons-0.0.20.tgz#75d7e6bbc0f748c7dc1db258a8fed429fab8c799"
-  integrity sha512-ScHVLFFSoLsrcLMV9LQgTb0WZUP3w1Q8w46/1iJUV33gTE1VWn7Rtg9lOjYUlSK0CLT6e0w0H9N7/eVxmf2/8w==
+"@metacraft/icons@^0.0.21":
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/@metacraft/icons/-/icons-0.0.21.tgz#7e370b78865d75c098b2807aa721bb691b75c789"
+  integrity sha512-TNU/kdIqN1Nls5KFm/sONV2GouBRXMYka4C6xqLdTtUU75gYh5wH25bcUs+GHrmOMPlABpP2YLWRhb5uP25DIQ==
   dependencies:
     react "^18.0.0"
     react-native-svg "^13.0.0"
