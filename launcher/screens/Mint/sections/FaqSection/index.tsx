@@ -14,7 +14,7 @@ const FaqSection: FC = () => {
 			</Text>
 			<View style={styles.contentContainer}>
 				{faqList.map((item, index) => (
-					<FaqItem title={item.title} content={item.content} key={index} />
+					<FaqItem key={index} title={item.title} content={item.content} />
 				))}
 			</View>
 		</View>
