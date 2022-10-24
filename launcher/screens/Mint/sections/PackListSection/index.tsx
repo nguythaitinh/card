@@ -1,18 +1,15 @@
 import React, { FC } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Text } from '@metacraft/ui';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { packList, PackStats } from 'screens/Mint/shared';
-import { MintParamList } from 'stacks/Browser/shared';
+import { navigate } from 'stacks/Browser/shared';
 import { iStyles } from 'utils/styles';
 
 import PackBundle from './PackBundle';
 
 export const PackListSection: FC = () => {
-	const navigation = useNavigation<StackNavigationProp<MintParamList>>();
 	const onPackPress = (pack: PackStats) => {
-		navigation.navigate('DetailPack', { id: pack.route });
+		navigate('Mint', { screen: 'DetailPack', params: { id: pack.route } });
 	};
 
 	return (
