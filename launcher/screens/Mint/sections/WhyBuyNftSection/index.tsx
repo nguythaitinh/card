@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { Image, Linking, ScaledSize, TextStyle, View } from 'react-native';
-import { Text } from '@metacraft/ui';
+import { Image, Linking, ScaledSize, View } from 'react-native';
+import { Markdown, Text } from '@metacraft/ui';
 import UnderRealmButton from 'launcher/components/Marketplace/Button';
 import resources from 'launcher/utils/resources';
 import { iStyles } from 'launcher/utils/styles';
@@ -12,13 +12,6 @@ interface Props {
 }
 
 export const WhyBuyNftSection: FC<Props> = ({ dimensions }) => {
-	const titleStyle = {
-		flexBasis: 600,
-		paddingLeft: dimensions.width < 1120 ? 0 : 120,
-		paddingRight: 50,
-		paddingTop: 30,
-	} as TextStyle;
-
 	return (
 		<View style={[iStyles.contentContainer, styles.container]}>
 			<Image
@@ -78,12 +71,6 @@ export const WhyBuyNftSection: FC<Props> = ({ dimensions }) => {
 				style={styles.patternBottomRight}
 			/>
 			<View style={styles.contentContainer}>
-				<Text
-					responsiveSizes={[35, 35, 30, 25]}
-					style={[styles.title, titleStyle]}
-				>
-					Why buy Genesis NFT Card now?
-				</Text>
 				<View
 					style={{
 						flex: 1,
@@ -92,6 +79,9 @@ export const WhyBuyNftSection: FC<Props> = ({ dimensions }) => {
 						maxWidth: 600,
 					}}
 				>
+					<Text responsiveSizes={[35, 35, 30, 25]} style={styles.title}>
+						Why buy Genesis NFT Card now?
+					</Text>
 					{whyBuyNft.map((item, index) => (
 						<View key={index} style={{ flexDirection: 'row' }}>
 							<Image
@@ -109,7 +99,7 @@ export const WhyBuyNftSection: FC<Props> = ({ dimensions }) => {
 								>
 									{item.title}
 								</Text>
-								<Text>{item.detail}</Text>
+								<Markdown content={item.detail} />
 							</View>
 						</View>
 					))}
