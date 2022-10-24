@@ -2,12 +2,13 @@ import React, { FC } from 'react';
 import {
 	Image,
 	ImageStyle,
+	Linking,
 	ScaledSize,
 	ScrollView,
 	StyleSheet,
 	View,
 } from 'react-native';
-import { Text } from '@metacraft/ui';
+import { Hyperlink, Text } from '@metacraft/ui';
 import { NftWithToken } from '@metaplex-foundation/js';
 import UnderRealmButton from 'launcher/components/Marketplace/Button';
 
@@ -21,6 +22,7 @@ interface Props {
 
 export const Popup: FC<Props> = ({ dimensions, nft }) => {
 	const width = Math.min(dimensions.width - 40, 1000);
+	const imageSource = nft.uri.replace('.json', '.png');
 
 	return (
 		<View style={[styles.container, { width }]}>
@@ -35,10 +37,23 @@ export const Popup: FC<Props> = ({ dimensions, nft }) => {
 			<View style={[styles.contentContainer, { width }]}>
 				<Text
 					responsiveSizes={[20]}
-					style={{ fontWeight: '500', marginVertical: 30, textAlign: 'center' }}
+					style={{
+						fontWeight: '500',
+						marginTop: 30,
+						marginBottom: 15,
+						textAlign: 'center',
+					}}
 				>
 					You have successfully purchased{' '}
-					<Text style={{ color: '#ccb182' }}>10</Text> NFT Card
+					<Text style={{ color: '#ccb182' }}>1</Text> NFT Card
+				</Text>
+				<Text style={{ textAlign: 'center', marginBottom: 30 }}>
+					Please check your Wallet for the NFT. Chat with us on{' '}
+					<Hyperlink
+						title="Discord"
+						onPress={() => Linking.openURL('https://discord.gg/sXcz9Em4AR')}
+					/>{' '}
+					if any support needed.
 				</Text>
 				<ScrollView
 					contentContainerStyle={{
@@ -53,13 +68,15 @@ export const Popup: FC<Props> = ({ dimensions, nft }) => {
 						isCardUp={false}
 						animationFlipDisable
 						style={{ marginHorizontal: 10 }}
+						imageSource={imageSource}
 					/>
 				</ScrollView>
 				<View style={{ marginVertical: 30 }}>
-					<Text style={{ textAlign: 'center' }}>
-						*Character and Attribute will be revealed later
+					<Text style={{ textAlign: 'center', fontStyle: 'italic' }}>
+						*Some Hero characters visual are not available yet and will be
+						revealed later
 					</Text>
-					<UnderRealmButton
+					{/* <UnderRealmButton
 						style={{
 							marginHorizontal: 'auto',
 							marginTop: 20,
@@ -76,7 +93,7 @@ export const Popup: FC<Props> = ({ dimensions, nft }) => {
 						>
 							View in my profile
 						</Text>
-					</UnderRealmButton>
+					</UnderRealmButton> */}
 				</View>
 			</View>
 		</View>
