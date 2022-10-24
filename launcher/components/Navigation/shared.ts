@@ -1,7 +1,9 @@
+import { RootParamList } from 'stacks/Browser/shared';
+
 export interface NavigationConfig {
 	title: string;
 	url?: string;
-	route?: string;
+	route?: keyof RootParamList;
 }
 
 export const stormNavigations: NavigationConfig[] = [
@@ -27,23 +29,32 @@ export const stormNavigations: NavigationConfig[] = [
 	},
 ];
 
-export const mintNavigation: NavigationConfig = {
+export const homeNav: NavigationConfig = {
+	title: 'Home',
+	route: 'Home',
+};
+
+export const mintNav: NavigationConfig = {
 	title: 'Mint',
+	route: 'Mint',
 };
 
 export const localNavigations: NavigationConfig[] = [
 	{
 		title: 'Game',
+		route: 'Game',
 	},
+	// {
+	// 	title: 'Marketplace',
+	// 	route: 'Marketplace',
+	// },
 	{
-		title: 'Card',
+		title: 'Cards',
+		route: 'Cards',
 	},
-	{
-		title: 'Community',
-	},
-	{
-		title: 'Support',
-	},
+	// {
+	// 	title: 'Support',
+	// },
 ];
 
 export const navigationHeight = {

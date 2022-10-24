@@ -1,18 +1,22 @@
 import React, { FC } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from '@metacraft/ui';
 
 import { NavigationConfig, navigationHeight } from '../shared';
 
 interface Props {
 	item: NavigationConfig;
+	onNavigate?: (item: NavigationConfig) => void;
 }
 
-export const NavigationItem: FC<Props> = ({ item }) => {
+export const NavigationItem: FC<Props> = ({ item, onNavigate }) => {
 	return (
-		<View style={styles.container}>
+		<TouchableOpacity
+			style={styles.container}
+			onPress={() => onNavigate?.(item)}
+		>
 			<Text style={styles.title}>{item.title}</Text>
-		</View>
+		</TouchableOpacity>
 	);
 };
 

@@ -7,16 +7,23 @@ import {
 	View,
 } from 'react-native';
 import {
+	homeNav,
 	localNavigations,
-	mintNavigation,
+	mintNav,
+	NavigationConfig,
 	navigationHeight,
 } from 'components/Navigation/shared';
+import { navigate } from 'stacks/Browser/shared';
 import resources from 'utils/resources';
 import { iStyles } from 'utils/styles';
 
 import NavigationItem from './Item';
 
 export const InternalNavigation: FC = () => {
+	const onNavigate = (item: NavigationConfig) => {
+		navigate(item.route as never);
+	};
+
 	return (
 		<ImageBackground
 			style={styles.container}
@@ -24,16 +31,25 @@ export const InternalNavigation: FC = () => {
 			resizeMode="repeat"
 		>
 			<View style={[iStyles.contentContainer, styles.contentContainer]}>
-				<TouchableOpacity activeOpacity={0.9}>
+				<TouchableOpacity
+					activeOpacity={0.9}
+					onPress={() => onNavigate(homeNav)}
+				>
 					<Image source={resources.navigation.logo} style={styles.logo} />
 				</TouchableOpacity>
 				<View style={styles.navigationContainer}>
 					{localNavigations.map((item) => {
-						return <NavigationItem key={item.title} item={item} />;
+						return (
+							<NavigationItem
+								key={item.title}
+								item={item}
+								onNavigate={onNavigate}
+							/>
+						);
 					})}
 				</View>
 				<View style={styles.commandContainer}>
-					<NavigationItem item={mintNavigation} />
+					<NavigationItem item={mintNav} onNavigate={onNavigate} />
 				</View>
 			</View>
 		</ImageBackground>
