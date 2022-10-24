@@ -8,6 +8,7 @@ import {
 	View,
 } from 'react-native';
 import { Text } from '@metacraft/ui';
+import { NftWithToken } from '@metaplex-foundation/js';
 import UnderRealmButton from 'launcher/components/Marketplace/Button';
 
 import Card from '../../components/Marketplace/Card';
@@ -15,9 +16,10 @@ import resources from '../../utils/resources';
 
 interface Props {
 	dimensions: ScaledSize;
+	nft: NftWithToken;
 }
 
-export const Popup: FC<Props> = ({ dimensions }) => {
+export const Popup: FC<Props> = ({ dimensions, nft }) => {
 	const width = Math.min(dimensions.width - 40, 1000);
 
 	return (
@@ -47,26 +49,6 @@ export const Popup: FC<Props> = ({ dimensions }) => {
 					horizontal
 					showsHorizontalScrollIndicator={false}
 				>
-					<Card
-						isCardUp={false}
-						animationFlipDisable
-						style={{ marginHorizontal: 10 }}
-					/>
-					<Card
-						isCardUp={false}
-						animationFlipDisable
-						style={{ marginHorizontal: 10 }}
-					/>
-					<Card
-						isCardUp={false}
-						animationFlipDisable
-						style={{ marginHorizontal: 10 }}
-					/>
-					<Card
-						isCardUp={false}
-						animationFlipDisable
-						style={{ marginHorizontal: 10 }}
-					/>
 					<Card
 						isCardUp={false}
 						animationFlipDisable
