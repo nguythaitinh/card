@@ -40,10 +40,10 @@ export const mintNav: NavigationConfig = {
 };
 
 export const localNavigations: NavigationConfig[] = [
-	{
-		title: 'Game',
-		route: 'Game',
-	},
+	// {
+	// 	title: 'Game',
+	// 	route: 'Game',
+	// },
 	// {
 	// 	title: 'Marketplace',
 	// 	route: 'Marketplace',

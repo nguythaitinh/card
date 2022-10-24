@@ -44,7 +44,7 @@ export const packList: PackStats[] = [
 		route: 'bronze',
 		total: 951,
 		remaining: 951,
-		unitPrice: 18,
+		unitPrice: 15,
 		sugarId: 'GcyRX3s882L79irZAG7QuSCf7bQEptj16gLjC62mkyrx',
 		rarity: {
 			Rare: 55.2,
@@ -59,7 +59,7 @@ export const packList: PackStats[] = [
 		route: 'silver',
 		total: 694,
 		remaining: 694,
-		unitPrice: 18,
+		unitPrice: 25,
 		sugarId: 'GcyRX3s882L79irZAG7QuSCf7bQEptj16gLjC62mkyrx',
 		rarity: {
 			Rare: 32.42,
@@ -72,9 +72,9 @@ export const packList: PackStats[] = [
 	{
 		title: 'Gold',
 		route: 'gold',
-		total: 491,
-		remaining: 491,
-		unitPrice: 18,
+		total: 488,
+		remaining: 488,
+		unitPrice: 40,
 		sugarId: 'GcyRX3s882L79irZAG7QuSCf7bQEptj16gLjC62mkyrx',
 		rarity: {
 			Rare: 15.37,
@@ -87,9 +87,9 @@ export const packList: PackStats[] = [
 	{
 		title: 'Platinum',
 		route: 'platinum',
-		total: 215,
-		remaining: 215,
-		unitPrice: 18,
+		total: 210,
+		remaining: 210,
+		unitPrice: 100,
 		sugarId: 'GcyRX3s882L79irZAG7QuSCf7bQEptj16gLjC62mkyrx',
 		rarity: {
 			Rare: 7.14,
@@ -102,9 +102,9 @@ export const packList: PackStats[] = [
 	{
 		title: 'Titan',
 		route: 'titan',
-		total: 39,
-		remaining: 39,
-		unitPrice: 18,
+		total: 30,
+		remaining: 30,
+		unitPrice: 250,
 		sugarId: 'GcyRX3s882L79irZAG7QuSCf7bQEptj16gLjC62mkyrx',
 		rarity: {
 			Rare: 0,
