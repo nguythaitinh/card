@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		paddingBottom: 10,
-		paddingLeft: 10,
 		color: '#beafa6',
 	},
 });
