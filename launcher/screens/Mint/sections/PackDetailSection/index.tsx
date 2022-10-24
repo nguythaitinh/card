@@ -1,44 +1,37 @@
-import React, { FC, Fragment, useRef } from 'react';
+import React, { FC, Fragment } from 'react';
 import {
+	ActivityIndicator,
 	Image,
 	ImageBackground,
-	ScaledSize,
 	StyleSheet,
 	View,
 	ViewStyle,
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import {
-	AnimateDirections,
-	BindDirections,
-	Hyperlink,
-	modalActions,
-	Text,
-} from '@metacraft/ui';
+import { Hyperlink, modalActions, Text } from '@metacraft/ui';
+import { CandyMachineV2, toBigNumber } from '@metaplex-foundation/js';
+import { useWallet } from '@solana/wallet-adapter-react';
 import Accordion from 'components/Marketplace/Accordion';
 import Card from 'components/Marketplace/Card';
+import SignInOptions from 'components/modals/SignInOptions';
 import resources from 'launcher/utils/resources';
 import { PackStats, Rarity } from 'screens/Mint/shared';
 import { iStyles } from 'utils/styles';
 
-import Popup from '../../Popup';
-
 interface Props {
-	dimensions: ScaledSize;
+	isLoading?: boolean;
 	pack: PackStats;
-	onPurchase?: (pack: PackStats, volume: number) => void;
+	candyMachine: CandyMachineV2 | null;
+	onPurchase?: (candyMachine: CandyMachineV2, volume: number) => void;
 }
 
 export const PackDetailSection: FC<Props> = ({
-	dimensions,
+	isLoading,
 	pack,
+	candyMachine,
 	onPurchase,
 }) => {
-	// const scaledWidth = Math.min(
-	// 	iStyles.contentContainer.maxWidth / dimensions.width,
-	// 	1,
-	// );
-
+	const { connected, disconnect } = useWallet();
 	const progressBarInner = {
 		position: 'absolute',
 		top: 0,
@@ -49,20 +42,17 @@ export const PackDetailSection: FC<Props> = ({
 		backgroundColor: '#dabe8c',
 	} as ViewStyle;
 
-	const containerRef = useRef<View>(null);
-
-	const showPopup = () => {
+	const onConnectWalletPress = (): void => {
 		modalActions.show({
-			id: 'Successful Buying',
-			component: () => <Popup dimensions={dimensions} />,
-			bindingDirection: BindDirections.Inner,
-			animateDirection: AnimateDirections.BottomRight,
-			bindingRef: containerRef,
-			maskActiveOpacity: 0.9,
-			maskStyle: {
-				backgroundColor: 'rgb(17, 9, 9)',
-			},
+			id: 'signInOptions',
+			component: SignInOptions,
+			maskActiveOpacity: 0.8,
+			context: { web3Only: true },
 		});
+	};
+
+	const onDisconnectPress = () => {
+		disconnect();
 	};
 
 	return (
@@ -93,56 +83,85 @@ export const PackDetailSection: FC<Props> = ({
 								Legendary is the highest level of... with enhanced chance
 								receiving higher rarity card
 							</Text>
-							<Text>{pack.sugarId}</Text>
-							<View
-								style={[
-									styles.rowContainer,
-									{ width: '100%', alignItems: 'center' },
-								]}
-							>
-								<View style={styles.progressBarContainer}>
-									<View style={progressBarInner} />
-								</View>
-								<Text style={{ marginLeft: 20, color: '#ddd2af' }}>
-									600/694
-								</Text>
-							</View>
-							{[1, 5, 10].map((amount) => {
-								return (
-									<View key={amount} style={{ marginTop: 20, width: '100%' }}>
-										<TouchableOpacity
-											onPress={() => onPurchase?.(pack, amount)}
-										>
-											<ImageBackground
-												source={resources.marketplace.buyButtonBackground}
-												style={{
-													flexDirection: 'row',
-													alignItems: 'center',
-													paddingVertical: 13,
-													paddingHorizontal: 30,
-												}}
-											>
-												<Text>{amount} Card</Text>
-												<Image
-													source={resources.marketplace.buyButtonDash}
-													style={{ width: 86, height: 2, marginLeft: 10 }}
-												/>
-												<View style={styles.priceContainer}>
-													<Image
-														source={resources.marketplace.coinUsd}
-														style={styles.coinIcon}
-													/>
-													<Text>USDC {amount * pack.unitPrice}</Text>
-												</View>
-											</ImageBackground>
-										</TouchableOpacity>
+							{/* <Text>{pack.sugarId}</Text> */}
+							{isLoading ? (
+								<ActivityIndicator size="large" />
+							) : (
+								<Fragment>
+									<View
+										style={[
+											styles.rowContainer,
+											{ width: '100%', alignItems: 'center' },
+										]}
+									>
+										<View style={styles.progressBarContainer}>
+											<View style={progressBarInner} />
+										</View>
+										<Text style={{ marginLeft: 20, color: '#ddd2af' }}>
+											{`${candyMachine?.itemsRemaining}/${pack.total}`}
+										</Text>
 									</View>
-								);
-							})}
+									{candyMachine &&
+									candyMachine.itemsRemaining > toBigNumber(0) ? (
+										[1].map((amount) => {
+											return (
+												<View
+													key={amount}
+													style={{ marginTop: 20, width: '100%' }}
+												>
+													<TouchableOpacity
+														disabled={!connected}
+														onPress={() => onPurchase?.(candyMachine, amount)}
+													>
+														<ImageBackground
+															source={resources.marketplace.buyButtonBackground}
+															style={styles.buttonBackground}
+														>
+															<Text>{amount} Card</Text>
+															<Image
+																source={resources.marketplace.buyButtonDash}
+																style={{ width: 86, height: 2, marginLeft: 10 }}
+															/>
+															<View style={styles.priceContainer}>
+																<Image
+																	source={resources.marketplace.coinUsd}
+																	style={styles.coinIcon}
+																/>
+																<Text>USDC {amount * pack.unitPrice}</Text>
+															</View>
+														</ImageBackground>
+													</TouchableOpacity>
+												</View>
+											);
+										})
+									) : (
+										<Text
+											responsiveSizes={[25]}
+											style={{ marginTop: 15, fontWeight: '600' }}
+										>
+											SOLD OUT
+										</Text>
+									)}
+								</Fragment>
+							)}
+
 							<View style={{ marginTop: 15, opacity: 0.5 }}>
-								<Text style={{ fontWeight: '300', fontSize: 12 }}>
-									<Hyperlink title="Connect Wallet" /> to buy
-								</Text>
+								{connected ? (
+									<Text style={{ fontWeight: '300', fontSize: 12 }}>
+										<Hyperlink
+											title="Disconnect Wallet"
+											onPress={onDisconnectPress}
+										/>
+									</Text>
+								) : (
+									<Text style={{ fontWeight: '300', fontSize: 12 }}>
+										<Hyperlink
+											title="Connect Wallet"
+											onPress={onConnectWalletPress}
+										/>{' '}
+										to buy
+									</Text>
+								)}
 							</View>
 						</View>
 					</View>
@@ -216,6 +235,12 @@ const styles = StyleSheet.create({
 		height: 10,
 		borderRadius: 10,
 		backgroundColor: '#4d4a44',
+	},
+	buttonBackground: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		paddingVertical: 13,
+		paddingHorizontal: 30,
 	},
 	packPrice: {
 		textAlign: 'center',
