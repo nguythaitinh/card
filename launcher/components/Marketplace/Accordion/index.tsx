@@ -22,6 +22,7 @@ interface Props {
 	children?: string | ReactNode;
 	titleStyle?: TextStyle;
 	chevronImage?: ReactNode;
+	defaultExpanded?: boolean;
 }
 
 export const Accordion: FC<Props> = ({
@@ -30,10 +31,11 @@ export const Accordion: FC<Props> = ({
 	children,
 	titleStyle,
 	chevronImage,
+	defaultExpanded = false,
 }) => {
-	const [isExpanded, setIsExpanded] = useState(false);
+	const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 	const titleIsString = typeof title === 'string';
-	const chevronAngle = useSharedValue(0);
+	const chevronAngle = useSharedValue(isExpanded ? 180 : 0);
 	const contentHeight = useSharedValue(0);
 	const [titleLayout, setTitleLayout] = useState<LayoutRectangle>(idleLayout);
 	const [contentLayout, setContentLayout] =
@@ -86,6 +88,9 @@ export const Accordion: FC<Props> = ({
 			<View
 				onLayout={({ nativeEvent }) => {
 					setContentLayout(nativeEvent.layout);
+					contentHeight.value = isExpanded
+						? contentHeight.value + nativeEvent.layout.height
+						: contentHeight.value;
 				}}
 			>
 				{children || <Text style={styles.contentText}>{content}</Text>}
