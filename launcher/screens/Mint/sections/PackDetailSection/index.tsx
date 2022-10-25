@@ -5,10 +5,10 @@ import {
 	ImageBackground,
 	Linking,
 	StyleSheet,
+	TouchableOpacity,
 	View,
 	ViewStyle,
 } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Hyperlink, modalActions, Text } from '@metacraft/ui';
 import { CandyMachineV2, toBigNumber } from '@metaplex-foundation/js';
 import { useWallet } from '@solana/wallet-adapter-react';
@@ -143,6 +143,7 @@ export const PackDetailSection: FC<Props> = ({
 															opacity: 0.5,
 															backgroundColor: '#000',
 														}}
+														pointerEvents="none"
 													/>
 												)}
 											</View>
@@ -176,7 +177,7 @@ export const PackDetailSection: FC<Props> = ({
 						</View>
 						<View style={{ width: 350 }}>
 							<Text responsiveSizes={[20]} style={styles.title}>
-								Rarity Rate
+								Rarity Rate (from low to high)
 							</Text>
 							<View style={styles.stripeSeparator} />
 							{Object.keys(pack.rarity).map((item) => (
@@ -209,6 +210,7 @@ export const PackDetailSection: FC<Props> = ({
 									<View style={[styles.stripeSeparator, { width: 350 }]} />
 								</Fragment>
 							}
+							defaultExpanded={true}
 						>
 							<Hyperlink
 								title="Check this Candy Machine information on Solscan"
