@@ -112,11 +112,13 @@ export const styles = StyleSheet.create({
 	},
 	whyImageContainer: {
 		flex: 1,
+		marginVertical: 20,
+		justifyContent: 'center',
 		alignItems: 'center',
 		minWidth: 490,
 	},
 	whyImage: {
-		marginTop: 120,
+		// marginTop: 120,
 		width: 600,
 		height: 608,
 	},
