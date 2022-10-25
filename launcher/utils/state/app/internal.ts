@@ -1,14 +1,14 @@
 import { proxy } from 'valtio';
-import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import { WalletAdapterNetwork as Network } from '@solana/wallet-adapter-base';
 
 interface AppState {
 	counter: number;
 	privacy: boolean;
-	network: WalletAdapterNetwork;
+	network: Network;
 }
 
 export const appState = proxy<AppState>({
 	counter: 0,
 	privacy: false,
-	network: __DEV__ ? WalletAdapterNetwork.Devnet : WalletAdapterNetwork.Mainnet,
+	network: gitBranch === 'dev' ? Network.Devnet : Network.Mainnet,
 });
