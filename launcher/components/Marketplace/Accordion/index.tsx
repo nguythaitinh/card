@@ -4,9 +4,9 @@ import {
 	LayoutRectangle,
 	StyleSheet,
 	TextStyle,
+	TouchableOpacity,
 	View,
 } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import Animated, {
 	useAnimatedStyle,
 	useSharedValue,
