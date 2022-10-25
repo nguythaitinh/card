@@ -6,9 +6,10 @@ import {
 	ScaledSize,
 	ScrollView,
 	StyleSheet,
+	TouchableOpacity,
 	View,
 } from 'react-native';
-import { Hyperlink, Text } from '@metacraft/ui';
+import { Hyperlink, modalActions, Text } from '@metacraft/ui';
 import { NftWithToken } from '@metaplex-foundation/js';
 import UnderRealmButton from 'launcher/components/Marketplace/Button';
 
@@ -35,6 +36,12 @@ export const Popup: FC<Props> = ({ dimensions, nft }) => {
 			<Image source={resources.marketplace.popupBorder} style={styles.left} />
 			<Image source={resources.marketplace.popupBorder} style={styles.right} />
 			<View style={[styles.contentContainer, { width }]}>
+				<TouchableOpacity
+					style={styles.closeButtonContainer}
+					onPress={() => modalActions.hide('Successful Buying')}
+				>
+					<Text style={styles.closeButton}>&times;</Text>
+				</TouchableOpacity>
 				<Text
 					responsiveSizes={[20]}
 					style={{
@@ -74,7 +81,7 @@ export const Popup: FC<Props> = ({ dimensions, nft }) => {
 				<View style={{ marginVertical: 30 }}>
 					<Text style={{ textAlign: 'center', fontStyle: 'italic' }}>
 						*Some Hero characters visual are not available yet and will be
-						revealed later
+						revealed later.
 					</Text>
 					{/* <UnderRealmButton
 						style={{
@@ -145,6 +152,21 @@ const styles = StyleSheet.create({
 	right: {
 		...borderVertical,
 		right: 0,
+	},
+	closeButtonContainer: {
+		position: 'absolute',
+		top: 20,
+		right: 20,
+		width: 30,
+		height: 30,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	closeButton: {
+		color: '#524242',
+		fontSize: 40,
+		fontWeight: '300',
+		lineHeight: 30,
 	},
 	contentContainer: {
 		padding: 30,
