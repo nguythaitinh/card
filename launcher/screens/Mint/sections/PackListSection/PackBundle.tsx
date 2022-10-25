@@ -1,6 +1,19 @@
-import React, { FC } from 'react';
-import { Image, StyleSheet, View, ViewStyle } from 'react-native';
+import React, { FC, useEffect, useRef, useState } from 'react';
+import {
+	ActivityIndicator,
+	Image,
+	StyleSheet,
+	View,
+	ViewStyle,
+} from 'react-native';
 import { Text } from '@metacraft/ui';
+import {
+	CandyMachineV2,
+	Metaplex,
+	walletAdapterIdentity,
+} from '@metaplex-foundation/js';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import { PublicKey } from '@solana/web3.js';
 import Card from 'components/Marketplace/Card';
 import { PackStats } from 'screens/Mint/shared';
 import resources from 'utils/resources';
@@ -11,40 +24,76 @@ interface Props {
 }
 
 export const PackBundle: FC<Props> = ({ item, onPress }) => {
-	const { title, total, remaining, unitPrice } = item;
-	const progressBarInner = {
-		position: 'absolute',
-		top: 0,
-		bottom: 0,
-		left: 0,
-		width: (remaining / total) * 100 + '%',
-		borderRadius: 10,
-		backgroundColor: '#dabe8c',
-	} as ViewStyle;
+	const { title, total, remaining, unitPrice, sugarId } = item;
+	const { publicKey, signMessage, signTransaction } = useWallet();
+	const { connection } = useConnection();
+	const mplRef = useRef<Metaplex>();
+	const sugarRef = useRef<CandyMachineV2>();
+	const [isLoading, setIsLoading] = useState(false);
+	const progressBarInner =
+		sugarRef.current &&
+		({
+			position: 'absolute',
+			top: 0,
+			bottom: 0,
+			left: 0,
+			width:
+				(sugarRef.current?.itemsRemaining.toNumber() /
+					sugarRef.current?.itemsAvailable.toNumber()) *
+					100 +
+				'%',
+			borderRadius: 10,
+			backgroundColor: '#dabe8c',
+		} as ViewStyle);
+
+	useEffect(() => {
+		const injectRefs = async () => {
+			setIsLoading(true);
+
+			const address = new PublicKey(sugarId);
+			const walletAdapter = walletAdapterIdentity({
+				publicKey,
+				signMessage,
+				signTransaction,
+			});
+			const metaplex = Metaplex.make(connection).use(walletAdapter);
+			const sugar = await metaplex.candyMachinesV2().findByAddress({ address });
+
+			setIsLoading(false);
+			mplRef.current = metaplex;
+			sugarRef.current = sugar;
+		};
+
+		injectRefs();
+	}, [sugarId, connection, publicKey, signMessage, signTransaction]);
 
 	return (
 		<View style={styles.container}>
 			<Card animationFlipDisable onPress={() => onPress?.(item)} />
 			<View style={styles.contentContainer}>
-				<View style={styles.packInfo}>
-					<Text style={styles.packTitle} responsiveSizes={[16]}>
-						{title}
-						{''} Pack
-					</Text>
-					<Text style={styles.packQuant}>
-						{remaining}/{total}
-					</Text>
-					<View style={styles.progressBarContainer}>
-						<View style={progressBarInner} />
+				{isLoading ? (
+					<ActivityIndicator />
+				) : (
+					<View style={styles.packInfo}>
+						<Text style={styles.packTitle} responsiveSizes={[16]}>
+							{title}
+							{''} Pack
+						</Text>
+						<Text style={styles.packQuant}>
+							{`${sugarRef.current?.itemsRemaining}/${sugarRef.current?.itemsAvailable}`}
+						</Text>
+						<View style={styles.progressBarContainer}>
+							<View style={progressBarInner} />
+						</View>
+						<View style={styles.priceContainer}>
+							<Image
+								source={resources.marketplace.coinUsd}
+								style={styles.coinIcon}
+							/>
+							<Text>USDC {unitPrice}</Text>
+						</View>
 					</View>
-					<View style={styles.priceContainer}>
-						<Image
-							source={resources.marketplace.coinUsd}
-							style={styles.coinIcon}
-						/>
-						<Text>USDC {unitPrice}</Text>
-					</View>
-				</View>
+				)}
 			</View>
 		</View>
 	);
