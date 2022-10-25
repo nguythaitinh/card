@@ -5,10 +5,10 @@ import {
 	ImageBackground,
 	Linking,
 	StyleSheet,
+	TouchableOpacity,
 	View,
 	ViewStyle,
 } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Hyperlink, modalActions, Text } from '@metacraft/ui';
 import { CandyMachineV2, toBigNumber } from '@metaplex-foundation/js';
 import { useWallet } from '@solana/wallet-adapter-react';
@@ -143,6 +143,7 @@ export const PackDetailSection: FC<Props> = ({
 															opacity: 0.5,
 															backgroundColor: '#000',
 														}}
+														pointerEvents="none"
 													/>
 												)}
 											</View>
