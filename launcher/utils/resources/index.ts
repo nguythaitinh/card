@@ -1,4 +1,12 @@
 export default {
+	navigation: {
+		bg: require('../../../assets/marketplace/navigation-bg.png'),
+		logo: require('../../../assets/marketplace/flag.png'),
+	},
+	mint: {
+		keyVisual: require('../../../assets/mint/key-visual.png'),
+		cards: require('../../../assets/mint/cards.png'),
+	},
 	marketplace: {
 		headingBackground: require('../../../assets/marketplace/heading-background.png'),
 		mainBackground: require('../../../assets/marketplace/main-background.png'),
@@ -16,6 +24,7 @@ export default {
 		},
 		card: {
 			back: require('../../../assets/marketplace/under-realm-card-back.png'),
+			front: require('../../../assets/marketplace/under-realm-card-front.png'),
 		},
 		mintBanner: require('../../../assets/marketplace/mint-banner.png'),
 		coinUsd: require('../../../assets/marketplace/coin-usd.png'),
@@ -35,5 +44,16 @@ export default {
 			patternBottomLeft: require('../../../assets/marketplace/mint-bottom-left-pattern.png'),
 			patternBottomRight: require('../../../assets/marketplace/mint-bottom-right-pattern.png'),
 		},
+		faq: {
+			top: require('../../../assets/marketplace/faq-top.png'),
+			middle: require('../../../assets/marketplace/faq-middle.png'),
+			bottom: require('../../../assets/marketplace/faq-bottom.png'),
+		},
+		chevronDown: require('../../../assets/marketplace/chevron-down.png'),
+		titleSeparator: require('../../../assets/marketplace/title-separator.png'),
+		buyButtonBackground: require('../../../assets/marketplace/buy-button-bg.png'),
+		buyButtonDash: require('../../../assets/marketplace/buy-button-inner-dash.png'),
+		popupBorder: require('../../../assets/marketplace/popup-border.png'),
+		popupBackground: require('../../../assets/marketplace/popup-bg.png'),
 	},
 };

@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import MarketplaceScreen from 'screens/Marketplace';
+import DetailCardScreen from 'screens/Marketplace/DetailCard';
 
-import MarketplaceScreen from '../../../screens/Marketplace';
-import DetailCardScreen from '../../../screens/Marketplace/DetailCard';
 import { MarketplaceParamList, screenOptions } from '../shared';
 
 const Stack = createStackNavigator<MarketplaceParamList>();

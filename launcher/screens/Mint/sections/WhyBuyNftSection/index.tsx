@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { Image, Linking, ScaledSize, TextStyle, View } from 'react-native';
-import { Text } from '@metacraft/ui';
+import { Image, Linking, ScaledSize, View } from 'react-native';
+import { Markdown, Text } from '@metacraft/ui';
 import UnderRealmButton from 'launcher/components/Marketplace/Button';
 import resources from 'launcher/utils/resources';
 import { iStyles } from 'launcher/utils/styles';
@@ -12,13 +12,6 @@ interface Props {
 }
 
 export const WhyBuyNftSection: FC<Props> = ({ dimensions }) => {
-	const titleStyle = {
-		flexBasis: 600,
-		paddingLeft: dimensions.width < 1120 ? 0 : 120,
-		paddingRight: 50,
-		paddingTop: 30,
-	} as TextStyle;
-
 	return (
 		<View style={[iStyles.contentContainer, styles.container]}>
 			<Image
@@ -78,57 +71,55 @@ export const WhyBuyNftSection: FC<Props> = ({ dimensions }) => {
 				style={styles.patternBottomRight}
 			/>
 			<View style={styles.contentContainer}>
-				<Text
-					responsiveSizes={[35, 35, 30, 25]}
-					style={[styles.title, titleStyle]}
-				>
-					Why buy Genesis NFT Card now?
-				</Text>
-				<View
-					style={{
-						flex: 1,
-						flexBasis: 400,
-						paddingRight: dimensions.width < 1120 ? 0 : 100,
-						maxWidth: 600,
-					}}
-				>
-					{whyBuyNft.map((item, index) => (
-						<View key={index} style={{ flexDirection: 'row' }}>
-							<Image
-								source={resources.marketplace.mintWhyBuyNft.bloodDrop}
-								style={{ width: 24, height: 35, marginRight: 10 }}
-							/>
-							<View style={{ flex: 1, marginBottom: 40 }}>
-								<Text
-									responsiveSizes={[20]}
-									style={{
-										paddingVertical: 5,
-										color: '#beafa6',
-										marginBottom: 10,
-									}}
-								>
-									{item.title}
-								</Text>
-								<Text>{item.detail}</Text>
+				<View style={styles.whyImageContainer}>
+					<Image
+						style={styles.whyImage}
+						source={resources.mint.cards}
+						resizeMode="contain"
+					/>
+				</View>
+				<View style={styles.infoContainer}>
+					<View style={styles.infoInner}>
+						<Text responsiveSizes={[35, 35, 30, 25]} style={styles.title}>
+							Why buy Genesis NFT Card now?
+						</Text>
+						{whyBuyNft.map((item, index) => (
+							<View key={index} style={{ flexDirection: 'row' }}>
+								<Image
+									source={resources.marketplace.mintWhyBuyNft.bloodDrop}
+									style={{ width: 24, height: 35, marginRight: 10 }}
+								/>
+								<View style={{ flex: 1, marginBottom: 40 }}>
+									<Text
+										responsiveSizes={[20]}
+										style={{
+											paddingVertical: 5,
+											color: '#beafa6',
+											marginBottom: 10,
+										}}
+									>
+										{item.title}
+									</Text>
+									<Markdown content={item.detail} />
+								</View>
 							</View>
-						</View>
-					))}
-					<UnderRealmButton
-						style={{
-							width: 250,
-							marginLeft: 30,
-						}}
-						onPress={() =>
-							Linking.openURL(
-								'https://stormgate.substack.com/?utm_source=substack&utm_medium=web&utm_campaign=reader2&utm_source=%2Fsearch%2Fstormgate&utm_medium=reader2',
-							)
-						}
-					>
-						<View style={{ alignItems: 'center' }}>
-							<Text responsiveSizes={[13]}>Read details</Text>
-							<Text responsiveSizes={[13]}>on Substack</Text>
-						</View>
-					</UnderRealmButton>
+						))}
+						<UnderRealmButton
+							style={{
+								width: 220,
+								marginLeft: 30,
+							}}
+							onPress={() =>
+								Linking.openURL(
+									'https://stormgate.substack.com/?utm_source=substack&utm_medium=web&utm_campaign=reader2&utm_source=%2Fsearch%2Fstormgate&utm_medium=reader2',
+								)
+							}
+						>
+							<View style={{ alignItems: 'center' }}>
+								<Text>Read details</Text>
+							</View>
+						</UnderRealmButton>
+					</View>
 				</View>
 			</View>
 		</View>

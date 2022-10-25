@@ -1,44 +1,14 @@
-import Auth, { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
+import { Auth, CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import { ICredentials } from '@aws-amplify/core';
 
-import config from './awsConfig';
-import {
-	AuthError,
-	ChallengedUser,
-	platformOptions,
-	redirectOrigin,
-	simpleId,
-} from './internal';
-
-const {
-	region,
-	userPoolId,
-	userPoolWebClientId,
-	cognitoAuthDomain,
-	cognitoAuthScopes,
-} = config;
-
-Auth.configure({
-	region,
-	userPoolId,
-	userPoolWebClientId,
-	authenticationFlowType: 'CUSTOM_AUTH',
-	oauth: {
-		...platformOptions,
-		domain: cognitoAuthDomain,
-		scope: cognitoAuthScopes,
-		redirectSignIn: `${redirectOrigin}/dashboard`,
-		redirectSignOut: `${redirectOrigin}/authentication`,
-		responseType: 'code',
-	},
-});
+import { AuthError, ChallengedUser, simpleId } from './internal';
 
 export const extractJwt = async (): Promise<string | null> => {
 	try {
 		const session = await Auth.currentSession();
 
 		if (session?.isValid()) {
-			const token = await session.getIdToken();
+			const token = session.getIdToken();
 			return token.getJwtToken();
 		}
 	} catch (error) {
@@ -74,3 +44,5 @@ export const amplifySignIn = async (
 		}
 	}
 };
+
+export * from './internal';

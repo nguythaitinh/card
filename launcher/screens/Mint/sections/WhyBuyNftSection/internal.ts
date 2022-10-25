@@ -103,11 +103,29 @@ export const styles = StyleSheet.create({
 	contentContainer: {
 		flexDirection: 'row',
 		flexWrap: 'wrap',
-		justifyContent: 'center',
+		overflow: 'hidden',
 	},
 	title: {
 		fontWeight: '500',
 		marginBottom: 20,
+		marginLeft: 34,
+	},
+	whyImageContainer: {
+		flex: 1,
+		alignItems: 'center',
+		minWidth: 490,
+	},
+	whyImage: {
+		marginTop: 120,
+		width: 600,
+		height: 608,
+	},
+	infoContainer: {
+		flex: 1,
+		minWidth: 490,
+	},
+	infoInner: {
+		maxWidth: 500,
 	},
 });
 
@@ -118,23 +136,16 @@ interface WhyBuyNft {
 
 export const whyBuyNft: WhyBuyNft[] = [
 	{
-		title: 'Rare & Unique',
-		detail:
-			'There is only 2,390 NFTs created from Developers, no more NFT founded from us, except for special occasions, eg.Tournament,...',
+		title: 'Limited & Unique',
+		detail: `There will be limited Genesis cards to be issued in the future. This is the very first and one of the largest Genesis card minting of **2,373 Genesis NFTs** where you can get unique chance to purchase and own those NFTs.`,
 	},
 	{
-		title: 'Rare & Unique',
-		detail:
-			'There is only 2,390 NFTs created from Developers, no more NFT founded from us, except for special occasions, eg.Tournament,...',
+		title: 'Higher rarity rate, powerful Craft ability',
+		detail: `Not only limited and unique, Genesis minting offer **higher rarity chance** compare to Craft (the only way to generate new NFT Cards).
+While using for Craft, Genesis have higher chance create powerful children.`,
 	},
 	{
-		title: 'Rare & Unique',
-		detail:
-			'There is only 2,390 NFTs created from Developers, no more NFT founded from us, except for special occasions, eg.Tournament,...',
-	},
-	{
-		title: 'Rare & Unique',
-		detail:
-			'There is only 2,390 NFTs created from Developers, no more NFT founded from us, except for special occasions, eg.Tournament,...',
+		title: 'Badge and Historical record',
+		detail: `This is the very first NFT minting event for Under Realm. By purchasing and owning one of those NFTs, your support is valuable and remarkable. Bagdes will be available on your profile as a “Early Genesis owner”.`,
 	},
 ];

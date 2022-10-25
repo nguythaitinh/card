@@ -1,31 +1,13 @@
 import React, { FC } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Text } from '@metacraft/ui';
-import Buddies from 'components/Buddies';
-import CompactLayout from 'components/layouts/Compact';
+import ScrollLayout from 'components/layouts/Scroll';
+import { iStyles } from 'utils/styles';
 
-export const LauncherHome: FC = () => {
+export const HomeScreen: FC = () => {
 	return (
-		<CompactLayout contentContainerStyle={styles.contentContainer}>
-			<View style={styles.innerContainer}>
-				<Text>Home</Text>
-			</View>
-			<Buddies width={280} />
-		</CompactLayout>
+		<ScrollLayout
+			contentContainerStyle={iStyles.contentContainer}
+		></ScrollLayout>
 	);
 };
 
-export default LauncherHome;
-
-const styles = StyleSheet.create({
-	contentContainer: {
-		width: '100%',
-		maxWidth: 1600,
-		marginHorizontal: 'auto',
-		flexDirection: 'row',
-	},
-	innerContainer: {
-		flex: 1,
-		paddingTop: 60,
-	},
-});
+export default HomeScreen;

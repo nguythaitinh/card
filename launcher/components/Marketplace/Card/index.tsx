@@ -89,7 +89,8 @@ const Card: FC<Props> = ({
 
 	const useFlipBackStyle = (isUp: SharedValue<boolean>) => {
 		return useAnimatedStyle(() => {
-			if (animationFlipDisable) return {} as ViewStyle;
+			if (animationFlipDisable)
+				return { opacity: isUp.value ? 1 : 0 } as ViewStyle;
 			const rotateY = isUp.value
 				? interpolate(xFlipOffset.value, [0, width], [0, 180])
 				: interpolate(xFlipOffset.value, [width, 0], [180, 0]);
@@ -101,6 +102,7 @@ const Card: FC<Props> = ({
 			);
 
 			return {
+				backfaceVisibility: 'hidden',
 				transform: [{ rotateY: `${rotateY}deg` }],
 				opacity,
 			};
@@ -109,10 +111,11 @@ const Card: FC<Props> = ({
 
 	const useFlipFrontStyle = (isUp: SharedValue<boolean>) => {
 		return useAnimatedStyle(() => {
-			if (animationFlipDisable) return { opacity: isUp ? 0 : 1 } as ViewStyle;
+			if (animationFlipDisable)
+				return { opacity: isUp.value ? 0 : 1 } as ViewStyle;
 			const rotateY = isUp.value
-				? interpolate(xFlipOffset.value, [width, 0], [180, 0])
-				: interpolate(xFlipOffset.value, [0, width], [0, 180]);
+				? interpolate(xFlipOffset.value, [width, 0], [360, 180])
+				: interpolate(xFlipOffset.value, [0, width], [180, 360]);
 
 			const opacity = interpolate(
 				xFlipOffset.value,
@@ -121,6 +124,7 @@ const Card: FC<Props> = ({
 			);
 
 			return {
+				backfaceVisibility: 'hidden',
 				transform: [{ rotateY: `${rotateY}deg` }],
 				opacity,
 			};
@@ -136,10 +140,12 @@ const Card: FC<Props> = ({
 		>
 			<AnimatedTouchable
 				onPress={() => {
-					isUp.value = !isUp.value;
-					xFlipOffset.value = withTiming(isUp.value ? 0 : width, {
-						duration: 1000,
-					});
+					if (!animationFlipDisable) {
+						isUp.value = !isUp.value;
+						xFlipOffset.value = withTiming(isUp.value ? 0 : width, {
+							duration: 1000,
+						});
+					}
 					onPress?.();
 				}}
 			>
@@ -150,15 +156,16 @@ const Card: FC<Props> = ({
 					style={[
 						cardSize,
 						{
-							backgroundColor: '#000',
 							position: 'absolute',
 							top: 0,
 						},
 						useFlipFrontStyle(isUp),
 					]}
 				>
-					{imageSource && (
+					{imageSource ? (
 						<Image style={cardSize} source={{ uri: imageSource }} />
+					) : (
+						<Image style={cardSize} source={resources.marketplace.card.front} />
 					)}
 				</AnimatedView>
 			</AnimatedTouchable>

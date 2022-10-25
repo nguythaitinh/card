@@ -6,12 +6,11 @@ import Animated, {
 	useSharedValue,
 } from 'react-native-reanimated';
 import { AppState, appState } from '@metacraft/ui';
-
-import CompactLayout from '../../components/layouts/Compact';
-import { idleLayout } from '../../utils/helper';
-import { useSnapshot } from '../../utils/hook';
-import resources from '../../utils/resources';
-import { iStyles } from '../../utils/styles';
+import CompactLayout from 'components/layouts/Compact';
+import { idleLayout } from 'utils/helper';
+import { useSnapshot } from 'utils/hook';
+import resources from 'utils/resources';
+import { iStyles } from 'utils/styles';
 
 import BoxSellingSection from './sections/BoxSelling';
 import HeadingSection from './sections/Heading';

@@ -34,7 +34,7 @@ export const platformOptions = Platform.select({
 
 export const redirectOrigin = Platform.select({
 	default: 'metacraft:/',
-	web: location?.origin,
+	web: __DEV__ ? 'http://localhost:3000' : 'https://stormgate.io',
 });
 
 export const simpleId = (length: number): string => {
