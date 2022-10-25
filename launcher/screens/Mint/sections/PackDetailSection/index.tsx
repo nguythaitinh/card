@@ -176,7 +176,7 @@ export const PackDetailSection: FC<Props> = ({
 						</View>
 						<View style={{ width: 350 }}>
 							<Text responsiveSizes={[20]} style={styles.title}>
-								Rarity Rate
+								Rarity Rate (from low to high)
 							</Text>
 							<View style={styles.stripeSeparator} />
 							{Object.keys(pack.rarity).map((item) => (
@@ -209,6 +209,7 @@ export const PackDetailSection: FC<Props> = ({
 									<View style={[styles.stripeSeparator, { width: 350 }]} />
 								</Fragment>
 							}
+							defaultExpanded={true}
 						>
 							<Hyperlink
 								title="Check this Candy Machine information on Solscan"
