@@ -12,6 +12,8 @@ export interface PackStats {
 	rarity: RarityRate;
 }
 
+const isDev = gitBranch === 'dev';
+
 export const packList: PackStats[] = [
 	{
 		title: 'Bronze',
@@ -19,7 +21,9 @@ export const packList: PackStats[] = [
 		total: 951,
 		remaining: 951,
 		unitPrice: 15,
-		sugarId: 'GcyRX3s882L79irZAG7QuSCf7bQEptj16gLjC62mkyrx',
+		sugarId: isDev
+			? 'GcyRX3s882L79irZAG7QuSCf7bQEptj16gLjC62mkyrx'
+			: 'GDP3MV8h8ofSGsdQZLe4N4uyZ8FsBV9j3BgLYK1t5JS5',
 		rarity: {
 			Rare: 55.2,
 			Epic: 25.87,
@@ -33,8 +37,10 @@ export const packList: PackStats[] = [
 		route: 'silver',
 		total: 694,
 		remaining: 694,
-		unitPrice: 25,
-		sugarId: 'GcyRX3s882L79irZAG7QuSCf7bQEptj16gLjC62mkyrx',
+		unitPrice: 30,
+		sugarId: isDev
+			? 'GcyRX3s882L79irZAG7QuSCf7bQEptj16gLjC62mkyrx'
+			: '9wFjawBHaiYwEiqryMkeEWABprFs1ZsX6ssy1ebxXCzY',
 		rarity: {
 			Rare: 32.42,
 			Epic: 43.66,
@@ -48,8 +54,10 @@ export const packList: PackStats[] = [
 		route: 'gold',
 		total: 488,
 		remaining: 488,
-		unitPrice: 40,
-		sugarId: 'GcyRX3s882L79irZAG7QuSCf7bQEptj16gLjC62mkyrx',
+		unitPrice: 45,
+		sugarId: isDev
+			? 'GcyRX3s882L79irZAG7QuSCf7bQEptj16gLjC62mkyrx'
+			: 'CRJCZYfZ7yDkCqrQdNxv1DDoZFJLjQRdpE6CuRN5nSbc',
 		rarity: {
 			Rare: 15.37,
 			Epic: 17.21,
@@ -63,8 +71,10 @@ export const packList: PackStats[] = [
 		route: 'platinum',
 		total: 210,
 		remaining: 210,
-		unitPrice: 100,
-		sugarId: 'GcyRX3s882L79irZAG7QuSCf7bQEptj16gLjC62mkyrx',
+		unitPrice: 120,
+		sugarId: isDev
+			? 'GcyRX3s882L79irZAG7QuSCf7bQEptj16gLjC62mkyrx'
+			: 'EN9FRH9Hu36mZybz6gNbhkXPc8RwWWRyuVDUTxZTjPkb',
 		rarity: {
 			Rare: 7.14,
 			Epic: 18.57,
@@ -78,8 +88,10 @@ export const packList: PackStats[] = [
 		route: 'titan',
 		total: 30,
 		remaining: 30,
-		unitPrice: 250,
-		sugarId: 'GcyRX3s882L79irZAG7QuSCf7bQEptj16gLjC62mkyrx',
+		unitPrice: 300,
+		sugarId: isDev
+			? 'GcyRX3s882L79irZAG7QuSCf7bQEptj16gLjC62mkyrx'
+			: 'GMS4hJjLxqxg2WPZM8i4tYyHwBpH6CH2hNJdD8YkUiPe',
 		rarity: {
 			Rare: 0,
 			Epic: 0,

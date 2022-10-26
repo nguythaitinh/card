@@ -41,7 +41,7 @@ export const homeNav: NavigationConfig = {
 };
 
 export const mintNav: NavigationConfig = {
-	title: 'Genesis Mint',
+	title: 'Mint',
 	route: 'Mint',
 	params: { screen: 'Dashboard' },
 };
