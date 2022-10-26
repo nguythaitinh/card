@@ -1,3 +1,5 @@
+import config from 'utils/config';
+
 export type Rarity = 'Rare' | 'Epic' | 'Mythical' | 'Legendary' | 'Immortal';
 
 type RarityRate = Record<Rarity, number>;
@@ -12,7 +14,7 @@ export interface PackStats {
 	rarity: RarityRate;
 }
 
-const isDev = gitBranch === 'dev';
+const isDev = config.defaultNetwork === 'devnet';
 
 export const packList: PackStats[] = [
 	{
@@ -103,6 +105,7 @@ export const packList: PackStats[] = [
 ];
 
 type PackMap = Record<string, PackStats>;
+
 export const packMap: PackMap = packList.reduce((a, i) => {
 	a[i.route] = i;
 	return a;
