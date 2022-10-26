@@ -11,17 +11,15 @@ import {
 } from 'react-native';
 import { Hyperlink, modalActions, Text } from '@metacraft/ui';
 import { NftWithToken } from '@metaplex-foundation/js';
-import UnderRealmButton from 'launcher/components/Marketplace/Button';
-
-import Card from '../../components/Marketplace/Card';
-import resources from '../../utils/resources';
+import Card from 'components/Marketplace/Card';
+import resources from 'utils/resources';
 
 interface Props {
 	dimensions: ScaledSize;
 	nft: NftWithToken;
 }
 
-export const Popup: FC<Props> = ({ dimensions, nft }) => {
+export const PurchaseSuccessModal: FC<Props> = ({ dimensions, nft }) => {
 	const width = Math.min(dimensions.width - 40, 1000);
 	const imageSource = nft.uri.replace('.json', '.png');
 
@@ -83,31 +81,13 @@ export const Popup: FC<Props> = ({ dimensions, nft }) => {
 						*Some Hero characters visual are not available yet and will be
 						revealed later.
 					</Text>
-					{/* <UnderRealmButton
-						style={{
-							marginHorizontal: 'auto',
-							marginTop: 20,
-						}}
-					>
-						<Text
-							style={{
-								textAlign: 'center',
-								paddingVertical: 5,
-								paddingHorizontal: 60,
-								fontWeight: '500',
-							}}
-							responsiveSizes={[16]}
-						>
-							View in my profile
-						</Text>
-					</UnderRealmButton> */}
 				</View>
 			</View>
 		</View>
 	);
 };
 
-export default Popup;
+export default PurchaseSuccessModal;
 
 const borderVertical = {
 	position: 'absolute',

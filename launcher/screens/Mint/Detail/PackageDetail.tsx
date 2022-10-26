@@ -10,44 +10,33 @@ import {
 	ViewStyle,
 } from 'react-native';
 import { Hyperlink, modalActions, Text } from '@metacraft/ui';
-import { CandyMachineV2, toBigNumber } from '@metaplex-foundation/js';
 import { useWallet } from '@solana/wallet-adapter-react';
 import Accordion from 'components/Marketplace/Accordion';
 import Card from 'components/Marketplace/Card';
 import SignInOptions from 'components/modals/SignInOptions';
 import resources from 'launcher/utils/resources';
 import { PackStats, Rarity } from 'screens/Mint/shared';
+import { SugarEffect } from 'utils/hook';
 import { iStyles } from 'utils/styles';
 
 interface Props {
-	isLoading?: boolean;
 	pack: PackStats;
-	candyMachine?: CandyMachineV2;
-	onPurchase?: (candyMachine: CandyMachineV2, volume: number) => void;
+	sugar: SugarEffect;
+	onPurchase?: (volume: number) => void;
 }
 
-export const PackDetailSection: FC<Props> = ({
-	isLoading,
-	pack,
-	candyMachine,
-	onPurchase,
-}) => {
+export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
 	const { connected, disconnect } = useWallet();
-	const progressBarInner =
-		candyMachine &&
-		({
-			position: 'absolute',
-			top: 0,
-			bottom: 0,
-			left: 0,
-			width:
-				(candyMachine?.itemsRemaining.toNumber() /
-					candyMachine?.itemsAvailable.toNumber()) *
-					100 +
-				'%',
-			borderRadius: 10,
-			backgroundColor: '#dabe8c',
-		} as ViewStyle);
+	const { itemsRemaining, itemsAvailable } = sugar;
+	const progressBarInner = {
+		position: 'absolute',
+		top: 0,
+		bottom: 0,
+		left: 0,
+		width: (itemsRemaining / itemsAvailable) * 100 + '%',
+		borderRadius: 10,
+		backgroundColor: '#dabe8c',
+	} as ViewStyle;
 
 	const onConnectWalletPress = (): void => {
 		modalActions.show({
@@ -85,7 +74,7 @@ export const PackDetailSection: FC<Props> = ({
 							Number of Card/Pack: 1 Card
 						</Text>
 						{/* <Text>{pack.sugarId}</Text> */}
-						{isLoading ? (
+						{sugar.isLoading ? (
 							<ActivityIndicator size="large" />
 						) : (
 							<Fragment>
@@ -99,11 +88,10 @@ export const PackDetailSection: FC<Props> = ({
 										<View style={progressBarInner} />
 									</View>
 									<Text style={{ marginLeft: 20, color: '#ddd2af' }}>
-										{`${candyMachine?.itemsRemaining}/${candyMachine?.itemsAvailable}`}
+										{`${itemsRemaining}/${itemsAvailable}`}
 									</Text>
 								</View>
-								{candyMachine &&
-								candyMachine.itemsRemaining > toBigNumber(0) ? (
+								{itemsRemaining > 0 ? (
 									[1].map((amount) => {
 										return (
 											<View
@@ -112,7 +100,7 @@ export const PackDetailSection: FC<Props> = ({
 											>
 												<TouchableOpacity
 													disabled={!connected}
-													onPress={() => onPurchase?.(candyMachine, amount)}
+													onPress={() => onPurchase?.(amount)}
 												>
 													<ImageBackground
 														source={resources.marketplace.buyButtonBackground}
@@ -213,9 +201,11 @@ export const PackDetailSection: FC<Props> = ({
 							defaultExpanded={true}
 						>
 							<Hyperlink
-								title="Check this Candy Machine information on Solscan"
+								title="Explore this pack"
 								onPress={() =>
-									Linking.openURL(`https://solscan.io/account/${pack.sugarId}`)
+									Linking.openURL(
+										`https://www.solaneyes.com/address/${pack.sugarId}`,
+									)
 								}
 							/>
 						</Accordion>

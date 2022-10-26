@@ -1,0 +1,120 @@
+import {
+	MutableRefObject,
+	useCallback,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
+import {
+	CandyMachineV2,
+	Metaplex,
+	MintCandyMachineV2Output,
+	walletAdapterIdentity,
+} from '@metaplex-foundation/js';
+import { getAssociatedTokenAddress as getAta } from '@solana/spl-token';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import { PublicKey } from '@solana/web3.js';
+
+export interface SugarEffect {
+	isLoading: boolean;
+	isActive: boolean;
+	itemsRemaining: number;
+	itemsAvailable: number;
+	isWhitelistUser: boolean;
+	isPresale: boolean;
+	isValidBalance: boolean;
+	discountPrice?: number;
+	mintNft: () => Promise<MintCandyMachineV2Output>;
+	candyRef: MutableRefObject<CandyMachineV2 | undefined>;
+}
+
+export const useWalletSugar = (sugarId: string): SugarEffect => {
+	const mplRef = useRef<Metaplex>();
+	const candyRef = useRef<CandyMachineV2>();
+	const { publicKey, signMessage, signTransaction } = useWallet();
+	const { connection } = useConnection();
+	const [isLoading, setIsLoading] = useState(false);
+	const [isActive, setIsActive] = useState(false);
+	const [itemsRemaining, setItemsRemaining] = useState<number>(0);
+	const [itemsAvailable, setItemsAvailable] = useState<number>(0);
+	const [isWhitelistUser, setIsWhitelistUser] = useState(false);
+	const [isPresale, setIsPresale] = useState(false);
+	const [isValidBalance, setIsValidBalance] = useState(false);
+	const [discountPrice, setDiscountPrice] = useState<number>();
+
+	const refreshSugar = useCallback(async () => {
+		setIsLoading(true);
+
+		const address = new PublicKey(sugarId);
+		const adapterIdentity = walletAdapterIdentity({
+			publicKey,
+			signMessage,
+			signTransaction,
+		});
+		const mpl = Metaplex.make(connection).use(adapterIdentity);
+		const sugar = await mpl.candyMachinesV2().findByAddress({ address });
+		const goLiveTime = sugar.goLiveDate?.toNumber?.() || 0;
+		const currentTime = new Date().getTime() / 1000;
+		const whitelistSettings = sugar.whitelistMintSettings;
+		const presaleEnabled = !!whitelistSettings?.presale;
+
+		mplRef.current = mpl;
+		candyRef.current = sugar;
+
+		setIsActive(goLiveTime < currentTime);
+		setIsPresale(presaleEnabled && goLiveTime > currentTime);
+		setDiscountPrice(sugar.whitelistMintSettings?.discountPrice as never);
+		setItemsRemaining(sugar.itemsRemaining.toNumber());
+		setItemsAvailable(sugar.itemsAvailable.toNumber());
+
+		if (whitelistSettings?.mint && publicKey) {
+			try {
+				const address = await getAta(whitelistSettings.mint, publicKey);
+				const balance = await connection.getTokenAccountBalance(address);
+				setIsWhitelistUser(parseInt(balance.value.amount) > 0);
+			} catch (e) {
+				console.log('Could not fetch Whitelist token balance');
+			}
+		}
+
+		if (sugar.tokenMintAddress && publicKey) {
+			try {
+				const address = await getAta(sugar.tokenMintAddress, publicKey);
+				const balance = await connection.getTokenAccountBalance(address);
+				setIsValidBalance(parseInt(balance.value.amount) > 0);
+			} catch (e) {
+				console.log('Could not fetch Mint token balance');
+			}
+		}
+
+		setIsLoading(false);
+	}, [sugarId, connection, publicKey, signTransaction]);
+
+	const mintNft = useCallback((): Promise<MintCandyMachineV2Output> => {
+		if (mplRef.current && candyRef.current && publicKey) {
+			return mplRef.current?.candyMachinesV2().mint({
+				candyMachine: candyRef.current,
+				newOwner: publicKey,
+			});
+		} else {
+			return Promise.resolve({} as never);
+		}
+	}, [publicKey]);
+
+	useEffect(() => {
+		refreshSugar();
+	}, [refreshSugar]);
+
+	return {
+		isLoading,
+		isActive,
+		itemsRemaining,
+		itemsAvailable,
+		isWhitelistUser,
+		isPresale,
+		isValidBalance,
+		discountPrice,
+		mintNft,
+		candyRef,
+	};
+};
