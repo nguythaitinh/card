@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import { Image, TextInput, TouchableOpacity, View } from 'react-native';
 import { Text } from '@metacraft/ui';
-import { useNavigation, useRoute } from '@react-navigation/native';
-
-import UnderRealmButton from '../../../components/Marketplace/Button';
-import Card from '../../../components/Marketplace/Card';
+import { useNavigation } from '@react-navigation/native';
+import UnderRealmButton from 'components/Marketplace/Button';
+import Card from 'components/Marketplace/Card';
 
 import { styles } from './internal';
 
@@ -17,9 +16,6 @@ export const DetailCard: FC = () => {
 			navigation.navigate('Dashboard' as never);
 		}
 	};
-
-	const route = useRoute();
-	const { id } = route.params as never;
 
 	return (
 		<View style={styles.overlay}>
