@@ -15,6 +15,7 @@ import {
 import { getAssociatedTokenAddress as getAta } from '@solana/spl-token';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
+import { parseAmount } from 'utils/helper';
 
 export interface SugarEffect {
 	isLoading: boolean;
@@ -61,6 +62,7 @@ export const useWalletSugar = (sugarId: string): SugarEffect => {
 		const whitelistSettings = sugar.whitelistMintSettings;
 		const presaleEnabled = !!whitelistSettings?.presale;
 
+		let isWhitelistUser = false;
 		mplRef.current = mpl;
 		candyRef.current = sugar;
 
@@ -75,7 +77,9 @@ export const useWalletSugar = (sugarId: string): SugarEffect => {
 			try {
 				const address = await getAta(whitelistSettings.mint, publicKey);
 				const balance = await connection.getTokenAccountBalance(address);
-				setIsWhitelistUser(parseInt(balance.value.amount) > 0);
+
+				isWhitelistUser = parseInt(balance.value.amount) > 0;
+				setIsWhitelistUser(isWhitelistUser);
 			} catch (e) {
 				console.log('Could not fetch Whitelist token balance');
 			}
@@ -85,7 +89,12 @@ export const useWalletSugar = (sugarId: string): SugarEffect => {
 			try {
 				const address = await getAta(sugar.tokenMintAddress, publicKey);
 				const balance = await connection.getTokenAccountBalance(address);
-				setIsValidBalance(parseInt(balance.value.amount) > 0);
+				const purchaseAmount = isWhitelistUser
+					? sugar.whitelistMintSettings?.discountPrice
+					: sugar.price;
+				const purchasePrice = parseAmount(purchaseAmount as never, 6);
+
+				setIsValidBalance(parseInt(balance.value.amount) > purchasePrice);
 			} catch (e) {
 				console.log('Could not fetch Mint token balance');
 			}

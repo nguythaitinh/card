@@ -31,13 +31,15 @@ export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
 		isActive,
 		isPresale,
 		isWhitelistUser,
+		isValidBalance,
 		itemsRemaining,
 		itemsAvailable,
 		price,
 		discountPrice,
 	} = sugar;
 	const isEarlyPurchase = isPresale && isWhitelistUser;
-	const allowPurchase = connected && (isActive || isEarlyPurchase);
+	const isPurchasable = isActive || isEarlyPurchase;
+	const allowPurchase = connected && isValidBalance && isPurchasable;
 	const officialPrice = isWhitelistUser ? discountPrice : price;
 	const purchasePrefix = isWhitelistUser ? 'Whitelist mint' : 'Mint';
 	const progressBarInner = {
