@@ -39,7 +39,7 @@ export const PurchaseButton: FC<Props> = ({
 				<Text>{title}</Text>
 				<Image
 					source={resources.marketplace.buyButtonDash}
-					style={{ width: 50, height: 2, marginLeft: 10 }}
+					style={{ width: 32, height: 2, marginLeft: 10 }}
 				/>
 				<View style={styles.priceContainer}>
 					<Image

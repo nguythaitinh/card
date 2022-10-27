@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Hyperlink, modalActions, Text } from '@metacraft/ui';
 import { useWallet } from '@solana/wallet-adapter-react';
+import Countdown from 'components/Countdown';
 import Accordion from 'components/Marketplace/Accordion';
 import Card from 'components/Marketplace/Card';
 import SignInOptions from 'components/modals/SignInOptions';
@@ -41,7 +42,7 @@ export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
 	const isPurchasable = isActive || isEarlyPurchase;
 	const allowPurchase = connected && isValidBalance && isPurchasable;
 	const officialPrice = isWhitelistUser ? discountPrice : price;
-	const purchasePrefix = isWhitelistUser ? 'Whitelist mint' : 'Mint';
+	const purchasePrefix = isWhitelistUser ? 'WHITELIST MINT' : 'MINT';
 	const progressBarInner = {
 		position: 'absolute',
 		top: 0,
@@ -69,6 +70,15 @@ export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
 				</View>
 				<View style={styles.innerContainer}>
 					<View style={{ width: 350, alignItems: 'center' }}>
+						{isPresale && (
+							<Fragment>
+								<Countdown
+									style={styles.countdown}
+									endTime={new Date(1667502000000)}
+								/>
+								<Text style={styles.countdownExplains}>UNTIL PUBLIC MINT</Text>
+							</Fragment>
+						)}
 						<ImageBackground
 							source={resources.marketplace.titleSeparator}
 							style={{ width: '100%', paddingVertical: 15 }}
@@ -80,7 +90,7 @@ export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
 								{pack.title} Pack
 							</Text>
 						</ImageBackground>
-						<Text style={{ width: '100%', paddingVertical: 15 }}>
+						<Text style={{ width: '100%', marginTop: 15 }}>
 							Number of Card/Pack: 1 Card
 						</Text>
 						{sugar.isLoading ? (
@@ -108,7 +118,7 @@ export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
 												disabled={!allowPurchase}
 												amount={amount}
 												unitPrice={officialPrice}
-												title={`${purchasePrefix} ${amount} Pack`}
+												title={`${purchasePrefix} ${amount} PACK`}
 												onPress={() => onPurchase?.(amount)}
 											/>
 										);
@@ -215,6 +225,15 @@ const styles = StyleSheet.create({
 		color: '#cdc8b5',
 		paddingVertical: 10,
 		fontWeight: '500',
+	},
+	countdown: {
+		marginTop: 14,
+	},
+	countdownExplains: {
+		fontSize: 11,
+		fontWeight: '700',
+		marginTop: 8,
+		marginBottom: 24,
 	},
 	progressBarContainer: {
 		position: 'relative',
