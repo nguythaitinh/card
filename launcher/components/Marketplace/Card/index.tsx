@@ -21,20 +21,22 @@ import resources from '../../../utils/resources';
 const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 const AnimatedView = Animated.createAnimatedComponent(View);
 
-interface Props {
+export interface CardProps {
 	style?: ViewStyle;
 	imageSource?: string;
 	size?: number;
+	ratio?: number;
 	animationFlipDisable?: boolean;
 	animationHoveredDisable?: boolean;
 	isCardUp?: boolean;
 	onPress?: () => void;
 }
 
-const Card: FC<Props> = ({
+const Card: FC<CardProps> = ({
 	style,
 	imageSource,
 	size = 200,
+	ratio = 1.45,
 	animationFlipDisable = false,
 	animationHoveredDisable = false,
 	isCardUp = true,
@@ -42,7 +44,7 @@ const Card: FC<Props> = ({
 }) => {
 	const cardResources = resources.marketplace.card;
 	const width = size;
-	const height = size * 1.38;
+	const height = size * ratio;
 	const cardSize = { width, height };
 	const xOffset = useSharedValue(width / 2);
 	const yOffset = useSharedValue(height / 2);
