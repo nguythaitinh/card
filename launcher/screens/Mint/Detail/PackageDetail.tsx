@@ -1,11 +1,9 @@
 import React, { FC, Fragment } from 'react';
 import {
 	ActivityIndicator,
-	Image,
 	ImageBackground,
 	Linking,
 	StyleSheet,
-	TouchableOpacity,
 	View,
 	ViewStyle,
 } from 'react-native';
@@ -19,6 +17,8 @@ import { PackStats, Rarity } from 'screens/Mint/shared';
 import { SugarEffect } from 'utils/hook';
 import { iStyles } from 'utils/styles';
 
+import PurchaseButton from './PurchaseButton';
+
 interface Props {
 	pack: PackStats;
 	sugar: SugarEffect;
@@ -27,7 +27,19 @@ interface Props {
 
 export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
 	const { connected, disconnect } = useWallet();
-	const { itemsRemaining, itemsAvailable } = sugar;
+	const {
+		isActive,
+		isPresale,
+		isWhitelistUser,
+		itemsRemaining,
+		itemsAvailable,
+		price,
+		discountPrice,
+	} = sugar;
+	const isEarlyPurchase = isPresale && isWhitelistUser;
+	const allowPurchase = connected && (isActive || isEarlyPurchase);
+	const officialPrice = isWhitelistUser ? discountPrice : price;
+	const purchasePrefix = isWhitelistUser ? 'Whitelist mint' : 'Mint';
 	const progressBarInner = {
 		position: 'absolute',
 		top: 0,
@@ -51,11 +63,7 @@ export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
 		<View style={[iStyles.contentContainer, styles.container]}>
 			<View style={styles.rowContainer}>
 				<View style={styles.innerContainer}>
-					<Card
-						size={350}
-						animationFlipDisable={true}
-						animationHoveredDisable={true}
-					/>
+					<Card size={350} animationFlipDisable={true} />
 				</View>
 				<View style={styles.innerContainer}>
 					<View style={{ width: 350, alignItems: 'center' }}>
@@ -73,7 +81,6 @@ export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
 						<Text style={{ width: '100%', paddingVertical: 15 }}>
 							Number of Card/Pack: 1 Card
 						</Text>
-						{/* <Text>{pack.sugarId}</Text> */}
 						{sugar.isLoading ? (
 							<ActivityIndicator size="large" />
 						) : (
@@ -94,47 +101,14 @@ export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
 								{itemsRemaining > 0 ? (
 									[1].map((amount) => {
 										return (
-											<View
+											<PurchaseButton
 												key={amount}
-												style={{ marginTop: 20, width: '100%' }}
-											>
-												<TouchableOpacity
-													disabled={!connected}
-													onPress={() => onPurchase?.(amount)}
-												>
-													<ImageBackground
-														source={resources.marketplace.buyButtonBackground}
-														style={styles.buttonBackground}
-													>
-														<Text>{amount} Pack</Text>
-														<Image
-															source={resources.marketplace.buyButtonDash}
-															style={{ width: 86, height: 2, marginLeft: 10 }}
-														/>
-														<View style={styles.priceContainer}>
-															<Image
-																source={resources.marketplace.coinUsd}
-																style={styles.coinIcon}
-															/>
-															<Text>USDC {amount * pack.unitPrice}</Text>
-														</View>
-													</ImageBackground>
-												</TouchableOpacity>
-												{!connected && (
-													<View
-														style={{
-															position: 'absolute',
-															left: 0,
-															top: 0,
-															right: 0,
-															bottom: 0,
-															opacity: 0.5,
-															backgroundColor: '#000',
-														}}
-														pointerEvents="none"
-													/>
-												)}
-											</View>
+												disabled={!allowPurchase}
+												amount={amount}
+												unitPrice={officialPrice}
+												title={`${purchasePrefix} ${amount} Pack`}
+												onPress={() => onPurchase?.(amount)}
+											/>
 										);
 									})
 								) : (
