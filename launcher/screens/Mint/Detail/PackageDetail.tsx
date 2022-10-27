@@ -90,7 +90,7 @@ export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
 								{pack.title} Pack
 							</Text>
 						</ImageBackground>
-						<Text style={{ width: '100%', marginTop: 15 }}>
+						<Text style={{ width: '100%', paddingVertical: 15 }}>
 							Number of Card/Pack: 1 Card
 						</Text>
 						{sugar.isLoading ? (
