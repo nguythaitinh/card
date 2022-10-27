@@ -1,53 +1,57 @@
 import React, { FC, Fragment } from 'react';
 import {
 	ActivityIndicator,
-	Image,
 	ImageBackground,
 	Linking,
 	StyleSheet,
-	TouchableOpacity,
 	View,
 	ViewStyle,
 } from 'react-native';
 import { Hyperlink, modalActions, Text } from '@metacraft/ui';
-import { CandyMachineV2, toBigNumber } from '@metaplex-foundation/js';
 import { useWallet } from '@solana/wallet-adapter-react';
+import Countdown from 'components/Countdown';
 import Accordion from 'components/Marketplace/Accordion';
 import Card from 'components/Marketplace/Card';
 import SignInOptions from 'components/modals/SignInOptions';
 import resources from 'launcher/utils/resources';
 import { PackStats, Rarity } from 'screens/Mint/shared';
+import { SugarEffect } from 'utils/hook';
 import { iStyles } from 'utils/styles';
 
+import PurchaseButton from './PurchaseButton';
+
 interface Props {
-	isLoading?: boolean;
 	pack: PackStats;
-	candyMachine?: CandyMachineV2;
-	onPurchase?: (candyMachine: CandyMachineV2, volume: number) => void;
+	sugar: SugarEffect;
+	onPurchase?: (volume: number) => void;
 }
 
-export const PackDetailSection: FC<Props> = ({
-	isLoading,
-	pack,
-	candyMachine,
-	onPurchase,
-}) => {
+export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
 	const { connected, disconnect } = useWallet();
-	const progressBarInner =
-		candyMachine &&
-		({
-			position: 'absolute',
-			top: 0,
-			bottom: 0,
-			left: 0,
-			width:
-				(candyMachine?.itemsRemaining.toNumber() /
-					candyMachine?.itemsAvailable.toNumber()) *
-					100 +
-				'%',
-			borderRadius: 10,
-			backgroundColor: '#dabe8c',
-		} as ViewStyle);
+	const {
+		isActive,
+		isPresale,
+		isWhitelistUser,
+		isValidBalance,
+		itemsRemaining,
+		itemsAvailable,
+		price,
+		discountPrice,
+	} = sugar;
+	const isEarlyPurchase = isPresale && isWhitelistUser;
+	const isPurchasable = isActive || isEarlyPurchase;
+	const allowPurchase = connected && isValidBalance && isPurchasable;
+	const officialPrice = isWhitelistUser ? discountPrice : price;
+	const purchasePrefix = isWhitelistUser ? 'WHITELIST MINT' : 'MINT';
+	const progressBarInner = {
+		position: 'absolute',
+		top: 0,
+		bottom: 0,
+		left: 0,
+		width: (itemsRemaining / itemsAvailable) * 100 + '%',
+		borderRadius: 10,
+		backgroundColor: '#dabe8c',
+	} as ViewStyle;
 
 	const onConnectWalletPress = (): void => {
 		modalActions.show({
@@ -62,14 +66,19 @@ export const PackDetailSection: FC<Props> = ({
 		<View style={[iStyles.contentContainer, styles.container]}>
 			<View style={styles.rowContainer}>
 				<View style={styles.innerContainer}>
-					<Card
-						size={350}
-						animationFlipDisable={true}
-						animationHoveredDisable={true}
-					/>
+					<Card size={350} animationFlipDisable={true} />
 				</View>
 				<View style={styles.innerContainer}>
 					<View style={{ width: 350, alignItems: 'center' }}>
+						{isPresale && (
+							<Fragment>
+								<Countdown
+									style={styles.countdown}
+									endTime={new Date(1667502000000)}
+								/>
+								<Text style={styles.countdownExplains}>UNTIL PUBLIC MINT</Text>
+							</Fragment>
+						)}
 						<ImageBackground
 							source={resources.marketplace.titleSeparator}
 							style={{ width: '100%', paddingVertical: 15 }}
@@ -84,8 +93,7 @@ export const PackDetailSection: FC<Props> = ({
 						<Text style={{ width: '100%', paddingVertical: 15 }}>
 							Number of Card/Pack: 1 Card
 						</Text>
-						{/* <Text>{pack.sugarId}</Text> */}
-						{isLoading ? (
+						{sugar.isLoading ? (
 							<ActivityIndicator size="large" />
 						) : (
 							<Fragment>
@@ -99,54 +107,20 @@ export const PackDetailSection: FC<Props> = ({
 										<View style={progressBarInner} />
 									</View>
 									<Text style={{ marginLeft: 20, color: '#ddd2af' }}>
-										{`${candyMachine?.itemsRemaining}/${candyMachine?.itemsAvailable}`}
+										{`${itemsRemaining}/${itemsAvailable}`}
 									</Text>
 								</View>
-								{candyMachine &&
-								candyMachine.itemsRemaining > toBigNumber(0) ? (
+								{itemsRemaining > 0 ? (
 									[1].map((amount) => {
 										return (
-											<View
+											<PurchaseButton
 												key={amount}
-												style={{ marginTop: 20, width: '100%' }}
-											>
-												<TouchableOpacity
-													disabled={!connected}
-													onPress={() => onPurchase?.(candyMachine, amount)}
-												>
-													<ImageBackground
-														source={resources.marketplace.buyButtonBackground}
-														style={styles.buttonBackground}
-													>
-														<Text>{amount} Pack</Text>
-														<Image
-															source={resources.marketplace.buyButtonDash}
-															style={{ width: 86, height: 2, marginLeft: 10 }}
-														/>
-														<View style={styles.priceContainer}>
-															<Image
-																source={resources.marketplace.coinUsd}
-																style={styles.coinIcon}
-															/>
-															<Text>USDC {amount * pack.unitPrice}</Text>
-														</View>
-													</ImageBackground>
-												</TouchableOpacity>
-												{!connected && (
-													<View
-														style={{
-															position: 'absolute',
-															left: 0,
-															top: 0,
-															right: 0,
-															bottom: 0,
-															opacity: 0.5,
-															backgroundColor: '#000',
-														}}
-														pointerEvents="none"
-													/>
-												)}
-											</View>
+												disabled={!allowPurchase}
+												amount={amount}
+												unitPrice={officialPrice}
+												title={`${purchasePrefix} ${amount} PACK`}
+												onPress={() => onPurchase?.(amount)}
+											/>
 										);
 									})
 								) : (
@@ -213,9 +187,11 @@ export const PackDetailSection: FC<Props> = ({
 							defaultExpanded={true}
 						>
 							<Hyperlink
-								title="Check this Candy Machine information on Solscan"
+								title="Explore this pack"
 								onPress={() =>
-									Linking.openURL(`https://solscan.io/account/${pack.sugarId}`)
+									Linking.openURL(
+										`https://www.solaneyes.com/address/${pack.sugarId}`,
+									)
 								}
 							/>
 						</Accordion>
@@ -249,6 +225,15 @@ const styles = StyleSheet.create({
 		color: '#cdc8b5',
 		paddingVertical: 10,
 		fontWeight: '500',
+	},
+	countdown: {
+		marginTop: 14,
+	},
+	countdownExplains: {
+		fontSize: 11,
+		fontWeight: '700',
+		marginTop: 8,
+		marginBottom: 24,
 	},
 	progressBarContainer: {
 		position: 'relative',

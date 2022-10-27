@@ -1,18 +1,19 @@
 import React, { FC } from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
 import { Text } from '@metacraft/ui';
-import { useNavigation } from '@react-navigation/native';
-
-import Separator from '../../../../components/icons/underRealm/Separator';
-import Card from '../../../../components/Marketplace/Card';
-import { marketplaceSizes, marketplaceStyle } from '../../shared';
+import Separator from 'components/icons/underRealm/Separator';
+import Card, { CardProps } from 'components/Marketplace/Card';
+import { marketplaceSizes, marketplaceStyle } from 'screens/Marketplace/shared';
+import { navigate } from 'stacks/Browser/shared';
 
 interface Props {
 	style?: ViewStyle;
 }
 
 export const BoxSellingSection: FC<Props> = ({ style }) => {
-	const navigation = useNavigation();
+	const onNavigate = (cardId: string) => {
+		navigate('Marketplace', { screen: 'DetailCard', params: { id: cardId } });
+	};
 
 	return (
 		<View style={[styles.container, style]}>
@@ -28,34 +29,10 @@ export const BoxSellingSection: FC<Props> = ({ style }) => {
 					Subtitle text
 				</Text>
 			</View>
-			<View
-				style={{
-					flex: 1,
-					flexDirection: 'row',
-					justifyContent: 'center',
-					marginVertical: 25,
-				}}
-			>
-				<Card
-					animationFlipDisable={true}
-					onPress={() => navigation.navigate('DetailCard', { id: '001' })}
-				/>
-				<Card
-					animationHoveredDisable={true}
-					onPress={() => navigation.navigate('DetailCard', { id: '001' })}
-				/>
-				<Card
-					animationFlipDisable={true}
-					animationHoveredDisable={true}
-					onPress={() => navigation.navigate('DetailCard', { id: '001' })}
-				/>
-				<Card
-					imageSource="https://picsum.photos/200/300"
-					onPress={() => navigation.navigate('DetailCard', { id: '001' })}
-				/>
-				<Card
-					onPress={() => navigation.navigate('DetailCard', { id: '001' })}
-				/>
+			<View style={styles.boxesContainer}>
+				{cardBoxes(onNavigate).map((props, i) => (
+					<Card key={i} {...props} />
+				))}
 			</View>
 		</View>
 	);
@@ -79,4 +56,33 @@ const styles = StyleSheet.create({
 		color: '#fff',
 		opacity: 0.5,
 	},
+	boxesContainer: {
+		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'center',
+		marginVertical: 25,
+	},
 });
+
+const cardBoxes = (navigate: (id: string) => void): CardProps[] => [
+	{
+		animationFlipDisable: true,
+		onPress: () => navigate('001'),
+	},
+	{
+		animationHoveredDisable: true,
+		onPress: () => navigate('001'),
+	},
+	{
+		animationFlipDisable: true,
+		animationHoveredDisable: true,
+		onPress: () => navigate('001'),
+	},
+	{
+		imageSource: '',
+		onPress: () => navigate('001'),
+	},
+	{
+		onPress: () => navigate('001'),
+	},
+];
