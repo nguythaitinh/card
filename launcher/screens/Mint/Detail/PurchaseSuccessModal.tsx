@@ -70,10 +70,11 @@ export const PurchaseSuccessModal: FC<Props> = ({ dimensions, nft }) => {
 					showsHorizontalScrollIndicator={false}
 				>
 					<Card
-						isCardUp={false}
 						animationFlipDisable
-						style={{ marginHorizontal: 10 }}
+						ratio={1.38}
+						isCardUp={false}
 						imageSource={imageSource}
+						style={{ marginHorizontal: 10 }}
 					/>
 				</ScrollView>
 				<View style={{ marginVertical: 30 }}>
