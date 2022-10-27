@@ -6,6 +6,7 @@ import {
 	useState,
 } from 'react';
 import {
+	Amount,
 	CandyMachineV2,
 	Metaplex,
 	MintCandyMachineV2Output,
@@ -23,7 +24,8 @@ export interface SugarEffect {
 	isWhitelistUser: boolean;
 	isPresale: boolean;
 	isValidBalance: boolean;
-	discountPrice?: number;
+	price?: Amount;
+	discountPrice?: Amount;
 	mintNft: () => Promise<MintCandyMachineV2Output>;
 	candyRef: MutableRefObject<CandyMachineV2 | undefined>;
 }
@@ -40,7 +42,8 @@ export const useWalletSugar = (sugarId: string): SugarEffect => {
 	const [isWhitelistUser, setIsWhitelistUser] = useState(false);
 	const [isPresale, setIsPresale] = useState(false);
 	const [isValidBalance, setIsValidBalance] = useState(false);
-	const [discountPrice, setDiscountPrice] = useState<number>();
+	const [price, setPrice] = useState<Amount>();
+	const [discountPrice, setDiscountPrice] = useState<Amount>();
 
 	const refreshSugar = useCallback(async () => {
 		setIsLoading(true);
@@ -63,6 +66,7 @@ export const useWalletSugar = (sugarId: string): SugarEffect => {
 
 		setIsActive(goLiveTime < currentTime);
 		setIsPresale(presaleEnabled && goLiveTime > currentTime);
+		setPrice(sugar.price);
 		setDiscountPrice(sugar.whitelistMintSettings?.discountPrice as never);
 		setItemsRemaining(sugar.itemsRemaining.toNumber());
 		setItemsAvailable(sugar.itemsAvailable.toNumber());
@@ -113,6 +117,7 @@ export const useWalletSugar = (sugarId: string): SugarEffect => {
 		isWhitelistUser,
 		isPresale,
 		isValidBalance,
+		price,
 		discountPrice,
 		mintNft,
 		candyRef,
