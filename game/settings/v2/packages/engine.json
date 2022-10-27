@@ -14,12 +14,6 @@
       "gfx-webgl2": {
         "_value": true
       },
-      "animation": {
-        "_value": true
-      },
-      "skeletal-animation": {
-        "_value": true
-      },
       "3d": {
         "_value": false
       },
@@ -49,7 +43,7 @@
         "_value": false
       },
       "physics-2d": {
-        "_value": false,
+        "_value": true,
         "_option": "physics-2d-box2d"
       },
       "physics-2d-box2d": {
@@ -59,7 +53,7 @@
         "_value": false
       },
       "intersection-2d": {
-        "_value": false
+        "_value": true
       },
       "primitive": {
         "_value": false
@@ -86,15 +80,12 @@
         "_value": false
       },
       "tiled-map": {
-        "_value": false
+        "_value": true
       },
       "spine": {
         "_value": true
       },
       "dragon-bones": {
-        "_value": true
-      },
-      "marionette": {
         "_value": true
       }
     },
@@ -106,20 +97,23 @@
       "dragon-bones",
       "gfx-webgl",
       "gfx-webgl2",
+      "intersection-2d",
       "marionette",
       "particle-2d",
+      "physics-2d-box2d",
       "profiler",
       "skeletal-animation",
       "spine",
+      "tiled-map",
       "tween",
       "ui",
       "video",
-      "webview"
+      "webview",
+      "xr"
     ],
     "noDeprecatedFeatures": {
       "value": false,
       "version": ""
-    },
-    "flags": {}
+    }
   }
 }
