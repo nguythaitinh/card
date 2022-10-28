@@ -67,7 +67,7 @@ export const UnderRealmButton: FC<Props> = ({
 
 	return (
 		<TouchableOpacity
-			style={[styles.container, style]}
+			style={[styles.container, style, { opacity: disabled ? 0.7 : 1 }]}
 			onLayout={({ nativeEvent }) => setLayout(nativeEvent.layout)}
 			onPress={onPress}
 			disabled={disabled}
