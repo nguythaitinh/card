@@ -30,14 +30,14 @@ export const UnderRealmModal: FC<Props> = ({ style, children }) => {
 
 export default UnderRealmModal;
 
-const borderVertical = {
+const verticalBorder = {
 	position: 'absolute',
 	width: 10,
 	top: 0,
 	bottom: 0,
 } as ImageStyle;
 
-const borderHorizontal = {
+const horizontalBorder = {
 	position: 'absolute',
 	height: 10,
 	left: 0,
@@ -49,19 +49,19 @@ const styles = StyleSheet.create({
 		padding: 20,
 	},
 	top: {
-		...borderHorizontal,
+		...horizontalBorder,
 		top: 0,
 	},
 	bottom: {
-		...borderHorizontal,
+		...horizontalBorder,
 		bottom: 0,
 	},
 	left: {
-		...borderVertical,
+		...verticalBorder,
 		left: 0,
 	},
 	right: {
-		...borderVertical,
+		...verticalBorder,
 		right: 0,
 	},
 });
