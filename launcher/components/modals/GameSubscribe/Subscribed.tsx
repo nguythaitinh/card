@@ -6,11 +6,12 @@ import {
 	TouchableOpacity,
 	View,
 } from 'react-native';
-import { Text } from '@metacraft/ui';
+import { Hyperlink, Text } from '@metacraft/ui';
+import UnderRealmModal from 'components/layouts/UnderRealmModal';
 
 export const Subscribed: FC = () => {
 	return (
-		<View style={styles.container}>
+		<UnderRealmModal style={styles.container}>
 			<Text style={styles.heading}>
 				You have successfully subscribed to the Alpha Launch
 			</Text>
@@ -42,21 +43,19 @@ export const Subscribed: FC = () => {
 					Follow our community for quick updates:
 				</Text>
 				<View style={styles.commandContainer}>
-					<TouchableOpacity
+					<Hyperlink
 						style={styles.command}
+						title="Discord"
 						onPress={() => Linking.openURL('https://discord.gg/sXcz9Em4AR')}
-					>
-						<Text>Discord</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
+					/>
+					<Hyperlink
 						style={styles.command}
+						title="Twitter"
 						onPress={() => Linking.openURL('https://twitter.com/StormgateIO')}
-					>
-						<Text>Twitter</Text>
-					</TouchableOpacity>
+					/>
 				</View>
 			</View>
-		</View>
+		</UnderRealmModal>
 	);
 };
 
@@ -65,8 +64,7 @@ export default Subscribed;
 const styles = StyleSheet.create({
 	container: {
 		maxWidth: 650,
-		paddingTop: 100,
-		paddingBottom: 50,
+		paddingVertical: 50,
 		paddingHorizontal: 80,
 	},
 	heading: {
@@ -75,7 +73,7 @@ const styles = StyleSheet.create({
 		lineHeight: 32,
 		fontWeight: '400',
 		textAlign: 'center',
-		marginBottom: 20,
+		marginBottom: 30,
 	},
 	message: {
 		fontSize: 18,
@@ -95,7 +93,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignSelf: 'center',
 		alignItems: 'center',
-		marginTop: 12,
+		marginTop: 15,
 	},
 	command: {
 		marginHorizontal: 8,
@@ -105,7 +103,6 @@ const styles = StyleSheet.create({
 		height: 32,
 	},
 	followContainer: {
-		marginTop: 32,
 		marginBottom: 8,
 	},
 });

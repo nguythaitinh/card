@@ -10,6 +10,7 @@ import {
 import { useMutation } from '@apollo/client';
 import { modalActions } from '@metacraft/ui';
 import { Text } from '@metacraft/ui';
+import UnderRealmModal from 'components/layouts/UnderRealmModal';
 import UnderRealmButton from 'components/Marketplace/Button';
 import * as mutations from 'utils/graphql/mutation';
 import { useInput } from 'utils/hook';
@@ -31,10 +32,9 @@ export const GameSubscribe: FC<Props> = ({ dimensions }) => {
 	const containerStyle = {
 		alignSelf: 'center',
 		width: contentWidth,
-		paddingVertical: 40,
-		paddingHorizontal: 30,
+		paddingVertical: 50,
+		paddingHorizontal: 40,
 		backgroundColor: '#512b18',
-		borderRadius: 10,
 	} as ViewStyle;
 
 	const onSubscribe = () => {
@@ -62,7 +62,7 @@ export const GameSubscribe: FC<Props> = ({ dimensions }) => {
 	};
 
 	return (
-		<View style={containerStyle}>
+		<UnderRealmModal style={containerStyle}>
 			<Text style={styles.title}>Alpha Sign-up</Text>
 			<View style={styles.inputContainer}>
 				<TextInput {...emailInput} placeholder="Email" style={styles.input} />
@@ -79,7 +79,7 @@ export const GameSubscribe: FC<Props> = ({ dimensions }) => {
 				Only 10,000 free slots available.{'\n'}
 				Get a chance to experience soonest
 			</Text>
-		</View>
+		</UnderRealmModal>
 	);
 };
 
@@ -87,6 +87,7 @@ export default GameSubscribe;
 
 const styles = StyleSheet.create({
 	title: {
+		color: '#CFCDB3',
 		fontSize: 20,
 		textAlign: 'center',
 		marginBottom: 25,
@@ -98,12 +99,12 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 		marginBottom: 25,
 		borderWidth: 1,
-		borderColor: '#fff',
+		borderColor: '#CFCDB3',
 		borderRadius: 10,
 	},
 	input: {
 		marginVertical: 15,
-		color: '#fff',
+		color: '#CFCDB3',
 	},
 	button: {
 		alignSelf: 'center',
