@@ -67,7 +67,7 @@ export const UnderRealmButton: FC<Props> = ({
 
 	return (
 		<TouchableOpacity
-			style={[styles.container, style, { opacity: disabled ? 0.7 : 1 }]}
+			style={[styles.container, style, disabled && styles.disabledStyle]}
 			onLayout={({ nativeEvent }) => setLayout(nativeEvent.layout)}
 			onPress={onPress}
 			disabled={disabled}
@@ -121,5 +121,8 @@ const styles = StyleSheet.create({
 	titleStyle: {
 		textAlign: 'center',
 		color: '#fff',
+	},
+	disabledStyle: {
+		opacity: 0.7,
 	},
 });
