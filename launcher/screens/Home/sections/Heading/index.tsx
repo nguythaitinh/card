@@ -1,21 +1,33 @@
 import React, { FC } from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import {
+	AnimateDirections,
 	DimensionState,
 	dimensionState,
+	modalActions,
 	ScaledSizes,
 	Text,
 } from '@metacraft/ui';
 import { useNavigation } from '@react-navigation/native';
 import UnderRealmLogo from 'components/Home/visuals/UnderRealmLogo';
 import UnderRealmButton from 'components/Marketplace/Button';
+import GameSubscribe from 'components/modals/GameSubscribe';
 import { useSnapshot } from 'utils/hook';
 import resources from 'utils/resources';
 
 const HeadingSection: FC = () => {
 	const navigation = useNavigation();
-	const { responsiveLevel } = useSnapshot<DimensionState>(dimensionState);
+	const { responsiveLevel, windowSize } =
+		useSnapshot<DimensionState>(dimensionState);
 	const logoSize = [800, 600, 500, 350][responsiveLevel];
+
+	const showGameSubscribeModal = () => {
+		modalActions.show({
+			id: 'gameSubscribe',
+			component: () => <GameSubscribe dimensions={windowSize} />,
+			animateDirection: AnimateDirections.BottomRight,
+		});
+	};
 
 	return (
 		<ImageBackground
@@ -38,7 +50,10 @@ const HeadingSection: FC = () => {
 				>
 					<Text style={styles.actionButtonText}>Mint</Text>
 				</UnderRealmButton>
-				<UnderRealmButton style={styles.actionButton}>
+				<UnderRealmButton
+					style={styles.actionButton}
+					onPress={showGameSubscribeModal}
+				>
 					<Text style={styles.actionButtonText}>Alpha Subscribe</Text>
 				</UnderRealmButton>
 			</View>
