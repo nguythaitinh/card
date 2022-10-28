@@ -56,4 +56,7 @@ export default {
 		popupBorder: { uri: '/marketplace/popup-border.png' },
 		popupBackground: { uri: '/marketplace/popup-bg.png' },
 	},
+	home: {
+		headingBackground: { uri: '/home/heading-background.png' },
+	},
 };
