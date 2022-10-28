@@ -56,4 +56,7 @@ export default {
 		popupBorder: require('../../../assets/marketplace/popup-border.png'),
 		popupBackground: require('../../../assets/marketplace/popup-bg.png'),
 	},
+	home: {
+		headingBackground: require('../../../assets/home/heading-background.png'),
+	},
 };
