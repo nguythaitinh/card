@@ -10,6 +10,14 @@ import { Hyperlink, Text } from '@metacraft/ui';
 import UnderRealmModal from 'components/layouts/UnderRealmModal';
 
 export const Subscribed: FC = () => {
+	const shareTwitter = () =>
+		Linking.openURL(
+			'https://twitter.com/intent/tweet?text=I%27ve%20subscribed%20to&url=https%3A%2F%2Fstormgate.io%2F&via=StormgateIO',
+		);
+	const joinDiscord = () => Linking.openURL('https://discord.gg/sXcz9Em4AR');
+	const followTwitter = () =>
+		Linking.openURL('https://twitter.com/StormgateIO');
+
 	return (
 		<UnderRealmModal style={styles.container}>
 			<Text style={styles.heading}>
@@ -21,14 +29,7 @@ export const Subscribed: FC = () => {
 			<View style={styles.blockContainer}>
 				<View style={styles.tweetContainer}>
 					<Text style={[styles.message, { marginRight: 16 }]}>Tweet this:</Text>
-					<TouchableOpacity
-						style={styles.command}
-						onPress={() =>
-							Linking.openURL(
-								'https://twitter.com/intent/tweet?text=I%27ve%20subscribed%20to&url=https%3A%2F%2Fstormgate.io%2F&via=StormgateIO',
-							)
-						}
-					>
+					<TouchableOpacity style={styles.command} onPress={shareTwitter}>
 						<Image
 							style={styles.twitterImage}
 							source={{
@@ -46,12 +47,12 @@ export const Subscribed: FC = () => {
 					<Hyperlink
 						style={styles.command}
 						title="Discord"
-						onPress={() => Linking.openURL('https://discord.gg/sXcz9Em4AR')}
+						onPress={joinDiscord}
 					/>
 					<Hyperlink
 						style={styles.command}
 						title="Twitter"
-						onPress={() => Linking.openURL('https://twitter.com/StormgateIO')}
+						onPress={followTwitter}
 					/>
 				</View>
 			</View>
