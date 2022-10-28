@@ -3,14 +3,13 @@ import {
 	Image,
 	ImageStyle,
 	StyleSheet,
-	Text,
 	TextStyle,
 	TouchableOpacity,
 	View,
 	ViewStyle,
 } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { Hoverable } from '@metacraft/ui';
+import { Hoverable, Text } from '@metacraft/ui';
 
 import { idleLayout } from '../../../utils/helper';
 import resources from '../../../utils/resources';
@@ -19,6 +18,7 @@ import { HoveredStyleFunc, useDefaultHoveredStyle } from './shared';
 
 interface Props {
 	style?: ViewStyle;
+	disabled?: boolean;
 	title?: string;
 	texStyle?: TextStyle;
 	children?: ReactNode;
@@ -30,6 +30,7 @@ const AnimatedView = Animated.createAnimatedComponent(View);
 
 export const UnderRealmButton: FC<Props> = ({
 	style,
+	disabled = false,
 	title = '',
 	texStyle,
 	children,
@@ -69,6 +70,7 @@ export const UnderRealmButton: FC<Props> = ({
 			style={[styles.container, style]}
 			onLayout={({ nativeEvent }) => setLayout(nativeEvent.layout)}
 			onPress={onPress}
+			disabled={disabled}
 		>
 			{layout.width && (
 				<Fragment>
