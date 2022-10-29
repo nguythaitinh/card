@@ -1,12 +1,8 @@
 {
-  "name": "game",
-  "uuid": "650527f9-2e32-4301-9741-d8281c043735",
-  "version": "3.5.1",
+  "name": "ur",
+  "uuid": "0ba8ea60-0477-4df9-9163-48999c7acd7d",
+  "version": "3.6.1",
   "creator": {
-    "version": "3.5.1"
-  },
-  "dependencies": {
-    "@cocrafts/engine-card": "^0.0.14",
-    "lodash-es": "^4.17.21"
+    "version": "3.6.1"
   }
 }
