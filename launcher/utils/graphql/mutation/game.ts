@@ -13,3 +13,13 @@ export const acceptGame = gql`
 		acceptGame(invitationId: $invitationId)
 	}
 `;
+
+export const subscribeGame = gql`
+	mutation SubscribeGame($input: SubscribeGameInput!) {
+		subscribeGame(input: $input) {
+			game
+			email
+			timestamp
+		}
+	}
+`;
