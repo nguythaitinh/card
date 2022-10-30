@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
 	actionButtonText: {
 		textAlign: 'center',
 		fontSize: 16,
+		color: '#fff',
 		textShadow: '0 0 10px black',
 	},
 });

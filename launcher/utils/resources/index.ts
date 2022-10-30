@@ -58,5 +58,6 @@ export default {
 	},
 	home: {
 		headingBackground: require('../../../assets/home/heading-background.png'),
+		cardsImage: require('../../../assets/home/cards-image.png'),
 	},
 };

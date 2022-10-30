@@ -148,9 +148,9 @@ export const UnderRealmLogo: FC<Props> = ({
 					y2={49}
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop offset={0} stopOpacity={0} />
-					<stop offset={0.5} stopOpacity={0.4} stopColor={'#7F8183'} />
-					<stop offset={0.8} stopOpacity={0.8} stopColor={'#D7D8DA'} />
+					<stop offset={0} stopOpacity={0} stopColor={'#fff'} />
+					<stop offset={0.5} stopOpacity={0.4} stopColor={'#fff'} />
+					<stop offset={0.8} stopOpacity={0.8} stopColor={'#fff'} />
 					<stop offset={1} stopColor={'#fff'} />
 				</LinearGradient>
 			</Defs>
