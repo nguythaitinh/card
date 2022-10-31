@@ -58,5 +58,6 @@ export default {
 	},
 	home: {
 		headingBackground: { uri: '/home/heading-background.png' },
+		cardsImage: { uri: '/home/cards-image.png' },
 	},
 };

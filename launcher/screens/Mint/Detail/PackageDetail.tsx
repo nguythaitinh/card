@@ -2,7 +2,6 @@ import React, { FC, Fragment } from 'react';
 import {
 	ActivityIndicator,
 	ImageBackground,
-	Linking,
 	StyleSheet,
 	View,
 	ViewStyle,
@@ -23,10 +22,16 @@ import PurchaseButton from './PurchaseButton';
 interface Props {
 	pack: PackStats;
 	sugar: SugarEffect;
+	isLoading?: boolean;
 	onPurchase?: (volume: number) => void;
 }
 
-export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
+export const PackDetailSection: FC<Props> = ({
+	pack,
+	sugar,
+	isLoading,
+	onPurchase,
+}) => {
 	const { connected, disconnect } = useWallet();
 	const {
 		isActive,
@@ -119,6 +124,7 @@ export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
 												amount={amount}
 												unitPrice={officialPrice}
 												title={`${purchasePrefix} ${amount} PACK`}
+												isLoading={isLoading}
 												onPress={() => onPurchase?.(amount)}
 											/>
 										);
@@ -188,11 +194,7 @@ export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
 						>
 							<Hyperlink
 								title="Explore this pack"
-								onPress={() =>
-									Linking.openURL(
-										`https://www.solaneyes.com/address/${pack.sugarId}`,
-									)
-								}
+								href={`https://www.solaneyes.com/address/${pack.sugarId}`}
 							/>
 						</Accordion>
 					</View>

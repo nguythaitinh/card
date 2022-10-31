@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 import {
+	ActivityIndicator,
 	Image,
 	ImageBackground,
 	StyleSheet,
@@ -16,6 +17,7 @@ interface Props {
 	unitPrice?: Amount;
 	disabled?: boolean;
 	title: string;
+	isLoading?: boolean;
 	onPress?: () => void;
 }
 
@@ -24,8 +26,27 @@ export const PurchaseButton: FC<Props> = ({
 	amount,
 	unitPrice,
 	title,
+	isLoading,
 	onPress,
 }) => {
+	const buttonContent = isLoading ? (
+		<View style={{ alignItems: 'center', width: '100%' }}>
+			<ActivityIndicator />
+		</View>
+	) : (
+		<Fragment>
+			<Text>{title}</Text>
+			<Image
+				source={resources.marketplace.buyButtonDash}
+				style={{ width: 32, height: 2, marginLeft: 10 }}
+			/>
+			<View style={styles.priceContainer}>
+				<Image source={resources.marketplace.coinUsd} style={styles.coinIcon} />
+				<Text>USDC {parseAmount(unitPrice, 6) * amount}</Text>
+			</View>
+		</Fragment>
+	);
+
 	return (
 		<TouchableOpacity
 			disabled={disabled}
@@ -36,18 +57,7 @@ export const PurchaseButton: FC<Props> = ({
 				source={resources.marketplace.buyButtonBackground}
 				style={styles.buttonBackground}
 			>
-				<Text>{title}</Text>
-				<Image
-					source={resources.marketplace.buyButtonDash}
-					style={{ width: 32, height: 2, marginLeft: 10 }}
-				/>
-				<View style={styles.priceContainer}>
-					<Image
-						source={resources.marketplace.coinUsd}
-						style={styles.coinIcon}
-					/>
-					<Text>USDC {parseAmount(unitPrice, 6) * amount}</Text>
-				</View>
+				{buttonContent}
 			</ImageBackground>
 			{disabled && <View style={styles.disabledMask} pointerEvents="none" />}
 		</TouchableOpacity>

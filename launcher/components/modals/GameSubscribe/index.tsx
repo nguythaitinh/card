@@ -25,9 +25,10 @@ interface Props {
 
 export const GameSubscribe: FC<Props> = ({ dimensions }) => {
 	const [loading, setLoading] = useState(false);
+	const [subscribePressed, setSubscribePressed] = useState(false);
 	const [subscribeGame] = useMutation(mutations.subscribeGame);
 	const emailInput = useInput();
-	const isEmailValid = validateEmail(emailInput.value);
+	const { hasError, errorMess } = validateEmail(emailInput.value);
 	const contentWidth = Math.min(dimensions.width - 16, 480);
 	const containerStyle = {
 		alignSelf: 'center',
@@ -38,37 +39,52 @@ export const GameSubscribe: FC<Props> = ({ dimensions }) => {
 	} as ViewStyle;
 
 	const onSubscribe = () => {
-		setLoading(true);
+		setSubscribePressed(true);
 
-		subscribeGame({
-			variables: {
-				input: {
-					email: emailInput.value,
-					game: MetacraftGames.Card,
+		if (!hasError) {
+			setLoading(true);
+
+			subscribeGame({
+				variables: {
+					input: {
+						email: emailInput.value,
+						game: MetacraftGames.Card,
+					},
 				},
-			},
-			onCompleted: () => {
-				setLoading(false);
-				emailInput.onChangeText('');
+				onCompleted: () => {
+					setLoading(false);
+					emailInput.onChangeText('');
 
-				modalActions.hide('gameSubscribe');
+					modalActions.hide('gameSubscribe');
 
-				modalActions.show({
-					id: 'subscribed',
-					component: Subscribed,
-				});
-			},
-		});
+					modalActions.show({
+						id: 'subscribed',
+						component: Subscribed,
+					});
+				},
+			});
+		}
 	};
 
 	return (
 		<UnderRealmModal style={containerStyle}>
 			<Text style={styles.title}>Alpha Sign-up</Text>
-			<View style={styles.inputContainer}>
-				<TextInput {...emailInput} placeholder="Email" style={styles.input} />
+			<View style={styles.inputBlock}>
+				<View style={styles.inputContainer}>
+					<TextInput
+						{...emailInput}
+						placeholder="Enter Your Email"
+						style={styles.input}
+						onKeyPress={({ nativeEvent: { key } }) => {
+							if (key === 'Enter') onSubscribe();
+						}}
+					/>
+				</View>
+				{subscribePressed && hasError && (
+					<Text style={styles.warning}>{errorMess}</Text>
+				)}
 			</View>
 			<UnderRealmButton
-				disabled={!isEmailValid}
 				style={styles.button}
 				onPress={onSubscribe}
 				title="Subscribe"
@@ -95,9 +111,11 @@ const styles = StyleSheet.create({
 	separator: {
 		alignSelf: 'center',
 	},
+	inputBlock: {
+		marginBottom: 25,
+	},
 	inputContainer: {
 		paddingHorizontal: 20,
-		marginBottom: 25,
 		borderWidth: 1,
 		borderColor: '#CFCDB3',
 		borderRadius: 10,
@@ -106,12 +124,19 @@ const styles = StyleSheet.create({
 		marginVertical: 15,
 		color: '#CFCDB3',
 	},
+	warning: {
+		marginTop: 10,
+		fontSize: 12,
+		fontWeight: '300',
+		color: '#ffc107',
+	},
 	button: {
 		alignSelf: 'center',
 		width: 180,
 	},
 	buttonText: {
 		textAlign: 'center',
+		color: '#fff',
 	},
 	footerDesc: {
 		marginTop: 30,

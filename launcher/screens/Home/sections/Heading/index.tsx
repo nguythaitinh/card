@@ -19,7 +19,7 @@ const HeadingSection: FC = () => {
 	const navigation = useNavigation();
 	const { responsiveLevel, windowSize } =
 		useSnapshot<DimensionState>(dimensionState);
-	const logoSize = [800, 600, 500, 350][responsiveLevel];
+	const logoSize = [720, 600, 500, 350][responsiveLevel];
 
 	const showGameSubscribeModal = () => {
 		modalActions.show({
@@ -63,7 +63,7 @@ const HeadingSection: FC = () => {
 
 export default HeadingSection;
 
-const responsiveHeadline = [50, 40, 35, 30] as ScaledSizes;
+const responsiveHeadline = [30] as ScaledSizes;
 
 const styles = StyleSheet.create({
 	container: {
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
 	actionButtonText: {
 		textAlign: 'center',
 		fontSize: 16,
+		color: '#fff',
 		textShadow: '0 0 10px black',
 	},
 });
