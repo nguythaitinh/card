@@ -5,6 +5,7 @@ import ScrollLayout from 'components/layouts/Scroll';
 import { useSnapshot } from 'utils/hook';
 import { iStyles } from 'utils/styles';
 
+import BattlefieldSetupSection from './sections/BattlefieldSetup';
 import GameIntroSection from './sections/GameIntro';
 import HeadingSection from './sections/Heading';
 
@@ -17,6 +18,7 @@ export const HomeScreen: FC = () => {
 		>
 			<HeadingSection />
 			<GameIntroSection dimension={windowSize} />
+			<BattlefieldSetupSection dimension={windowSize} />
 		</ScrollLayout>
 	);
 };
