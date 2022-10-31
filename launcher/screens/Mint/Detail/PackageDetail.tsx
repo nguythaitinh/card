@@ -23,10 +23,16 @@ import PurchaseButton from './PurchaseButton';
 interface Props {
 	pack: PackStats;
 	sugar: SugarEffect;
+	isLoading?: boolean;
 	onPurchase?: (volume: number) => void;
 }
 
-export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
+export const PackDetailSection: FC<Props> = ({
+	pack,
+	sugar,
+	isLoading,
+	onPurchase,
+}) => {
 	const { connected, disconnect } = useWallet();
 	const {
 		isActive,
@@ -119,6 +125,7 @@ export const PackDetailSection: FC<Props> = ({ pack, sugar, onPurchase }) => {
 												amount={amount}
 												unitPrice={officialPrice}
 												title={`${purchasePrefix} ${amount} PACK`}
+												isLoading={isLoading}
 												onPress={() => onPurchase?.(amount)}
 											/>
 										);
