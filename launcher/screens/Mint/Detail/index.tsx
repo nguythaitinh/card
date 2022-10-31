@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import {
 	AnimateDirections,
@@ -16,6 +16,7 @@ import PackDetail from './PackageDetail';
 import PurchaseSuccessModal from './PurchaseSuccessModal';
 
 export const DetailScreen: FC = () => {
+	const [isLoading, setIsLoading] = useState(false);
 	const route = useRoute();
 	const { id } = route.params as { id: string };
 	const pack = packMap[id];
@@ -24,6 +25,7 @@ export const DetailScreen: FC = () => {
 	const containerRef = useRef<View>(null);
 
 	const onPurchase = async () => {
+		setIsLoading(true);
 		const result = await sugar.mintNft();
 
 		if (result?.nft) {
@@ -44,11 +46,18 @@ export const DetailScreen: FC = () => {
 				},
 			});
 		}
+
+		setIsLoading(false);
 	};
 
 	return (
 		<ScrollLayout contentContainerStyle={styles.container}>
-			<PackDetail pack={pack} sugar={sugar} onPurchase={onPurchase} />
+			<PackDetail
+				pack={pack}
+				sugar={sugar}
+				isLoading={isLoading}
+				onPurchase={onPurchase}
+			/>
 		</ScrollLayout>
 	);
 };
