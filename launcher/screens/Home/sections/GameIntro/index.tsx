@@ -14,14 +14,16 @@ import { iStyles } from 'utils/styles';
 
 interface Props {
 	dimension: ScaledSize;
+	responsiveLevel: number;
 }
 
-export const GameIntroSection: FC<Props> = ({ dimension }) => {
+export const GameIntroSection: FC<Props> = ({ dimension, responsiveLevel }) => {
 	const [layout, setLayout] = useState<LayoutRectangle>(idleLayout);
 	const width = Math.min(dimension.width, iStyles.contentContainer.maxWidth);
 	const imageSize = {
 		width,
-		height: width * 0.35945,
+		height: responsiveLevel > 1 ? width * 0.7 : width * 0.35945,
+		marginBottom: 20,
 	};
 
 	const container = {
