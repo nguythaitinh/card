@@ -10,7 +10,7 @@ export default {
 	marketplace: {
 		headingBackground: { uri: '/marketplace/heading-background.png' },
 		mainBackground: { uri: '/marketplace/main-background.png' },
-		underRealmInteractMaterial: {
+		underRealmButton: {
 			normal: {
 				left: { uri: '/marketplace/under-realm-normal-left-edge.png' },
 				middle: { uri: '/marketplace/under-realm-normal-middle.png' },
@@ -20,6 +20,18 @@ export default {
 				left: { uri: '/marketplace/under-realm-hover-left-edge.png' },
 				middle: { uri: '/marketplace/under-realm-hover-middle.png' },
 				right: { uri: '/marketplace/under-realm-hover-right-edge.png' },
+			},
+		},
+		underRealmSubButton: {
+			normal: {
+				left: { uri: '/marketplace/under-realm-sub-normal-left-edge.png' },
+				middle: { uri: '/marketplace/under-realm-sub-normal-middle.png' },
+				right: { uri: '/marketplace/under-realm-sub-normal-right-edge.png' },
+			},
+			hover: {
+				left: { uri: '/marketplace/under-realm-sub-hover-left-edge.png' },
+				middle: { uri: '/marketplace/under-realm-sub-hover-middle.png' },
+				right: { uri: '/marketplace/under-realm-sub-hover-right-edge.png' },
 			},
 		},
 		card: {

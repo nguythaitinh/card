@@ -2,7 +2,6 @@ import React, { FC, Fragment } from 'react';
 import {
 	ActivityIndicator,
 	ImageBackground,
-	Linking,
 	StyleSheet,
 	View,
 	ViewStyle,
@@ -195,11 +194,7 @@ export const PackDetailSection: FC<Props> = ({
 						>
 							<Hyperlink
 								title="Explore this pack"
-								onPress={() =>
-									Linking.openURL(
-										`https://www.solaneyes.com/address/${pack.sugarId}`,
-									)
-								}
+								href={`https://www.solaneyes.com/address/${pack.sugarId}`}
 							/>
 						</Accordion>
 					</View>

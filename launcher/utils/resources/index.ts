@@ -10,7 +10,7 @@ export default {
 	marketplace: {
 		headingBackground: require('../../../assets/marketplace/heading-background.png'),
 		mainBackground: require('../../../assets/marketplace/main-background.png'),
-		underRealmInteractMaterial: {
+		underRealmButton: {
 			normal: {
 				left: require('../../../assets/marketplace/under-realm-normal-left-edge.png'),
 				middle: require('../../../assets/marketplace/under-realm-normal-middle.png'),
@@ -20,6 +20,18 @@ export default {
 				left: require('../../../assets/marketplace/under-realm-hover-left-edge.png'),
 				middle: require('../../../assets/marketplace/under-realm-hover-middle.png'),
 				right: require('../../../assets/marketplace/under-realm-hover-right-edge.png'),
+			},
+		},
+		underRealmSubButton: {
+			normal: {
+				left: require('../../../assets/marketplace/under-realm-sub-normal-left-edge.png'),
+				middle: require('../../../assets/marketplace/under-realm-sub-normal-middle.png'),
+				right: require('../../../assets/marketplace/under-realm-sub-normal-right-edge.png'),
+			},
+			hover: {
+				left: require('../../../assets/marketplace/under-realm-sub-hover-left-edge.png'),
+				middle: require('../../../assets/marketplace/under-realm-sub-hover-middle.png'),
+				right: require('../../../assets/marketplace/under-realm-sub-hover-right-edge.png'),
 			},
 		},
 		card: {
