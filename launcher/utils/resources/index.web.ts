@@ -71,5 +71,8 @@ export default {
 	home: {
 		headingBackground: { uri: '/home/heading-background.png' },
 		cardsImage: { uri: '/home/cards-image.png' },
+		battlefieldBackground: { uri: '/home/battlefield-background.png' },
+		cardExplainBackground: { uri: '/home/card-explain-background.png' },
+		cardExplain: { uri: '/home/card-explain.png' },
 	},
 };

@@ -1,23 +1,44 @@
-import React, { FC } from 'react';
-import { Image, ScaledSize, StyleSheet, View } from 'react-native';
+import React, { FC, useState } from 'react';
+import {
+	Image,
+	LayoutRectangle,
+	ScaledSize,
+	StyleSheet,
+	View,
+	ViewStyle,
+} from 'react-native';
 import { Text } from '@metacraft/ui';
+import { idleLayout } from 'utils/helper';
 import resources from 'utils/resources';
 import { iStyles } from 'utils/styles';
 
 interface Props {
 	dimension: ScaledSize;
+	responsiveLevel: number;
 }
 
-export const GameIntroSection: FC<Props> = ({ dimension }) => {
+export const GameIntroSection: FC<Props> = ({ dimension, responsiveLevel }) => {
+	const [layout, setLayout] = useState<LayoutRectangle>(idleLayout);
 	const width = Math.min(dimension.width, iStyles.contentContainer.maxWidth);
 	const imageSize = {
 		width,
-		height: width * 0.35945,
+		height: responsiveLevel > 1 ? width * 0.7 : width * 0.35945,
+		marginBottom: 20,
 	};
 
+	const container = {
+		height: layout.height - 130,
+		alignItems: 'center',
+	} as ViewStyle;
+
 	return (
-		<View style={styles.container}>
-			<View style={[styles.contentContainer, { width }]}>
+		<View style={container}>
+			<View
+				style={[styles.contentContainer, { width }]}
+				onLayout={({ nativeEvent }) => {
+					setLayout(nativeEvent.layout);
+				}}
+			>
 				<Image source={resources.home.cardsImage} style={imageSize} />
 				<Text style={styles.content}>
 					Under Realm: Rise of Magic takes place in a chaotic, fragmented world
@@ -51,9 +72,6 @@ export const GameIntroSection: FC<Props> = ({ dimension }) => {
 export default GameIntroSection;
 
 const styles = StyleSheet.create({
-	container: {
-		alignItems: 'center',
-	},
 	contentContainer: {
 		position: 'absolute',
 		top: -130,
