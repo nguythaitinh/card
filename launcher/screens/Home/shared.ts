@@ -8,5 +8,10 @@ export const sharedStyle = StyleSheet.create({
 		fontWeight: '600',
 		color: '#fff',
 		marginBottom: 15,
+		textAlign: 'center',
+	},
+	buttonText: {
+		textAlign: 'center',
+		color: '#fff',
 	},
 });
