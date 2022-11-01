@@ -5,18 +5,26 @@ import ScrollLayout from 'components/layouts/Scroll';
 import { useSnapshot } from 'utils/hook';
 import { iStyles } from 'utils/styles';
 
+import BattlefieldSetupSection from './sections/BattlefieldSetup';
+import CardExplainSection from './sections/CardExplain';
 import GameIntroSection from './sections/GameIntro';
 import HeadingSection from './sections/Heading';
 
 export const HomeScreen: FC = () => {
-	const { windowSize } = useSnapshot<DimensionState>(dimensionState);
+	const { windowSize, responsiveLevel } =
+		useSnapshot<DimensionState>(dimensionState);
 
 	return (
 		<ScrollLayout
 			contentContainerStyle={[iStyles.contentContainer, styles.container]}
 		>
 			<HeadingSection />
-			<GameIntroSection dimension={windowSize} />
+			<GameIntroSection
+				dimension={windowSize}
+				responsiveLevel={responsiveLevel}
+			/>
+			<BattlefieldSetupSection dimension={windowSize} />
+			<CardExplainSection dimension={windowSize} />
 		</ScrollLayout>
 	);
 };

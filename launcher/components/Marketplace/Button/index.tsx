@@ -22,6 +22,7 @@ interface Props {
 	title?: string;
 	texStyle?: TextStyle;
 	children?: ReactNode;
+	isSubButton?: boolean;
 	onPress?: () => void;
 	useHoveredStyle?: HoveredStyleFunc;
 }
@@ -34,11 +35,14 @@ export const UnderRealmButton: FC<Props> = ({
 	title = '',
 	texStyle,
 	children,
+	isSubButton = false,
 	onPress,
 	useHoveredStyle = useDefaultHoveredStyle,
 }) => {
 	const [layout, setLayout] = useState(idleLayout);
-	const source = resources.marketplace.underRealmInteractMaterial;
+	const source = isSubButton
+		? resources.marketplace.underRealmSubButton
+		: resources.marketplace.underRealmButton;
 
 	const middle = {
 		position: 'absolute',
