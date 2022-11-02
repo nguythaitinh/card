@@ -74,5 +74,7 @@ export default {
 		battlefieldBackground: require('../../../assets/home/battlefield-background.png'),
 		cardExplainBackground: require('../../../assets/home/card-explain-background.png'),
 		cardExplain: require('../../../assets/home/card-explain.png'),
+		elementalInteractionBackground: require('../../../assets/home/elemental-interaction-background.png'),
+		elementalInteractionVisual: require('../../../assets/home/elemental-interaction-visual.png'),
 	},
 };
