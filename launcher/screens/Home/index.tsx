@@ -7,6 +7,7 @@ import { iStyles } from 'utils/styles';
 
 import BattlefieldSetupSection from './sections/BattlefieldSetup';
 import CardExplainSection from './sections/CardExplain';
+import ElementalInteractionSection from './sections/ElementalInteraction';
 import GameIntroSection from './sections/GameIntro';
 import HeadingSection from './sections/Heading';
 
@@ -24,7 +25,11 @@ export const HomeScreen: FC = () => {
 				responsiveLevel={responsiveLevel}
 			/>
 			<BattlefieldSetupSection dimension={windowSize} />
-			<CardExplainSection dimension={windowSize} />
+			<CardExplainSection
+				dimension={windowSize}
+				responsiveLevel={responsiveLevel}
+			/>
+			<ElementalInteractionSection responsiveLevel={responsiveLevel} />
 		</ScrollLayout>
 	);
 };
