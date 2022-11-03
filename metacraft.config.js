@@ -97,13 +97,7 @@ module.exports = {
 	publicPath: () => process.env.PUBLIC_URL || '/',
 	keepPreviousBuild: () => true,
 	buildId: () => 'app',
-	webpackMiddlewares: [
-		compatible,
-		setEnvironments,
-		copyAssets,
-		externals,
-		splitBundle,
-	],
+	webpackMiddlewares: [compatible, setEnvironments, copyAssets, splitBundle],
 	moduleAlias: {
 		global: {
 			'react-native': 'react-native-web',
