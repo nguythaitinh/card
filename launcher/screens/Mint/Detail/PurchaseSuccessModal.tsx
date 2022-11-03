@@ -14,6 +14,8 @@ import { NftWithToken } from '@metaplex-foundation/js';
 import Card from 'components/Marketplace/Card';
 import resources from 'utils/resources';
 
+import { getRarityTitle } from '../shared';
+
 interface Props {
 	dimensions: ScaledSize;
 	nft: NftWithToken;
@@ -22,6 +24,9 @@ interface Props {
 export const PurchaseSuccessModal: FC<Props> = ({ dimensions, nft }) => {
 	const width = Math.min(dimensions.width - 40, 1000);
 	const imageSource = nft.uri.replace('.json', '.png');
+	console.log(nft);
+	const rarity = nft.name.slice(-6, -4);
+	const rarityTitle = getRarityTitle(rarity);
 
 	return (
 		<View style={[styles.container, { width }]}>
@@ -47,6 +52,7 @@ export const PurchaseSuccessModal: FC<Props> = ({ dimensions, nft }) => {
 						marginTop: 30,
 						marginBottom: 15,
 						textAlign: 'center',
+						color: '#fff',
 					}}
 				>
 					You have successfully purchased{' '}
@@ -69,13 +75,21 @@ export const PurchaseSuccessModal: FC<Props> = ({ dimensions, nft }) => {
 					horizontal
 					showsHorizontalScrollIndicator={false}
 				>
-					<Card
-						animationFlipDisable
-						ratio={1.38}
-						isCardUp={false}
-						imageSource={imageSource}
-						style={{ marginHorizontal: 10 }}
-					/>
+					<View style={styles.nftShowContainer}>
+						<Card
+							animationFlipDisable
+							ratio={1.38}
+							isCardUp={false}
+							imageSource={imageSource}
+							style={{ marginHorizontal: 10 }}
+						/>
+						<View style={styles.rarityContainer}>
+							<Text style={styles.rarityText}>{rarityTitle}</Text>
+							<Text
+								style={styles.subRarityText}
+							>{`(Rarity level ${rarity}/16)`}</Text>
+						</View>
+					</View>
 				</ScrollView>
 				<View style={{ marginVertical: 30 }}>
 					<Text style={{ textAlign: 'center', fontStyle: 'italic' }}>
@@ -152,5 +166,21 @@ const styles = StyleSheet.create({
 	contentContainer: {
 		padding: 30,
 		position: 'relative',
+	},
+	nftShowContainer: {
+		alignItems: 'center',
+	},
+	rarityContainer: {
+		paddingVertical: 20,
+		alignItems: 'center',
+	},
+	rarityText: {
+		color: '#ccb182',
+		fontSize: 34,
+		lineHeight: 34,
+	},
+	subRarityText: {
+		color: '#fff',
+		fontSize: 24,
 	},
 });

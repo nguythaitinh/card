@@ -110,3 +110,23 @@ export const packMap: PackMap = packList.reduce((a, i) => {
 	a[i.route] = i;
 	return a;
 }, {} as PackMap);
+
+export const getRarityTitle = (rarityLevel: string): string => {
+	const rarityTier = {
+		Immortal: 12,
+		Legendary: 9,
+		Mythical: 6,
+		Epic: 3,
+		Rare: 0,
+	};
+	const levelNumber = parseInt(rarityLevel);
+	let rarityTitle = '';
+	for (const i in rarityTier) {
+		if (levelNumber > rarityTier[i as never]) {
+			const subLevel = levelNumber - rarityTier[i as never];
+			rarityTitle = `${i} #${subLevel}`;
+			break;
+		}
+	}
+	return rarityTitle;
+};
