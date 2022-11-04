@@ -51,7 +51,6 @@ export const ScrollLayout: FC<Props> = ({
 			<Animated.ScrollView
 				style={[styles.contentContainer, contentContainerStyle]}
 				onScroll={scrollHandler}
-				showsVerticalScrollIndicator={false}
 				scrollEventThrottle={5}
 			>
 				{children}
