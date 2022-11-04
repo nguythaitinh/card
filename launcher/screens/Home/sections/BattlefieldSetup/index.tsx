@@ -27,7 +27,7 @@ const BattlefieldSetupSection: FC<Props> = ({ dimension }) => {
 	return (
 		<ImageBackground
 			source={resources.home.battlefieldBackground}
-			style={container}
+			style={[iStyles.wideContainer, container]}
 		>
 			<Text style={sharedStyle.heading} responsiveSizes={headingSize}>
 				Battlefield Setup
