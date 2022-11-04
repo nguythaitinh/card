@@ -74,8 +74,11 @@ export default {
 		battlefieldBackground: { uri: '/home/battlefield-background.png' },
 		cardExplainBackground: { uri: '/home/card-explain-background.png' },
 		cardExplain: { uri: '/home/card-explain.png' },
-		elementalInteractionBackground: {
-			uri: '/home/elemental-interaction-background.png',
+		elementalInteractionFirstBackground: {
+			uri: '/home/elemental-interaction-first-background.png',
+		},
+		elementalInteractionSecondBackground: {
+			uri: '/home/elemental-interaction-second-background.png',
 		},
 		elementalInteractionVisual: {
 			uri: '/home/elemental-interaction-visual.png',
