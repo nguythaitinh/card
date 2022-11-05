@@ -7,6 +7,7 @@ import { useSnapshot } from 'utils/hook';
 import BattlefieldSetupSection from './sections/BattlefieldSetup';
 import CardExplainSection from './sections/CardExplain';
 import ElementalInteractionSection from './sections/ElementalInteraction';
+import FooterSection from './sections/Footer';
 import GameIntroSection from './sections/GameIntro';
 import HeadingSection from './sections/Heading';
 
@@ -27,6 +28,7 @@ export const HomeScreen: FC = () => {
 				responsiveLevel={responsiveLevel}
 			/>
 			<ElementalInteractionSection responsiveLevel={responsiveLevel} />
+			<FooterSection />
 		</ScrollLayout>
 	);
 };
