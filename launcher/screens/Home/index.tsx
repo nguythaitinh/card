@@ -3,11 +3,11 @@ import { StyleSheet } from 'react-native';
 import { DimensionState, dimensionState } from '@metacraft/ui';
 import ScrollLayout from 'components/layouts/Scroll';
 import { useSnapshot } from 'utils/hook';
-import { iStyles } from 'utils/styles';
 
 import BattlefieldSetupSection from './sections/BattlefieldSetup';
 import CardExplainSection from './sections/CardExplain';
 import ElementalInteractionSection from './sections/ElementalInteraction';
+import FooterSection from './sections/Footer';
 import GameIntroSection from './sections/GameIntro';
 import HeadingSection from './sections/Heading';
 
@@ -16,9 +16,7 @@ export const HomeScreen: FC = () => {
 		useSnapshot<DimensionState>(dimensionState);
 
 	return (
-		<ScrollLayout
-			contentContainerStyle={[iStyles.contentContainer, styles.container]}
-		>
+		<ScrollLayout contentContainerStyle={styles.container}>
 			<HeadingSection />
 			<GameIntroSection
 				dimension={windowSize}
@@ -30,6 +28,7 @@ export const HomeScreen: FC = () => {
 				responsiveLevel={responsiveLevel}
 			/>
 			<ElementalInteractionSection responsiveLevel={responsiveLevel} />
+			<FooterSection />
 		</ScrollLayout>
 	);
 };

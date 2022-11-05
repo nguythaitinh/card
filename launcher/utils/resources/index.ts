@@ -74,7 +74,8 @@ export default {
 		battlefieldBackground: require('../../../assets/home/battlefield-background.png'),
 		cardExplainBackground: require('../../../assets/home/card-explain-background.png'),
 		cardExplain: require('../../../assets/home/card-explain.png'),
-		elementalInteractionBackground: require('../../../assets/home/elemental-interaction-background.png'),
+		elementalInteractionFirstBackground: require('../../../assets/home/elemental-interaction-first-background.png'),
+		elementalInteractionSecondBackground: require('../../../assets/home/elemental-interaction-second-background.png'),
 		elementalInteractionVisual: require('../../../assets/home/elemental-interaction-visual.png'),
 	},
 };

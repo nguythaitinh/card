@@ -11,6 +11,11 @@ interface Props {
 
 const ElementalInteractionSection: FC<Props> = ({ responsiveLevel }) => {
 	const visualSize = [700, 600, 500, 360][responsiveLevel];
+	const backgroundHeight = visualSize + 300;
+	const backgroundImageSize = {
+		width: backgroundHeight * 1.4085,
+		height: backgroundHeight,
+	};
 	const visualImageSize = {
 		width: visualSize,
 		height: visualSize,
@@ -20,27 +25,32 @@ const ElementalInteractionSection: FC<Props> = ({ responsiveLevel }) => {
 	return (
 		<ImageBackground
 			style={styles.container}
-			source={resources.home.elementalInteractionBackground}
+			source={resources.home.elementalInteractionFirstBackground}
 		>
-			<Text
-				style={[sharedStyle.heading, styles.heading, styles.blackText]}
-				responsiveSizes={headingSize}
+			<ImageBackground
+				source={resources.home.elementalInteractionSecondBackground}
+				style={[backgroundImageSize, styles.imageContainer]}
 			>
-				Elemental Interaction
-			</Text>
-			<Text style={styles.blackText}>
-				Generating vs. overcoming interaction
-			</Text>
-			<Text style={styles.blackText}>
-				Generating vs. overcoming interaction
-			</Text>
-			<Image
-				source={resources.home.elementalInteractionVisual}
-				style={visualImageSize}
-			/>
-			<UnderRealmButton style={styles.button}>
-				<Text style={sharedStyle.buttonText}>Explore more</Text>
-			</UnderRealmButton>
+				<Text
+					style={[sharedStyle.heading, styles.heading, styles.blackText]}
+					responsiveSizes={headingSize}
+				>
+					Elemental Interaction
+				</Text>
+				<Text style={styles.blackText}>
+					Generating vs. overcoming interaction
+				</Text>
+				<Text style={styles.blackText}>
+					Generating vs. overcoming interaction
+				</Text>
+				<Image
+					source={resources.home.elementalInteractionVisual}
+					style={visualImageSize}
+				/>
+				<UnderRealmButton style={styles.button}>
+					<Text style={sharedStyle.buttonText}>Explore more</Text>
+				</UnderRealmButton>
+			</ImageBackground>
 		</ImageBackground>
 	);
 };
@@ -50,14 +60,18 @@ export default ElementalInteractionSection;
 const styles = StyleSheet.create({
 	container: {
 		alignItems: 'center',
-		paddingHorizontal: 15,
-		paddingVertical: 40,
 	},
 	heading: {
 		fontFamily: 'Volkhov',
 	},
 	blackText: {
 		color: '#000',
+	},
+	imageContainer: {
+		paddingHorizontal: 15,
+		paddingVertical: 40,
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	button: {
 		width: 200,

@@ -52,13 +52,13 @@ export const CardExplainSection: FC<Props> = ({
 					<UnderRealmButton style={styles.button} onPress={onMintPress}>
 						<Text style={sharedStyle.buttonText}>Mint NFT</Text>
 					</UnderRealmButton>
-					<UnderRealmButton
+					{/* <UnderRealmButton
 						isSubButton
 						style={styles.button}
 						onPress={onMintPress}
 					>
 						<Text style={sharedStyle.buttonText}>Explore Card</Text>
-					</UnderRealmButton>
+					</UnderRealmButton> */}
 				</View>
 			</ImageBackground>
 		</View>
