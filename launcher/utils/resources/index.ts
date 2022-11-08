@@ -77,5 +77,7 @@ export default {
 		elementalInteractionFirstBackground: require('../../../assets/home/elemental-interaction-first-background.png'),
 		elementalInteractionSecondBackground: require('../../../assets/home/elemental-interaction-second-background.png'),
 		elementalInteractionVisual: require('../../../assets/home/elemental-interaction-visual.png'),
+		cardTypesBackground: require('../../../assets/home/card-type-background.png'),
+		cardTypesSpellVisual: require('../../../assets/home/card-type-spell-visual.png'),
 	},
 };

@@ -83,5 +83,7 @@ export default {
 		elementalInteractionVisual: {
 			uri: '/home/elemental-interaction-visual.png',
 		},
+		cardTypesBackground: { uri: '/home/card-type-background.png' },
+		cardTypesSpellVisual: { uri: '/home/card-type-spell-visual.png' },
 	},
 };
