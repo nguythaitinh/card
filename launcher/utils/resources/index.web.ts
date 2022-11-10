@@ -94,7 +94,7 @@ export default {
 			},
 			summoner: {
 				backgroundActive: {
-					uri: '/home/classes/summoner/logo-background-active.png',
+					uri: '/home/classes/summoner/class-background-active.png',
 				},
 				logoBackgroundActive: {
 					uri: '/home/classes/summoner/logo-background-active.png',
@@ -104,7 +104,7 @@ export default {
 			},
 			assassin: {
 				backgroundActive: {
-					uri: '/home/classes/assassin/logo-background-active.png',
+					uri: '/home/classes/assassin/class-background-active.png',
 				},
 				logoBackgroundActive: {
 					uri: '/home/classes/assassin/logo-background-active.png',
@@ -114,7 +114,7 @@ export default {
 			},
 			wizard: {
 				backgroundActive: {
-					uri: '/home/classes/wizard/logo-background-active.png',
+					uri: '/home/classes/wizard/class-background-active.png',
 				},
 				logoBackgroundActive: {
 					uri: '/home/classes/wizard/logo-background-active.png',
@@ -124,7 +124,7 @@ export default {
 			},
 			tanker: {
 				backgroundActive: {
-					uri: '/home/classes/tanker/logo-background-active.png',
+					uri: '/home/classes/tanker/class-background-active.png',
 				},
 				logoBackgroundActive: {
 					uri: '/home/classes/tanker/logo-background-active.png',
@@ -134,7 +134,7 @@ export default {
 			},
 			knight: {
 				backgroundActive: {
-					uri: '/home/classes/knight/logo-background-active.png',
+					uri: '/home/classes/knight/class-background-active.png',
 				},
 				logoBackgroundActive: {
 					uri: '/home/classes/knight/logo-background-active.png',
