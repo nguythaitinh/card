@@ -12,7 +12,7 @@ export const cardTypeList: CardTypeItem[] = [
 		title: 'Hero',
 		content: [
 			'Every hero card has a distinctively high set amount of Attack/ Defense/ Health Points and usually has a special ability described in the card text.',
-			'Hero cards can be placed on the board and used to attack the opponent’s hero or adventurer. Each player can have up to 11 hero cards on the board simultaneously.',
+			'Hero cards can be placed on the board and used to attack the opponent’s hero or adventurer.',
 			'The hero card is destroyed when its health is reduced to 0 and it is sent to the graveyard.',
 		],
 		image: resources.home.cardTypesSpellVisual,
