@@ -1,11 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import {
-	Dimensions,
-	ImageBackground,
-	StyleSheet,
-	Text,
-	View,
-} from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 
 import resources from '../../../../utils/resources';
 
@@ -45,39 +39,49 @@ const Header: FC = () => {
 	const onIconPress = (index: number) => setActiveIconIndex(index);
 
 	return (
-		<ImageBackground
-			source={resources.guide.headingBackground}
-			resizeMode="cover"
-			style={[styles.headingBackground, headingBackgroundStyle]}
-		>
-			<Text style={styles.heading}>{labels.heading}</Text>
-			<Text style={styles.subHeading}>{labels.subHeading}</Text>
-			<View style={styles.icons}>
-				<Icon
-					type={ViewType.Battlefield}
-					onPress={() => onIconPress(0)}
-					isActive={activeIconIndex === 0}
-				/>
-				<Icon
-					type={ViewType.Play}
-					onPress={() => onIconPress(1)}
-					isActive={activeIconIndex === 1}
-				/>
-				<Icon
-					type={ViewType.Card}
-					onPress={() => onIconPress(2)}
-					isActive={activeIconIndex === 2}
-				/>
+		<View style={{ alignItems: 'center', justifyContent: 'center' }}>
+			<Image
+				source={resources.guide.headingBackground}
+				resizeMode="cover"
+				style={[styles.headingBackground, headingBackgroundStyle]}
+			/>
+			<View style={styles.container}>
+				<Text style={styles.heading}>{labels.heading}</Text>
+				<Text style={styles.subHeading}>{labels.subHeading}</Text>
+				<View style={styles.icons}>
+					<Icon
+						type={ViewType.Battlefield}
+						onPress={() => onIconPress(0)}
+						isActive={activeIconIndex === 0}
+					/>
+					<Icon
+						type={ViewType.Play}
+						onPress={() => onIconPress(1)}
+						isActive={activeIconIndex === 1}
+					/>
+					<Icon
+						type={ViewType.Card}
+						onPress={() => onIconPress(2)}
+						isActive={activeIconIndex === 2}
+					/>
+				</View>
 			</View>
-		</ImageBackground>
+		</View>
 	);
 };
 
 const styles = StyleSheet.create({
+	container: {
+		paddingHorizontal: 24,
+		paddingVertical: 40,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 	headingBackground: {
 		width: '100%',
 		alignItems: 'center',
 		justifyContent: 'space-around',
+		position: 'absolute',
 	},
 	heading: {
 		fontSize: 24,
@@ -89,14 +93,16 @@ const styles = StyleSheet.create({
 		fontSize: 10,
 		color: '#EBEBEB',
 		textAlign: 'center',
-		maxWidth: 800,
+		maxWidth: 600,
 		marginHorizontal: 24,
+		marginTop: 18,
 	},
 	icons: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		width: 250,
+		marginTop: 24,
 	},
 });
 
