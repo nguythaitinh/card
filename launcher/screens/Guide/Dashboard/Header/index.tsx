@@ -41,6 +41,9 @@ const Header: FC = () => {
 	const headingBackgroundStyle = {
 		height: dimensions.window.width * headingBackgroundRatio,
 	};
+
+	const onIconPress = (index: number) => setActiveIconIndex(index);
+
 	return (
 		<ImageBackground
 			source={resources.guide.headingBackground}
@@ -50,9 +53,21 @@ const Header: FC = () => {
 			<Text style={styles.heading}>{labels.heading}</Text>
 			<Text style={styles.subHeading}>{labels.subHeading}</Text>
 			<View style={styles.icons}>
-				<Icon type={ViewType.Battlefield} />
-				<Icon type={ViewType.Play} />
-				<Icon type={ViewType.Card} />
+				<Icon
+					type={ViewType.Battlefield}
+					onPress={() => onIconPress(0)}
+					isActive={activeIconIndex === 0}
+				/>
+				<Icon
+					type={ViewType.Play}
+					onPress={() => onIconPress(1)}
+					isActive={activeIconIndex === 1}
+				/>
+				<Icon
+					type={ViewType.Card}
+					onPress={() => onIconPress(2)}
+					isActive={activeIconIndex === 2}
+				/>
 			</View>
 		</ImageBackground>
 	);
@@ -79,8 +94,9 @@ const styles = StyleSheet.create({
 	},
 	icons: {
 		flexDirection: 'row',
-		justifyContent: 'center',
+		justifyContent: 'space-between',
 		alignItems: 'center',
+		width: 250,
 	},
 });
 

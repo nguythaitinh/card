@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import resources from '../../../../utils/resources';
 
@@ -7,10 +7,11 @@ import { ViewType } from '.';
 
 interface Props {
 	type: ViewType;
+	onPress: () => void;
 	isActive?: boolean;
 }
 
-const Icon: FC<Props> = ({ type, isActive = false }: Props) => {
+const Icon: FC<Props> = ({ type, onPress, isActive = false }: Props) => {
 	let resource = null;
 	let label = null;
 
@@ -36,10 +37,10 @@ const Icon: FC<Props> = ({ type, isActive = false }: Props) => {
 	}
 
 	return (
-		<View>
+		<TouchableOpacity onPress={onPress}>
 			<Image source={resource} style={styles.image} resizeMode="contain" />
 			<Text style={styles.label}>{label}</Text>
-		</View>
+		</TouchableOpacity>
 	);
 };
 
