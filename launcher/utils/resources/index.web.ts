@@ -144,4 +144,13 @@ export default {
 			},
 		},
 	},
+	guide: {
+		headingBackground: { uri: '/guide/heading-background.png' },
+		battlefieldIconNormal: { uri: '/guide/battlefield-icon-normal.png' },
+		battlefieldIconActive: { uri: '/guide/battlefield-icon-active.png' },
+		playIconNormal: { uri: '/guide/play-icon-normal.png' },
+		playIconActive: { uri: '/guide/play-icon-active.png' },
+		cardIconNormal: { uri: '/guide/card-icon-normal.png' },
+		cardIconActive: { uri: '/guide/card-icon-active.png' },
+	},
 };
