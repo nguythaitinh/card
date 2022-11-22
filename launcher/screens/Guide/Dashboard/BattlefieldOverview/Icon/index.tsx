@@ -1,16 +1,9 @@
 import React, { FC } from 'react';
-import { Image, Text } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+import { Text } from '@metacraft/ui';
 
-export enum ViewType {
-	Hand,
-	Deck,
-	Spell,
-	Grave,
-	SummonZone,
-	EndTurn,
-	HealthPoint,
-	History,
-}
+import resources from '../../../../../utils/resources';
+import { ViewType } from '../../BattlefieldOverview';
 
 interface Props {
 	type: ViewType;
@@ -22,40 +15,61 @@ const Icon: FC<Props> = ({ type }: Props) => {
 
 	switch (type) {
 		case ViewType.Hand:
-			resource = require('../../../../assets/images/guide/hand-icon.png');
+			resource = resources.guide.battlefieldOverview.hand;
 			label = 'Hand';
 			break;
 		case ViewType.Deck:
-			resource = require('../../../../assets/images/guide/deck-icon.png');
+			resource = resources.guide.battlefieldOverview.deck;
 			label = 'Deck';
 			break;
 		case ViewType.Spell:
-			resource = require('../../../../assets/images/guide/spell-icon.png');
+			resource = resources.guide.battlefieldOverview.spell;
 			label = 'Spell';
 			break;
 		case ViewType.Grave:
-			resource = require('../../../../assets/images/guide/grave-icon.png');
+			resource = resources.guide.battlefieldOverview.grave;
 			label = 'Grave';
 			break;
 		case ViewType.SummonZone:
-			resource = require('../../../../assets/images/guide/summon-zone-icon.png');
+			resource = resources.guide.battlefieldOverview.summonZone;
 			label = 'Summon Zone';
 			break;
 		case ViewType.EndTurn:
-			resource = require('../../../../assets/images/guide/end-turn-icon.png');
+			resource = resources.guide.battlefieldOverview.endTurn;
 			label = 'End Turn';
 			break;
 		case ViewType.HealthPoint:
-			resource = require('../../../../assets/images/guide/health-point-icon.png');
+			resource = resources.guide.battlefieldOverview.healthPoint;
 			label = 'Health Point';
 			break;
 		case ViewType.History:
-			resource = require('../../../../assets/images/guide/history-icon.png');
+			resource = resources.guide.battlefieldOverview.history;
 			label = 'History';
 			break;
 	}
 
-	return <Image source={resource} />;
+	return (
+		<View style={styles.container}>
+			<Image source={resource} style={styles.icon} resizeMode={'contain'} />
+			<Text style={styles.label}>{label}</Text>
+		</View>
+	);
 };
+
+const styles = StyleSheet.create({
+	container: {
+		alignItems: 'center',
+	},
+	icon: {
+		width: 32,
+		height: 32,
+	},
+	label: {
+		fontSize: 10,
+		color: '#EBEBEB',
+		textAlign: 'center',
+		marginTop: 4,
+	},
+});
 
 export default Icon;

@@ -154,13 +154,18 @@ export default {
 		cardIconNormal: { uri: '/guide/card-icon-normal.png' },
 		cardIconActive: { uri: '/guide/card-icon-active.png' },
 		battlefieldOverview: {
-			hand: { uri: '/guide/battlefield-overview/hand-icon.png' },
-			deck: { uri: '/guide/battlefield-overview/deck-icon.png' },
-			grave: { uri: '/guide/battlefield-overview/grave-icon.png' },
-			summonZone: { uri: '/guide/battlefield-overview/summon-zone-icon.png' },
-			endTurn: { uri: '/guide/battlefield-overview/end-turn-icon.png' },
-			healthPoint: { uri: '/guide/battlefield-overview/health-point-icon.png' },
-			history: { uri: '/guide/battlefield-overview/history-icon.png' },
+			hand: { uri: '/guide/battlefield-overview/hand-normal-icon.png' },
+			deck: { uri: '/guide/battlefield-overview/deck-normal-icon.png' },
+			spell: { uri: '/guide/battlefield-overview/spell-normal-icon.png' },
+			grave: { uri: '/guide/battlefield-overview/grave-normal-icon.png' },
+			summonZone: {
+				uri: '/guide/battlefield-overview/summon-zone-normal-icon.png',
+			},
+			endTurn: { uri: '/guide/battlefield-overview/end-turn-normal-icon.png' },
+			healthPoint: {
+				uri: '/guide/battlefield-overview/health-point-normal-icon.png',
+			},
+			history: { uri: '/guide/battlefield-overview/history-normal-icon.png' },
 		},
 	},
 };
