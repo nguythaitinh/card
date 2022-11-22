@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, View } from 'react-native';
+import { Text } from '@metacraft/ui';
 
 import resources from '../../../../utils/resources';
 
