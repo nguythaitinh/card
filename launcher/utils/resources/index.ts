@@ -124,5 +124,14 @@ export default {
 		playIconActive: require('../../../assets/guide/play-icon-active.png'),
 		cardIconNormal: require('../../../assets/guide/card-icon-normal.png'),
 		cardIconActive: require('../../../assets/guide/card-icon-active.png'),
+		battlefieldOverview: {
+			hand: require('../../../assets/guide/battlefield-overview/hand-icon.png'),
+			deck: require('../../../assets/guide/battlefield-overview/deck-icon.png'),
+			grave: require('../../../assets/guide/battlefield-overview/grave-icon.png'),
+			summonZone: require('../../../assets/guide/battlefield-overview/summon-zone-icon.png'),
+			endTurn: require('../../../assets/guide/battlefield-overview/end-turn-icon.png'),
+			healthPoint: require('../../../assets/guide/battlefield-overview/health-point-icon.png'),
+			history: require('../../../assets/guide/battlefield-overview/history-icon.png'),
+		},
 	},
 };

@@ -1,3 +1,4 @@
+import BattlefieldOverview from '../../screens/Guide/Dashboard/BattlefieldOverview/index';
 export default {
 	navigation: {
 		bg: { uri: '/marketplace/navigation-bg.png' },
@@ -152,5 +153,14 @@ export default {
 		playIconActive: { uri: '/guide/play-icon-active.png' },
 		cardIconNormal: { uri: '/guide/card-icon-normal.png' },
 		cardIconActive: { uri: '/guide/card-icon-active.png' },
+		battlefieldOverview: {
+			hand: { uri: '/guide/battlefield-overview/hand-icon.png' },
+			deck: { uri: '/guide/battlefield-overview/deck-icon.png' },
+			grave: { uri: '/guide/battlefield-overview/grave-icon.png' },
+			summonZone: { uri: '/guide/battlefield-overview/summon-zone-icon.png' },
+			endTurn: { uri: '/guide/battlefield-overview/end-turn-icon.png' },
+			healthPoint: { uri: '/guide/battlefield-overview/health-point-icon.png' },
+			history: { uri: '/guide/battlefield-overview/history-icon.png' },
+		},
 	},
 };
