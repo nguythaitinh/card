@@ -1,15 +1,12 @@
 import React, { FC, useState } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Animated, {
 	useAnimatedStyle,
 	withTiming,
 } from 'react-native-reanimated';
-import { Hoverable, Text } from '@metacraft/ui';
+import { Hoverable } from '@metacraft/ui';
 
-import {
-	HoveredStyleFunc,
-	useDefaultHoveredStyle,
-} from '../../../../components/Marketplace/Button/shared';
+import { HoveredStyleFunc } from '../../../../components/Marketplace/Button/shared';
 
 import Icon from './Icon';
 // import { HoveredStyleFunc, useDefaultHoveredStyle } from './shared';
@@ -69,45 +66,67 @@ const viewTypeIcons: ViewTypeIcon[] = [
 ];
 
 const BattlefieldOverview: FC = () => {
-	const [currentViewTypeIcon, setCurrentViewTypeIcon] = useState<ViewTypeIcon>(
-		viewTypeIcons[0],
-	);
+	const [currentViewTypeIconIndex, setCurrentViewTypeIconIndex] =
+		useState<number>(0);
 
 	const useHoveredStyle: HoveredStyleFunc = (isHovered) =>
 		useAnimatedStyle(() => ({
-			opacity: withTiming(isHovered.value ? 1 : 0.7, { duration: 250 }),
+			opacity: withTiming(isHovered.value ? 1 : 0.5, { duration: 250 }),
 		}));
 
+	const onIconPress = (index: number) => setCurrentViewTypeIconIndex(index);
 	return (
 		<View style={styles.container}>
 			<Title />
 			<View style={styles.iconsRow}>
-				{viewTypeIcons.map((viewTypeIcon) => (
-					<TouchableOpacity activeOpacity={0.7} key={viewTypeIcon.type}>
-						<Hoverable
-							style={{ left: 0, right: 0, justifyContent: 'center' }}
-							animatedStyle={useHoveredStyle}
+				<FlatList
+					renderItem={({ item, index }) => (
+						<TouchableOpacity
+							activeOpacity={1}
+							key={item.type}
+							onPress={() => onIconPress(index)}
 						>
-							<AnimatedView>
-								<Icon key={viewTypeIcon.type} type={viewTypeIcon.type} />
-							</AnimatedView>
-						</Hoverable>
-					</TouchableOpacity>
-				))}
+							{currentViewTypeIconIndex === index ? (
+								<Icon key={item.type} type={item.type} />
+							) : (
+								<Hoverable animatedStyle={useHoveredStyle}>
+									<AnimatedView>
+										<Icon key={item.type} type={item.type} />
+									</AnimatedView>
+								</Hoverable>
+							)}
+						</TouchableOpacity>
+					)}
+					data={viewTypeIcons}
+					horizontal={true}
+					showsHorizontalScrollIndicator={false}
+					contentContainerStyle={styles.flatlistContainer}
+					style={styles.flatlist}
+				/>
 			</View>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
-	container: { width: '100%', alignItems: 'center', marginTop: 40 },
-	iconsRow: {
-		width: 600,
+	container: {
+		width: '100%',
 		alignItems: 'center',
-		justifyContent: 'space-between',
+		marginTop: 40,
+		paddingHorizontal: 24,
+	},
+	iconsRow: {
+		width: '100%',
 		flexDirection: 'row',
 		marginTop: 32,
+		maxWidth: 600,
 	},
+	flatlistContainer: {
+		width: 600,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+	},
+	flatlist: { flex: 1, width: 600 },
 });
 
 export default BattlefieldOverview;
