@@ -1,5 +1,12 @@
-import React, { FC, useState } from 'react';
-import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import React, { FC, useEffect, useState } from 'react';
+import {
+	Dimensions,
+	FlatList,
+	Image,
+	StyleSheet,
+	TouchableOpacity,
+	View,
+} from 'react-native';
 import Animated, {
 	useAnimatedStyle,
 	withTiming,
@@ -7,6 +14,7 @@ import Animated, {
 import { Hoverable } from '@metacraft/ui';
 
 import { HoveredStyleFunc } from '../../../../components/Marketplace/Button/shared';
+import resources from '../../../../utils/resources';
 
 import Icon from './Icon';
 // import { HoveredStyleFunc, useDefaultHoveredStyle } from './shared';
@@ -65,7 +73,12 @@ const viewTypeIcons: ViewTypeIcon[] = [
 	},
 ];
 
+const mainBackgroundRatio = 576 / 864;
+
 const BattlefieldOverview: FC = () => {
+	const window = Dimensions.get('window');
+	const [dimensions, setDimensions] = useState({ window });
+
 	const [currentViewTypeIconIndex, setCurrentViewTypeIconIndex] =
 		useState<number>(0);
 
@@ -75,8 +88,25 @@ const BattlefieldOverview: FC = () => {
 		}));
 
 	const onIconPress = (index: number) => setCurrentViewTypeIconIndex(index);
+
+	useEffect(() => {
+		const subscription = Dimensions.addEventListener('change', ({ window }) => {
+			setDimensions({ window });
+		});
+		return () => subscription?.remove();
+	});
+
+	const headingBackgroundStyle = {
+		height: dimensions.window.width * mainBackgroundRatio,
+	};
+
 	return (
 		<View style={styles.container}>
+			<Image
+				resizeMode="cover"
+				style={[styles.mainBackground, headingBackgroundStyle]}
+				source={resources.guide.battlefieldOverview.mainBackground}
+			/>
 			<Title />
 			<View style={styles.iconsRow}>
 				<FlatList
@@ -114,6 +144,11 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		marginTop: 40,
 		paddingHorizontal: 24,
+	},
+	mainBackground: {
+		position: 'absolute',
+		width: '100%',
+		height: 300,
 	},
 	iconsRow: {
 		width: '100%',

@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
 		fontSize: 26,
 		color: '#fff',
 		fontFamily: 'Volkhov',
+		marginTop: 24,
 	},
 });
 

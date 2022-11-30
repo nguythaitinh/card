@@ -133,6 +133,7 @@ export default {
 			endTurn: require('../../../assets/guide/battlefield-overview/end-turn-normal-icon.png'),
 			healthPoint: require('../../../assets/guide/battlefield-overview/health-point-normal-icon.png'),
 			history: require('../../../assets/guide/battlefield-overview/history-normal-icon.png'),
+			mainBackground: require('../../../assets/guide/battlefield-overview/main-background.png'),
 		},
 	},
 };

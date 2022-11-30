@@ -1,4 +1,3 @@
-import BattlefieldOverview from '../../screens/Guide/Dashboard/BattlefieldOverview/index';
 export default {
 	navigation: {
 		bg: { uri: '/marketplace/navigation-bg.png' },
@@ -166,6 +165,9 @@ export default {
 				uri: '/guide/battlefield-overview/health-point-normal-icon.png',
 			},
 			history: { uri: '/guide/battlefield-overview/history-normal-icon.png' },
+			mainBackground: {
+				uri: '/guide/battlefield-overview/main-background.png',
+			},
 		},
 	},
 };
